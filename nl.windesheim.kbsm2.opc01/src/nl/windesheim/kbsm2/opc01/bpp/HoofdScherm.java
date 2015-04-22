@@ -61,7 +61,7 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
                 .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jCheckBox1.setText("First Fit");
         this.jCheckBox1.addActionListener(this);
@@ -164,42 +164,48 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         if (e.getSource() == jCheckBox1) { // checkbox van firstFit
             boolean checked = jCheckBox1.isSelected();
             if (checked) {
-                System.out.println("Check box1 state is selected");
+//                System.out.println("Check box1 state is selected");
                 algoritme.setFirstFit(true);
-                System.out.println(algoritme.getFirstFit());
+//                System.out.println(algoritme.getFirstFit());
             } else {
-                System.out.println("Check box1 state is not selected");
+//                System.out.println("Check box1 state is not selected");
                 algoritme.setFirstFit(false);
-                System.out.println(algoritme.getFirstFit());
+//                System.out.println(algoritme.getFirstFit());
             }
         }
         if (e.getSource() == jCheckBox2) {// checkbox van bestFit
             boolean checked = jCheckBox2.isSelected();
             if (checked) {
                 algoritme.setBestFit(true);
-                System.out.println("Check box2 state is selected");
-                System.out.println(algoritme.getBestFit());
+//                System.out.println("Check box2 state is selected");
+//                System.out.println(algoritme.getBestFit());
             } else {
                 algoritme.setBestFit(false);
-                System.out.println("Check box2 state is not selected");
-                System.out.println(algoritme.getBestFit());
+//                System.out.println("Check box2 state is not selected");
+//                System.out.println(algoritme.getBestFit());
             }
         }
         if (e.getSource() == jCheckBox3) {// checkbox van nextFit
             boolean checked = jCheckBox3.isSelected();
             if (checked) {
                 algoritme.setNextFit(true);
-                System.out.println("Check box3 state is selected");
-                System.out.println(algoritme.getNextFit());
+//                System.out.println("Check box3 state is selected");
+//                System.out.println(algoritme.getNextFit());
             } else {
                 algoritme.setNextFit(false);
-                System.out.println("Check box3 state is not selected");
-                System.out.println(algoritme.getNextFit());
+//                System.out.println("Check box3 state is not selected");
+//                System.out.println(algoritme.getNextFit());
             }
         }
         if (e.getSource() == jButton2) {
             if(algoritme.getFirstFit() == true){
                 new Simulatie(algoritme).setTitle("Simulatie First Fit");
+            }
+            if(algoritme.getBestFit() == true){
+                new Simulatie(algoritme).setTitle("Simulatie Best Fit");
+            }
+            if(algoritme.getNextFit() == true){
+                new Simulatie(algoritme).setTitle("Simulatie Next Fit");
             }
         }
     }

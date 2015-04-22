@@ -12,18 +12,29 @@ import javax.swing.*;
  *
  * @author W7Home
  */
-public class Simulatie extends JFrame{
+public class Simulatie extends JFrame {
+
     private Algoritme algoritme1;
     private TekenPanel paneel;
-    
-    public Simulatie(Algoritme algoritme1){
+
+    public Simulatie(Algoritme algoritme1) {
         this.algoritme1 = algoritme1;
-        setSize(300, 800);
-        setLayout (new FlowLayout());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        setSize(500, 500);
+        setFrame();
+        setLayout(new FlowLayout());
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         this.paneel = new TekenPanel(algoritme1);
         add(paneel);
         setVisible(true);
+    }
+
+    private void setFrame() {
+        Dimension windowSize = getSize();
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Point centerPoint = ge.getCenterPoint();
+        int dx = centerPoint.x - windowSize.width / 2 - 200;
+        int dy = centerPoint.y - windowSize.height / 2 + 200;
+        setLocation(dx, dy);
     }
 }
