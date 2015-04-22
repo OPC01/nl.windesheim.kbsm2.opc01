@@ -17,7 +17,7 @@ public class Main
         Packet c = new Packet(10, 30);
         Packet d = new Packet(20, 30);
         Packet e = new Packet(1, 30);
-        ArrayList<Packet> list = new ArrayList();
+        ArrayList<Packet> list = new ArrayList<Packet>();
         list.add(f);
         list.add(a);
         list.add(b);
