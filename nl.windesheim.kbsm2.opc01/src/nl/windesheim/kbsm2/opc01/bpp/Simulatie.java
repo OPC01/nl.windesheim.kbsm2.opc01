@@ -21,7 +21,6 @@ public class Simulatie extends JFrame{
         setSize(300, 800);
         setLayout (new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Simulatie ");
         
         this.paneel = new TekenPanel(algoritme1);
         add(paneel);
