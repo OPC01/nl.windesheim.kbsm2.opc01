@@ -11,23 +11,22 @@ public class Main
     public static void main(String[] args)
     {
         DistanceMap z = new DistanceMap();
-        Packet f = new Packet(100, 100);
-        Packet a = new Packet(10, 20);
+        Packet f = new Packet(0, 0);
+        Packet a = new Packet(10, 0);
         Packet b = new Packet(5, 30);
-        Packet c = new Packet(10, 30);
-        Packet d = new Packet(20, 30);
-        Packet e = new Packet(1, 30);
+        //Packet c = new Packet(10, 30);
+        //Packet d = new Packet(20, 30);
+        //Packet e = new Packet(1, 30);
         ArrayList<Packet> list = new ArrayList();
         list.add(f);
         list.add(a);
         list.add(b);
-        list.add(c);
-        list.add(d);
-        list.add(e);
+        //list.add(c);
+        //list.add(d);
+        //zlist.add(e);
         z.createMatrix(list);
         TSPNearestNeighbour x = new TSPNearestNeighbour();
         x.tsp(z.getMap());
         System.out.println(Arrays.deepToString(z.getMap()));
-        System.out.println(a.distance(b));
     }
 }

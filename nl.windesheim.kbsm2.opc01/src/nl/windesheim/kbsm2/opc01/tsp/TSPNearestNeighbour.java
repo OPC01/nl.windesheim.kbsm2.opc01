@@ -5,6 +5,7 @@
  */
 package nl.windesheim.kbsm2.opc01.tsp;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -16,6 +17,7 @@ public class TSPNearestNeighbour
 
     private int numberOfNodes;
     private Stack<Integer> stack;
+    private ArrayList<Integer> path;
 
     public TSPNearestNeighbour()
     {
@@ -24,6 +26,8 @@ public class TSPNearestNeighbour
 
     public void tsp(double adjacencyMatrix[][])
     {
+        ArrayList<Integer> path = new ArrayList<Integer>();
+        path.add(1);
         Stack<Integer> stack = new Stack<Integer>();
         int numberOfNodes = adjacencyMatrix[1].length - 1;
         int[] visited = new int[numberOfNodes + 1];
@@ -54,6 +58,7 @@ public class TSPNearestNeighbour
             }
             if (minFlag)
             {
+                path.add(dst);
                 visited[dst] = 1;
                 stack.push(dst);
                 System.out.print(dst + "\t");
@@ -62,5 +67,18 @@ public class TSPNearestNeighbour
             }
             stack.pop();
         }
+        /**
+         * *this.path = path; double routelength = 0; int originPacketCounter;
+         * int destinationPacketCounter; for (destinationPacketCounter = 1;
+         * destinationPacketCounter < path.size(); destinationPacketCounter++) {
+         * originPacketCounter = destinationPacketCounter - 1; int originPacket
+         * = path.get(originPacketCounter); int destinationPacket =
+         * path.get(destinationPacketCounter); routelength = routelength +
+         * adjacencyMatrix[originPacket][destinationPacket];
+         *
+         * }
+         * System.out.println(routelength);
+         */
+
     }
 }

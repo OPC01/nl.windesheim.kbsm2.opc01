@@ -60,11 +60,7 @@ public class MainScreen extends JFrame implements ActionListener
         }
         if (e.getSource() == start)
         {
-            SimulationResults results = new SimulationResults(this);
-            
-            VisualScreen visual = new VisualScreen(this);
-            results.setVisible(true);
 
         }
-    }   
+    }
 }
