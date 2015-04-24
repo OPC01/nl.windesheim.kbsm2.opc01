@@ -17,13 +17,13 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
     /**
      * Creates new form HoofdScherm2
      */
-    public HoofdScherm(Algoritme test) {
+    public HoofdScherm(Algoritme algoritme) {
         initComponents();
-        this.test = test;
+        this.algoritme = algoritme;
     }
 
-    public void setAlgoritme(Algoritme test) {
-        this.test = test;
+    public void setAlgoritme(Algoritme algoritme) {
+        this.algoritme = algoritme;
     }
 
     /**
@@ -61,19 +61,16 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
                 .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jCheckBox1.setText("First Fit");
         this.jCheckBox1.addActionListener(this);
 
         jCheckBox2.setText("Best Fit");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
+        jCheckBox2.addActionListener(this);
 
         jCheckBox3.setText("Next Fit");
+        jCheckBox3.addActionListener(this);
 
         jLabel1.setText("Selecteer algoritmes");
 
@@ -84,18 +81,10 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         jLabel5.setText("Aantal van dit soort");
 
         jButton2.setText("Start");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jButton2.addActionListener(this);
 
         jButton1.setText("Voeg toe");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jButton1.addActionListener(this);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,27 +161,53 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
     }// </editor-fold>                        
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == jCheckBox1) {
+        if (e.getSource() == jCheckBox1) { // checkbox van firstFit
             boolean checked = jCheckBox1.isSelected();
             if (checked) {
-                System.out.println("Check box state is selected");
-              //  boolean test = ;
+//                System.out.println("Check box1 state is selected");
+                algoritme.setFirstFit(true);
+//                System.out.println(algoritme.getFirstFit());
             } else {
-                System.out.println("Check box state is not selected");
+//                System.out.println("Check box1 state is not selected");
+                algoritme.setFirstFit(false);
+//                System.out.println(algoritme.getFirstFit());
             }
         }
-    }
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        if (e.getSource() == jCheckBox2) {// checkbox van bestFit
+            boolean checked = jCheckBox2.isSelected();
+            if (checked) {
+                algoritme.setBestFit(true);
+//                System.out.println("Check box2 state is selected");
+//                System.out.println(algoritme.getBestFit());
+            } else {
+                algoritme.setBestFit(false);
+//                System.out.println("Check box2 state is not selected");
+//                System.out.println(algoritme.getBestFit());
+            }
+        }
+        if (e.getSource() == jCheckBox3) {// checkbox van nextFit
+            boolean checked = jCheckBox3.isSelected();
+            if (checked) {
+                algoritme.setNextFit(true);
+//                System.out.println("Check box3 state is selected");
+//                System.out.println(algoritme.getNextFit());
+            } else {
+                algoritme.setNextFit(false);
+//                System.out.println("Check box3 state is not selected");
+//                System.out.println(algoritme.getNextFit());
+            }
+        }
+        if (e.getSource() == jButton2) {
+            if(algoritme.getFirstFit() == true){
+                new Simulatie(algoritme).setTitle("Simulatie First Fit");
+            }
+            if(algoritme.getBestFit() == true){
+                new Simulatie(algoritme).setTitle("Simulatie Best Fit");
+            }
+            if(algoritme.getNextFit() == true){
+                new Simulatie(algoritme).setTitle("Simulatie Next Fit");
+            }
+        }
     }
 
     // Variables declaration - do not modify                     
@@ -209,6 +224,6 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSpinner jSpinner1;
-    private Algoritme test;
+    private Algoritme algoritme;
     // End of variables declaration                   
 }

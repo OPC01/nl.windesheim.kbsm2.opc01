@@ -26,14 +26,6 @@ public class Algoritme {
 
     public Algoritme(String naam) {
         this.naam = naam;
-        if(this.bestFit){
-            algoritmeFirstFit();
-        } else if(this.firstFit){
-            algoritmeBestFit();
-        } else if(this.nextFit){
-            algoritmeNextFit();
-        }
-        
     }
 
     public void algoritmeFirstFit() {
