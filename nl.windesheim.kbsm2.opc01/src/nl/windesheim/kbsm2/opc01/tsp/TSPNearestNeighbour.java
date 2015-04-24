@@ -1,4 +1,4 @@
- package nl.windesheim.kbsm2.opc01.tsp;
+package nl.windesheim.kbsm2.opc01.tsp;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -9,6 +9,7 @@ public class TSPNearestNeighbour
     private int numberOfNodes;
     private Stack<Integer> stack;
     private ArrayList<Integer> path;
+    private double lengthOfPath;
 
     public TSPNearestNeighbour()
     {
@@ -18,7 +19,7 @@ public class TSPNearestNeighbour
     public void tsp(double adjacencyMatrix[][])
     {
         ArrayList<Integer> path = new ArrayList<Integer>();
-        path.add(1);
+        path.add(0);
         int numberOfNodes = adjacencyMatrix[0].length;
         int[] visited = new int[numberOfNodes];
         visited[0] = 1;
@@ -26,7 +27,7 @@ public class TSPNearestNeighbour
         int element, dst = 0, i;
         double min = Double.MAX_VALUE;
         boolean minFlag = false;
-
+        System.out.print("0" + "\t");
         while (!stack.isEmpty())
         {
             element = stack.peek();
@@ -59,6 +60,56 @@ public class TSPNearestNeighbour
         }
 
         this.path = path;
+    }
+
+    public int getNumberOfNodes()
+    {
+        return numberOfNodes;
+    }
+
+    public void setNumberOfNodes(int numberOfNodes)
+    {
+        this.numberOfNodes = numberOfNodes;
+    }
+
+    public Stack<Integer> getStack()
+    {
+        return stack;
+    }
+
+    public void setStack(Stack<Integer> stack)
+    {
+        this.stack = stack;
+    }
+
+    public ArrayList<Integer> getPath()
+    {
+        return path;
+    }
+
+    public void setPath(ArrayList<Integer> path)
+    {
+        this.path = path;
+    }
+
+    public double getLengthOfPath()
+    {
+        return lengthOfPath;
+    }
+
+    public void setLengthOfPath(double lengthOfPath)
+    {
+        this.lengthOfPath = lengthOfPath;
+    }
+
+    public void calculatePathLength(double adjMatrix[][], ArrayList<Packet> packets)
+    {
+        double length = 0;
+        for (int i = 0; i < path.size() - 1; i++)
+        {
+            length = length + adjMatrix[path.get(i)][path.get(i + 1)];
+        }
+        this.lengthOfPath = length;
     }
 
 }

@@ -16,17 +16,20 @@ public class Main
         Packet b = new Packet(20, 0);
         Packet c = new Packet(30, 0);
         Packet d = new Packet(0, 5);
-        //Packet e = new Packet(1, 30);
+        Packet e = new Packet(1, 30);
         ArrayList<Packet> list = new ArrayList<Packet>();
         list.add(f);
         list.add(a);
         list.add(b);
         list.add(c);
         list.add(d);
-        //zlist.add(e);
+        list.add(e);
         z.createMatrix(list);
         TSPNearestNeighbour x = new TSPNearestNeighbour();
         x.tsp(z.getMap());
         System.out.println(Arrays.deepToString(z.getMap()));
+        x.calculatePathLength(z.getMap(), list);
+        System.out.println(x.getLengthOfPath());
+        ArrayList<Integer> y = x.getPath();
     }
 }
