@@ -1,9 +1,7 @@
 package nl.windesheim.kbsm2.opc01.tsp;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Stack;
-import javax.swing.JFrame;
+import java.util.*;
+import javax.swing.*;
 
 public class Main
 {
