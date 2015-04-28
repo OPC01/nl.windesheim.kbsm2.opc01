@@ -33,13 +33,8 @@ public class Main extends JFrame {
             e.printStackTrace();
         }
 		
-		JFrame frame = new Main();
-		frame.setSize(1000,600);
-		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		frame.setTitle("AS/RS Systeem");
-		JPanel paneel = new Paneel();
-		frame.setContentPane( paneel );
-		frame.setLocation(600, 300);
-		frame.setVisible( true );
+		JFrame paneel = new Paneel();
+		paneel.setLocation(600, 300);
+		paneel.setVisible( true );
 	}
 }

@@ -6,11 +6,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.*;
 
-public class Paneel extends JPanel{
-	private JButton BTKlantengegevens,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
-	private JLabel JLStatus;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Paneel extends JFrame implements ActionListener{
+	private final JButton BTKlantengegevens,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
+	private final JLabel JLStatus;
 	
 	public Paneel(){
+                this.setSize(1000,600);
+		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		this.setTitle("AS/RS Systeem");
+            
+            
 		setLayout(null);
 		
 		BTKlantengegevens = new JButton("Klanten gegevens");
@@ -41,9 +49,11 @@ public class Paneel extends JPanel{
 		add(BTNieuwProduct);
 		add(BTPakbon);
 		add(JLStatus);
+                this.setVisible(true);
+                this.BTKlantengegevens.addActionListener(this);
 		
 	}
-	
+	/*
 	public void paintComponent(Graphics g)
 	  {
 	    super.paintComponent(g);
@@ -51,4 +61,15 @@ public class Paneel extends JPanel{
 		g.drawRect(420, 10, 500, 450);
 		g.drawRect(10,180,300,300);
 	  }
+        */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource() == BTKlantengegevens){;
+            KlantDialoog d = new KlantDialoog(this);
+            d.setVisible(true);
+        
+        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
