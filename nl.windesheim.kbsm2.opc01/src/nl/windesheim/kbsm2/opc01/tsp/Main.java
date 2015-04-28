@@ -31,5 +31,6 @@ public class Main
         x.calculatePathLength(z.getMap(), list);
         System.out.println(x.getLengthOfPath());
         ArrayList<Integer> y = x.getPath();
+        //lel
     }
 }
