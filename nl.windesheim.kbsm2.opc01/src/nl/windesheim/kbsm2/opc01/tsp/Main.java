@@ -8,14 +8,16 @@ public class Main
 
     public static void main(String[] args)
     {
+        MainScreen m = new MainScreen();
+        m.setVisible(true);
         /*
          DistanceMap z = new DistanceMap();
-         Packet f = new Packet(0, 0);
-         Packet a = new Packet(10, 0);
-         Packet b = new Packet(20, 0);
-         Packet c = new Packet(30, 0);
+         Packet f = new Packet(0, 1);
+         Packet a = new Packet(0, 2);
+         Packet b = new Packet(0, 3);
+         Packet c = new Packet(0, 4);
          Packet d = new Packet(0, 5);
-         Packet e = new Packet(1, 30);
+         Packet e = new Packet(1, 6);
          ArrayList<Packet> list = new ArrayList<Packet>();
          list.add(f);
          list.add(a);
@@ -30,6 +32,8 @@ public class Main
          x.calculatePathLength(z.getMap(), list);
          System.out.println(x.getLengthOfPath());
          ArrayList<Integer> y = x.getPath();
+<<<<<<< HEAD
          */        
+
     }
 }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,8 +19,6 @@ public class Main extends JFrame {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException
 				| IllegalAccessException | UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
         try {
@@ -30,11 +27,10 @@ public class Main extends JFrame {
             Order order = XMLReader.readXML(file);
             System.out.println(order.toString());
         } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
         }
-		
 		JFrame paneel = new Paneel();
-		paneel.setLocation(600, 300);
+//		paneel.setLocation(600, 300);
+                paneel.setLocationRelativeTo(null); // positioneert frame in het midden
 		paneel.setVisible( true );
 	}
 }

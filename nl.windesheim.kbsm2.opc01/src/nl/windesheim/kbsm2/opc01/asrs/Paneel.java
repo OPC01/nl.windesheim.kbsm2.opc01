@@ -50,7 +50,12 @@ public class Paneel extends JFrame implements ActionListener{
 		add(BTPakbon);
 		add(JLStatus);
                 this.setVisible(true);
+
                 this.BTKlantengegevens.addActionListener(this);
+                this.BTOrderMaken.addActionListener(this);
+                this.BTOrderSelect.addActionListener(this);
+                this.BTProducten.addActionListener(this);
+                this.BTNieuwProduct.addActionListener(this);
 		
 	}
 	/*
@@ -64,12 +69,30 @@ public class Paneel extends JFrame implements ActionListener{
         */
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         if(e.getSource() == BTKlantengegevens){;
             KlantDialoog d = new KlantDialoog(this);
             d.setVisible(true);
-        
         }
+        else if(e.getSource() == BTOrderMaken) {
+            OrderDialoog d = new OrderDialoog(this, true);
+            d.setVisible(true);
+        }
+        else if(e.getSource() == BTOrderSelect) {
+            OrderlijstDialoog d = new OrderlijstDialoog(this, true);
+            d.setVisible(true);
+        }
+        else if(e.getSource() == BTProducten) {
+            ProductSelecterenDialoog d = new ProductSelecterenDialoog(this, true);
+            d.setVisible(true);
+        }
+        else if(e.getSource() == BTNieuwProduct) {
+            ProductToevoegenDialoog d = new ProductToevoegenDialoog(this, true);
+            d.setVisible(true);
+        }
+        
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }
