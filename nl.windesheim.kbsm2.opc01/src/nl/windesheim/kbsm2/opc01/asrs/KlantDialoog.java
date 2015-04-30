@@ -18,9 +18,9 @@ import javax.swing.JLabel;
  */
 public class KlantDialoog extends JDialog implements ActionListener {
        
-    private JTextField jtfNaam,jtfAchternaam,jtfAdres,jtfPostcode,jtfPlaats;
-    private JButton jbToevoegen;
-    private JLabel jlKlant;
+    private final JTextField jtfNaam,jtfAchternaam,jtfAdres,jtfPostcode,jtfPlaats;
+    private final JButton jbToevoegen;
+    private final JLabel jlKlant;
     
     public KlantDialoog(JFrame frame){
         super(frame, true);
