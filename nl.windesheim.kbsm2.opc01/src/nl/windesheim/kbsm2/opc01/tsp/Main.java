@@ -30,14 +30,6 @@ public class Main
          x.calculatePathLength(z.getMap(), list);
          System.out.println(x.getLengthOfPath());
          ArrayList<Integer> y = x.getPath();
-         */
-
-        ArrayList<Integer> lst = new ArrayList<Integer>();
-        for (int i = 0; i < 6; ++i)
-        {
-            lst.add(i);
-        }
-        ArrayList<Integer> route = new ArrayList<Integer>();
-        TSPBruteForce.bruteForce(route, lst);
+         */        
     }
 }
