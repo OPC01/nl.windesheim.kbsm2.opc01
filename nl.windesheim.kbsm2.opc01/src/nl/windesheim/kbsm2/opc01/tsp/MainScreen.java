@@ -5,6 +5,7 @@
  */
 package nl.windesheim.kbsm2.opc01.tsp;
 
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 /**
@@ -145,7 +146,8 @@ public class MainScreen extends javax.swing.JFrame
             DistanceMap z = new DistanceMap();
             z.createMatrix(list);
             System.out.println(list);
-
+            GridLayout jPanelLayout = new GridLayout()
+            jPanel1.layout()
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
