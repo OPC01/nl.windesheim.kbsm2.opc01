@@ -12,7 +12,7 @@ public class TSPBruteForce
         {
             for (int i = 0; i < citiesNotInRoute.size(); i++)
             {
-                Integer justRemoved = (Integer) citiesNotInRoute.remove(0);
+                Integer justRemoved = citiesNotInRoute.remove(0);
                 ArrayList<Integer> newRoute = (ArrayList<Integer>) r.clone();
                 newRoute.add(justRemoved);
 
@@ -27,12 +27,23 @@ public class TSPBruteForce
                 bestRoute = r;
             }
         }
-        
+
     }
 
     private static boolean isBestRoute(ArrayList<Integer> r)
     {
         System.out.println(r.toString());
         return false;
+    }
+
+    public static void main(String[] args)
+    {
+        ArrayList<Integer> lst = new ArrayList<Integer>();
+        for (int i = 0; i < 6; ++i)
+        {
+            lst.add(i);
+        }
+        ArrayList<Integer> route = new ArrayList<Integer>();
+        bruteForce(route, lst);
     }
 }

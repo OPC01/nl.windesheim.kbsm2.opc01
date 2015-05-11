@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="dist/lib/ardulink.jar"/>
+	<classpathentry kind="lib" path="dist/lib/ch.ntb.usb-0.5.9.jar"/>
+	<classpathentry kind="lib" path="dist/lib/javax.mail-1.5.1.jar"/>
+	<classpathentry kind="lib" path="dist/lib/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="dist/nl.windesheim.kbsm2.opc01.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

@@ -164,37 +164,25 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         if (e.getSource() == jCheckBox1) { // checkbox van firstFit
             boolean checked = jCheckBox1.isSelected();
             if (checked) {
-//                System.out.println("Check box1 state is selected");
                 algoritme.setFirstFit(true);
-//                System.out.println(algoritme.getFirstFit());
             } else {
-//                System.out.println("Check box1 state is not selected");
                 algoritme.setFirstFit(false);
-//                System.out.println(algoritme.getFirstFit());
             }
         }
         if (e.getSource() == jCheckBox2) {// checkbox van bestFit
             boolean checked = jCheckBox2.isSelected();
             if (checked) {
                 algoritme.setBestFit(true);
-//                System.out.println("Check box2 state is selected");
-//                System.out.println(algoritme.getBestFit());
             } else {
                 algoritme.setBestFit(false);
-//                System.out.println("Check box2 state is not selected");
-//                System.out.println(algoritme.getBestFit());
             }
         }
         if (e.getSource() == jCheckBox3) {// checkbox van nextFit
             boolean checked = jCheckBox3.isSelected();
             if (checked) {
                 algoritme.setNextFit(true);
-//                System.out.println("Check box3 state is selected");
-//                System.out.println(algoritme.getNextFit());
             } else {
                 algoritme.setNextFit(false);
-//                System.out.println("Check box3 state is not selected");
-//                System.out.println(algoritme.getNextFit());
             }
         }
         if (e.getSource() == jButton2) {
