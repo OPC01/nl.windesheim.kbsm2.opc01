@@ -27,31 +27,109 @@ import org.zu.ardulink.protocol.IProtocol;
 import org.zu.ardulink.protocol.ProtocolHandler;
 import org.zu.ardulink.protocol.SimpleBinaryProtocol;
 
-public class BlinkLED {
+
+
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JFrame;
+
+public class BlinkLED extends JFrame {
+	public static Link link = Link.createInstance("TEST");
+	public static int motor1 = 4;
+	public static int motor2 = 7;
+	public static int speed1 = 5;
+	public static int speed2 = 6;
 
 	public static void main(String[] args) {
+		JFrame frame = new BlinkLED();
+		frame.setSize(1000,600);
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		frame.setTitle("test programma robot");
+		frame.setVisible(true);
+		
 		try {
-			Link link = Link.createInstance("TEST");
-                        link.connect("COM5",115200);
 
-				Thread.sleep(2000);
-				int power = IProtocol.HIGH;
-				while(true) {
-					System.out.println("Send power:" + power);
-					link.sendPowerPinSwitch(3, power);
-                    System.out.println("SWAG");
-					if(power == IProtocol.HIGH) {
-						power = IProtocol.LOW;
-					} else {
-						power = IProtocol.HIGH;
-					}
-					Thread.sleep(1000);
+            link.connect("COM7",115200);
+            Thread.sleep(2000);
+            System.out.println("verbinding gemaakt");   
+
 				}
 						
-		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+        	
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent ke) {
+                synchronized (BlinkLED.class) {
+                    switch (ke.getID()) {
+                    case KeyEvent.KEY_PRESSED:
+                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+        					link.sendPowerPinSwitch(motor1, 0);
+        					link.sendPowerPinIntensity(speed1, 255);
+        					System.out.println("poort 5 aan");
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
+        					link.sendPowerPinSwitch(motor2, 1);
+        					link.sendPowerPinIntensity(speed2, 255);
+                        	System.out.println("poort 7 aan");
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
+        					link.sendPowerPinSwitch(motor2, 0);
+        					link.sendPowerPinIntensity(speed2, 255);
+                        	System.out.println("poort 8 aan");
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+        					link.sendPowerPinSwitch(motor1, 1);
+        					link.sendPowerPinIntensity(speed1, 255);
+                            System.out.println("poort 6 aan");
+                        }
+                        break;
+
+                    case KeyEvent.KEY_RELEASED:
+                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+        					link.sendPowerPinSwitch(motor1, 0);
+        					link.sendPowerPinIntensity(speed1, 0);
+        					System.out.println("poort 5 uit");
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
+        					link.sendPowerPinSwitch(motor2, 1);
+        					link.sendPowerPinIntensity(speed2, 0);
+                        	System.out.println("poort 7 uit");
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
+        					link.sendPowerPinSwitch(motor2, 0);
+        					link.sendPowerPinIntensity(speed2, 0);
+                        	System.out.println("poort 8 uit");
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+        					link.sendPowerPinSwitch(motor1, 1);
+        					link.sendPowerPinIntensity(speed1, 0);
+                            System.out.println("poort 6 uit");
+                        }
+                        break;
+                    }
+                    return false;
+                }
+            }
+        });
+	
+        new Thread(new Runnable() {
+			public void run() {
+				while(true){
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
 	}
 
 	private static Link getDigisparkConnection() {
@@ -62,5 +140,5 @@ public class BlinkLED {
 		}
 		return Link.createInstance("digisparkConnection", SimpleBinaryProtocol.NAME, new DigisparkUSBConnection("digisparkConnection", protocol.getIncomingMessageDivider()));
 	}
-
+	
 }

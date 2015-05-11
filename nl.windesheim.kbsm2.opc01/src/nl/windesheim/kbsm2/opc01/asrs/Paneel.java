@@ -9,9 +9,16 @@ import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.io.BufferedReader;
+import java.io.File;
+
 public class Paneel extends JFrame implements ActionListener{
 	private final JButton BTKlantengegevens,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
 	private final JLabel JLStatus;
+        
+        private JFileChooser fileChooser = new JFileChooser();
+        private BufferedReader br;
+        private File file;
 	
 	public Paneel(){
                 this.setSize(1000,600);
@@ -75,8 +82,12 @@ public class Paneel extends JFrame implements ActionListener{
             d.setVisible(true);
         }
         else if(e.getSource() == BTOrderMaken) {
-            OrderDialoog d = new OrderDialoog(this, true);
-            d.setVisible(true);
+            int result = fileChooser.showOpenDialog(this);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                System.out.println("Geselecteerd bestand: " + selectedFile.getAbsolutePath());
+            }
         }
         else if(e.getSource() == BTOrderSelect) {
             OrderlijstDialoog d = new OrderlijstDialoog(this, true);
