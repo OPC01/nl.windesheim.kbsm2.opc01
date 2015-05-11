@@ -4,9 +4,9 @@ import java.util.*;
 
 public class TSPBruteForce
 {
-    private static ArrayList<Integer> bestRoute;
+    private ArrayList<Integer> bestRoute;
 
-    public static void bruteForce(ArrayList<Integer> r, ArrayList<Integer> citiesNotInRoute)
+    public void bruteForce(ArrayList<Integer> r, ArrayList<Integer> citiesNotInRoute)
     {
         if (!citiesNotInRoute.isEmpty())
         {
@@ -30,13 +30,13 @@ public class TSPBruteForce
 
     }
 
-    private static boolean isBestRoute(ArrayList<Integer> r)
+    private boolean isBestRoute(ArrayList<Integer> r)
     {
         System.out.println(r.toString());
         return false;
     }
 
-    public static void main(String[] args)
+    public void activateBruteForce()
     {
         ArrayList<Integer> lst = new ArrayList<Integer>();
         for (int i = 0; i < 6; ++i)
@@ -47,3 +47,4 @@ public class TSPBruteForce
         bruteForce(route, lst);
     }
 }
+//TSPBruteForce.bruteForce(route, lst);
