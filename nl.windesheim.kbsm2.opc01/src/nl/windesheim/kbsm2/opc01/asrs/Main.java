@@ -33,7 +33,6 @@ public class Main extends JFrame {
             e.printStackTrace();
         }
 		JFrame paneel = new Paneel();
-//		paneel.setLocation(600, 300);
                 paneel.setLocationRelativeTo(null); // positioneert frame in het midden
 		paneel.setVisible( true );
 	}
