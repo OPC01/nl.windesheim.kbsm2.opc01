@@ -12,12 +12,12 @@ public class TSPBruteForce
         {
             for (int i = 0; i < notInRoute.size(); i++)
             {
-                Integer justRemoved = notInRoute.remove(0);
+                Integer removed = notInRoute.remove(0);
                 ArrayList<Integer> newRoute = (ArrayList<Integer>) routes.clone();
-                newRoute.add(justRemoved);
+                newRoute.add(removed);
 
                 bruteForce(newRoute, notInRoute);
-                notInRoute.add(justRemoved);
+                notInRoute.add(removed);
             }
         }
         else
@@ -30,9 +30,9 @@ public class TSPBruteForce
 
     }
 
-    private boolean isBestRoute(ArrayList<Integer> r)
+    private boolean isBestRoute(ArrayList<Integer> routes)
     {
-        System.out.println(r.toString());
+        System.out.println(routes.toString());
         return false;
     }
 
