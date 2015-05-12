@@ -7,6 +7,7 @@ package nl.windesheim.kbsm2.opc01.tsp;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import javax.swing.JCheckBox;
 
 /**
  *
@@ -15,12 +16,22 @@ import java.util.ArrayList;
 public class MainScreen extends javax.swing.JFrame
 {
 
-    /**
-     * Creates new form MainScreen
-     */
+    private ArrayList<Packet> list = new ArrayList<Packet>();
+    private ArrayList<JCheckBox> boxReference = new ArrayList<JCheckBox>();
+
     public MainScreen()
     {
         initComponents();
+    }
+
+    public ArrayList<Packet> getList()
+    {
+        return list;
+    }
+
+    public ArrayList<JCheckBox> getBoxReference()
+    {
+        return boxReference;
     }
 
     /**
@@ -114,7 +125,7 @@ public class MainScreen extends javax.swing.JFrame
                     .addComponent(jCheckBox3)
                     .addComponent(jCheckBox2)
                     .addComponent(jCheckBox1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -126,7 +137,7 @@ public class MainScreen extends javax.swing.JFrame
 
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBox3ActionPerformed
     {//GEN-HEADEREND:event_jCheckBox3ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jCheckBox3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
@@ -137,17 +148,21 @@ public class MainScreen extends javax.swing.JFrame
         {
             GridLayout jPanelLayout = new GridLayout(options.width, options.hight);
             jPanel1.setLayout(jPanelLayout);
-            ArrayList<Packet> list = new ArrayList<Packet>();
+
             for (int i = 0; i < options.width; i++)
             {
                 for (int ii = 0; ii < options.hight; ii++)
                 {
                     list.add(new Packet(i, ii));
+                    JCheckBox box = new JCheckBox(i + "," + ii);
+                    boxReference.add(box);
+                    jPanel1.add(box);
+
                 }
             }
-            DistanceMap z = new DistanceMap();
-            z.createMatrix(list);
             System.out.println(list);
+            jPanel1.revalidate();
+            jPanel1.repaint();
 
         }
 
