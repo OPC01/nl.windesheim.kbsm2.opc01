@@ -186,19 +186,17 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
             }
         }
         if (e.getSource() == jButton2) {
-            if(algoritme.getFirstFit() == true){
-                new Simulatie(algoritme).setTitle("Simulatie First Fit");
-            }
-            if(algoritme.getBestFit() == true){
-                new Simulatie(algoritme).setTitle("Simulatie Best Fit");
-            }
-            if(algoritme.getNextFit() == true){
-                new Simulatie(algoritme).setTitle("Simulatie Next Fit");
+            if (e.getSource() == jSpinner1) {
+                int value = (int) jSpinner1.getValue();
+                if (value > 0) {
+                    algoritme.setDoosGrootte(value);
+                } else {
+
+                }
             }
         }
     }
-
-    // Variables declaration - do not modify                     
+            // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
