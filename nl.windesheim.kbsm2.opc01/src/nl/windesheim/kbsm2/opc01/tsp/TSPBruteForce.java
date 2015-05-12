@@ -4,35 +4,35 @@ import java.util.*;
 
 public class TSPBruteForce
 {
-    private ArrayList<Integer> bestRoute;
+    private ArrayList<Integer> bestPath;
 
-    public void bruteForce(ArrayList<Integer> routes, ArrayList<Integer> notInRoute)
+    public void bruteForce(ArrayList<Integer> path, ArrayList<Integer> notInPath)
     {
-        if (!notInRoute.isEmpty())
+        if (!notInPath.isEmpty())
         {
-            for (int i = 0; i < notInRoute.size(); i++)
+            for (int i = 0; i < notInPath.size(); i++)
             {
-                Integer removed = notInRoute.remove(0);
-                ArrayList<Integer> newRoute = (ArrayList<Integer>) routes.clone();
-                newRoute.add(removed);
+                Integer removed = notInPath.remove(0);
+                ArrayList<Integer> newPath = (ArrayList<Integer>) path.clone();
+                newPath.add(removed);
 
-                bruteForce(newRoute, notInRoute);
-                notInRoute.add(removed);
+                bruteForce(newPath, notInPath);
+                notInPath.add(removed);
             }
         }
         else
         {
-            if (isBestRoute(routes))
+            if (isBestPath(path))
             {
-                bestRoute = routes;
+                bestPath = path;
             }
         }
 
     }
 
-    private boolean isBestRoute(ArrayList<Integer> routes)
+    private boolean isBestPath(ArrayList<Integer> path)
     {
-        System.out.println(routes.toString());
+        System.out.println(path.toString());
         return false;
     }
 
