@@ -4,39 +4,39 @@ import java.util.*;
 
 public class TSPBruteForce
 {
-    private static ArrayList<Integer> bestRoute;
+    private ArrayList<Integer> bestRoute;
 
-    public static void bruteForce(ArrayList<Integer> r, ArrayList<Integer> citiesNotInRoute)
+    public void bruteForce(ArrayList<Integer> routes, ArrayList<Integer> notInRoute)
     {
-        if (!citiesNotInRoute.isEmpty())
+        if (!notInRoute.isEmpty())
         {
-            for (int i = 0; i < citiesNotInRoute.size(); i++)
+            for (int i = 0; i < notInRoute.size(); i++)
             {
-                Integer justRemoved = citiesNotInRoute.remove(0);
-                ArrayList<Integer> newRoute = (ArrayList<Integer>) r.clone();
+                Integer justRemoved = notInRoute.remove(0);
+                ArrayList<Integer> newRoute = (ArrayList<Integer>) routes.clone();
                 newRoute.add(justRemoved);
 
-                bruteForce(newRoute, citiesNotInRoute);
-                citiesNotInRoute.add(justRemoved);
+                bruteForce(newRoute, notInRoute);
+                notInRoute.add(justRemoved);
             }
         }
         else
         {
-            if (isBestRoute(r))
+            if (isBestRoute(routes))
             {
-                bestRoute = r;
+                bestRoute = routes;
             }
         }
 
     }
 
-    private static boolean isBestRoute(ArrayList<Integer> r)
+    private boolean isBestRoute(ArrayList<Integer> r)
     {
         System.out.println(r.toString());
         return false;
     }
 
-    public static void main(String[] args)
+    public void activateBruteForce()
     {
         ArrayList<Integer> lst = new ArrayList<Integer>();
         for (int i = 0; i < 6; ++i)
@@ -47,3 +47,4 @@ public class TSPBruteForce
         bruteForce(route, lst);
     }
 }
+//TSPBruteForce.bruteForce(route, lst);

@@ -29,7 +29,6 @@ public class Main extends JFrame {
         } catch (ParserConfigurationException | IOException | SAXException e) {
         }
 		JFrame paneel = new Paneel();
-//		paneel.setLocation(600, 300);
                 paneel.setLocationRelativeTo(null); // positioneert frame in het midden
 		paneel.setVisible( true );
 	}
