@@ -1,6 +1,6 @@
 package nl.windesheim.kbsm2.opc01.tsp;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class DistanceMap
 {
