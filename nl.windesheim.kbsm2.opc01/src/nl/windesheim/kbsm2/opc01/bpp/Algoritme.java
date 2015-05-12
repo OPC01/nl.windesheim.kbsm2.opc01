@@ -21,7 +21,7 @@ public class Algoritme {
     private int doosGrootte;
     private ArrayList<Integer> paketten;
     private int overschot;
-    private int aantalDozen;
+    private int aantalDozen = 0;
     private ArrayList<ArrayList<Integer>> dozen;
 
     public Algoritme(String naam) {
@@ -53,6 +53,10 @@ public class Algoritme {
     public void algoritmeNextFit() {
 
     }
+    
+    public int getDoosGrootte(){
+        return doosGrootte;
+    }
 
     public boolean getFirstFit() {
         return firstFit;
@@ -76,6 +80,10 @@ public class Algoritme {
 
     public void setNextFit(boolean nextFit) {
         this.nextFit = nextFit;
+    }
+    
+    public void setDoosGrootte(int doosGrootte){
+        this.doosGrootte = doosGrootte;
     }
 
 }
