@@ -18,9 +18,13 @@ public class MainScreen extends javax.swing.JFrame
 
     private ArrayList<Packet> list = new ArrayList<Packet>();
     private ArrayList<JCheckBox> boxReference = new ArrayList<JCheckBox>();
+    private TSPBruteForce bruteForce = new TSPBruteForce();
+    private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
+    private DistanceMap map = new DistanceMap();
 
     public MainScreen()
     {
+
         initComponents();
     }
 
@@ -45,8 +49,8 @@ public class MainScreen extends javax.swing.JFrame
     {
 
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        jBruteForce = new javax.swing.JCheckBox();
+        jNearestNeigbour = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -67,27 +71,20 @@ public class MainScreen extends javax.swing.JFrame
             .addGap(0, 170, Short.MAX_VALUE)
         );
 
-        jCheckBox1.setText("Brute Force");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
+        jBruteForce.setText("Brute Force");
 
-        jCheckBox2.setText("Nearest Neighbour");
+        jNearestNeigbour.setText("Nearest Neighbour");
 
         jCheckBox3.setText("jCheckBox1");
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener()
+
+        jButton1.setText("Start Simulatie");
+        jButton1.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jCheckBox3ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        jButton1.setText("Start Simulatie");
 
         jButton2.setText("Instelling");
         jButton2.addActionListener(new java.awt.event.ActionListener()
@@ -112,9 +109,9 @@ public class MainScreen extends javax.swing.JFrame
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(jCheckBox1)
+                        .addComponent(jBruteForce)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox2)
+                        .addComponent(jNearestNeigbour)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox3))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -128,8 +125,8 @@ public class MainScreen extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jNearestNeigbour)
+                    .addComponent(jBruteForce))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -139,11 +136,6 @@ public class MainScreen extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBox3ActionPerformed
-    {//GEN-HEADEREND:event_jCheckBox3ActionPerformed
-
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
@@ -173,10 +165,18 @@ public class MainScreen extends javax.swing.JFrame
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBox1ActionPerformed
-    {//GEN-HEADEREND:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
+    {//GEN-HEADEREND:event_jButton1ActionPerformed
+        map.createMatrix(list);
+        if (jBruteForce.isSelected())
+        {
+
+        }
+        if (jNearestNeigbour.isSelected())
+        {
+            nearestNeighbour.tsp(map.getMap());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,11 +228,11 @@ public class MainScreen extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox jBruteForce;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jNearestNeigbour;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
