@@ -38,13 +38,13 @@ public class TSPBruteForce
 
     public void activateBruteForce()
     {
-        ArrayList<Integer> lst = new ArrayList<Integer>();
+        ArrayList<Integer> first = new ArrayList<Integer>();
         for (int i = 0; i < 6; ++i)
         {
-            lst.add(i);
+            first.add(i);
         }
         ArrayList<Integer> route = new ArrayList<Integer>();
-        bruteForce(route, lst);
+        bruteForce(route, first);
     }
 }
-//TSPBruteForce.bruteForce(route, lst);
+//TSPBruteForce.bruteForce(route, first);
