@@ -35,9 +35,9 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
         jbToevoegen = new javax.swing.JButton();
         jlProductlocatie = new javax.swing.JLabel();
         jlX = new javax.swing.JLabel();
-        jtfX = new javax.swing.JTextField();
         jlY = new javax.swing.JLabel();
-        jtfY = new javax.swing.JTextField();
+        jsX = new javax.swing.JSpinner();
+        jsY = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Product Toevoegen");
@@ -65,6 +65,10 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
 
         jlY.setText("Y");
 
+        jsX.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
+        jsY.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,8 +92,8 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtfProductnummer, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                             .addComponent(jtfProductnaam)
-                            .addComponent(jtfX)
-                            .addComponent(jtfY))))
+                            .addComponent(jsX)
+                            .addComponent(jsY))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -106,15 +110,15 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlProductlocatie)
-                    .addComponent(jtfX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlX))
+                    .addComponent(jlX)
+                    .addComponent(jsX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlY)
-                    .addComponent(jtfY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jsY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbToevoegen)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,7 +129,15 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
     }//GEN-LAST:event_jtfProductnummerActionPerformed
 
     private void jbToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbToevoegenActionPerformed
-        // TODO add your handling code here:
+        String productNaam = jtfProductnaam.getText();
+        int productNummer = (int) Integer.parseInt(jtfProductnummer.getText());
+        int x = (int) jsX.getValue();
+        int y = (int) jsY.getValue();
+        
+        System.out.println("Productnaam: " + productNaam);
+        System.out.println("Productnummer: " + productNummer);
+        System.out.println("X: " + x);
+        System.out.println("Y: " + y);
     }//GEN-LAST:event_jbToevoegenActionPerformed
 
     /**
@@ -177,9 +189,9 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
     private javax.swing.JLabel jlProductnummer;
     private javax.swing.JLabel jlX;
     private javax.swing.JLabel jlY;
+    private javax.swing.JSpinner jsX;
+    private javax.swing.JSpinner jsY;
     private javax.swing.JTextField jtfProductnaam;
     private javax.swing.JTextField jtfProductnummer;
-    private javax.swing.JTextField jtfX;
-    private javax.swing.JTextField jtfY;
     // End of variables declaration//GEN-END:variables
 }

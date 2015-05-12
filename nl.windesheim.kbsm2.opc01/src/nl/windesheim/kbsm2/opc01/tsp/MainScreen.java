@@ -5,6 +5,7 @@
  */
 package nl.windesheim.kbsm2.opc01.tsp;
 
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 /**
@@ -41,7 +42,6 @@ public class MainScreen extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(600, 400));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -56,8 +56,14 @@ public class MainScreen extends javax.swing.JFrame
             .addGap(0, 170, Short.MAX_VALUE)
         );
 
-        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Brute Force");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jCheckBox2.setText("Nearest Neighbour");
 
@@ -134,6 +140,8 @@ public class MainScreen extends javax.swing.JFrame
         options.setVisible(true);
         if (options.created)
         {
+            GridLayout jPanelLayout = new GridLayout(options.width, options.hight);
+            jPanel1.setLayout(jPanelLayout);
             ArrayList<Packet> list = new ArrayList<Packet>();
             for (int i = 0; i < options.width; i++)
             {
@@ -149,6 +157,11 @@ public class MainScreen extends javax.swing.JFrame
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jCheckBox1ActionPerformed
+    {//GEN-HEADEREND:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
