@@ -135,6 +135,8 @@ public class MainScreen extends javax.swing.JFrame
         options.setVisible(true);
         if (options.created)
         {
+            GridLayout jPanelLayout = new GridLayout(options.width, options.hight);
+            jPanel1.setLayout(jPanelLayout);
             ArrayList<Packet> list = new ArrayList<Packet>();
             for (int i = 0; i < options.width; i++)
             {
@@ -146,8 +148,7 @@ public class MainScreen extends javax.swing.JFrame
             DistanceMap z = new DistanceMap();
             z.createMatrix(list);
             System.out.println(list);
-            GridLayout jPanelLayout = new GridLayout()
-            jPanel1.layout()
+
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
