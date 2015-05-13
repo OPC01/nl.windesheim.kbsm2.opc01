@@ -170,7 +170,7 @@ public class MainScreen extends javax.swing.JFrame
         map.createMatrix(list);
         if (jBruteForce.isSelected())
         {
-
+            TSPBruteForce.activateBruteForce();
         }
         if (jNearestNeigbour.isSelected())
         {
