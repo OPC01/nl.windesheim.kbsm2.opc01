@@ -198,7 +198,7 @@ public class MainScreen extends javax.swing.JFrame
 
         if (jBruteForce.isSelected())
         {
-
+            TSPBruteForce.activateBruteForce();
         }
         if (jNearestNeigbour.isSelected())
         {
