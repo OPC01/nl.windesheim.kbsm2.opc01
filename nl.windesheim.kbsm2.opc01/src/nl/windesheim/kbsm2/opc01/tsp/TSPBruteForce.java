@@ -44,6 +44,6 @@ public class TSPBruteForce
             first.add(i);
         }
         ArrayList<Integer> route = new ArrayList<Integer>();
-        bruteForce(route, first);
+        bruteForce(route, first);        
     }    
 }
