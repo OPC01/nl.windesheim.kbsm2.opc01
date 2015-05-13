@@ -6,7 +6,9 @@
 package nl.windesheim.kbsm2.opc01.tsp;
 
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JCheckBox;
 
 /**
@@ -16,8 +18,7 @@ import javax.swing.JCheckBox;
 public class MainScreen extends javax.swing.JFrame
 {
 
-    private ArrayList<Packet> list = new ArrayList<Packet>();
-    private ArrayList<JCheckBox> boxReference = new ArrayList<JCheckBox>();
+    private ArrayList<CheckBox> boxReference = new ArrayList<CheckBox>();
     private TSPBruteForce bruteForce = new TSPBruteForce();
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
     private DistanceMap map = new DistanceMap();
@@ -28,12 +29,7 @@ public class MainScreen extends javax.swing.JFrame
         initComponents();
     }
 
-    public ArrayList<Packet> getList()
-    {
-        return list;
-    }
-
-    public ArrayList<JCheckBox> getBoxReference()
+    public ArrayList<CheckBox> getBoxReference()
     {
         return boxReference;
     }
@@ -141,23 +137,28 @@ public class MainScreen extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jButton2ActionPerformed
         Options options = new Options(this, true);
         options.setVisible(true);
+        jPanel1.removeAll();
+        boxReference.clear();
         if (options.created)
         {
-            GridLayout jPanelLayout = new GridLayout(options.width, options.hight);
+            GridLayout jPanelLayout = new GridLayout(options.hight, options.width);
             jPanel1.setLayout(jPanelLayout);
 
-            for (int i = 0; i < options.width; i++)
+            for (int i = 0; i < options.hight; i++)
             {
-                for (int ii = 0; ii < options.hight; ii++)
+                for (int ii = 0; ii < options.width; ii++)
                 {
-                    list.add(new Packet(i, ii));
-                    JCheckBox box = new JCheckBox(i + "," + ii);
+                    int z = i - options.hight;
+                    int x = ii + 1;
+                    CheckBox box = new CheckBox(x + "." + -z, x, -z);
                     boxReference.add(box);
-                    jPanel1.add(box);
 
                 }
             }
-            System.out.println(list);
+            for (CheckBox a : boxReference)
+            {
+                jPanel1.add(a);
+            }
             jPanel1.revalidate();
             jPanel1.repaint();
 
@@ -165,9 +166,36 @@ public class MainScreen extends javax.swing.JFrame
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    class CheckBox extends JCheckBox
+    {
+
+        private Packet packet;
+
+        public CheckBox(String name, int x, int y)
+        {
+            super(name);
+            this.packet = new Packet(x, y);
+        }
+
+        public Packet getPacket()
+        {
+            return packet;
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
+        ArrayList<Packet> list = new ArrayList<Packet>();
+        for (CheckBox a : boxReference)
+        {
+            if (a.isSelected())
+            {
+                a.packet.setGetPacket(true);
+                list.add(a.getPacket());
+            }
+        }
+
         map.createMatrix(list);
+
         if (jBruteForce.isSelected())
         {
 
@@ -175,6 +203,11 @@ public class MainScreen extends javax.swing.JFrame
         if (jNearestNeigbour.isSelected())
         {
             nearestNeighbour.tsp(map.getMap());
+            for (int a : nearestNeighbour.getPath())
+            {
+                Packet q = boxReference.get(a).getPacket();
+                System.out.print(q);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -196,24 +229,32 @@ public class MainScreen extends javax.swing.JFrame
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         }
         catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
         catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
         catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
         catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainScreen.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
