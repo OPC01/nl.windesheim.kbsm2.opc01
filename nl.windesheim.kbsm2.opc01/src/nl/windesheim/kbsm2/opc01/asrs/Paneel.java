@@ -67,12 +67,6 @@ public class Paneel extends JFrame implements ActionListener{
 		JLBezig = new JLabel("Bezig :");
 		JLBezig.setBounds(10,220,100,20);
 		
-		
-		
-		
-		
-		
-		
 		add(BTStart);
 		add(BTOrderMaken);
 		add(BTProducten);
