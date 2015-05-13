@@ -26,7 +26,6 @@ public class TSPNearestNeighbour
         int element, dst = 0, i;
         double min = Double.MAX_VALUE;
         boolean minFlag = false;
-        System.out.print("0" + "\t");
         while (!stack.isEmpty())
         {
             element = stack.peek();
@@ -51,7 +50,6 @@ public class TSPNearestNeighbour
                 path.add(dst);
                 visited[dst] = 1;
                 stack.push(dst);
-                System.out.print(dst + "\t");
                 minFlag = false;
                 continue;
             }
