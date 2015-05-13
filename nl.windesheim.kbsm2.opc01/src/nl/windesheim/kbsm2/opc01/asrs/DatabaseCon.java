@@ -137,8 +137,9 @@ public class DatabaseCon {
         	
     		rs = stmt.executeQuery(sql);
         	int klantid = rs.getInt("klantid");
-        	
+        	//voor testen
         	System.out.println(klantid);
+        	//
     	}
     	else{
     		java.sql.PreparedStatement preparedStatement = null;
@@ -152,6 +153,14 @@ public class DatabaseCon {
     		int i = preparedStatement.executeUpdate();
     		//voor testen
     		System.out.println(Integer.toString(i));
+    		//
+    		sql = "SELECT klantid FROM klant ORDER BY klantid DESC LIMIT 1";
+    		ResultSet resultSet = stmt.executeQuery(sql);
+    		
+    		int klantid = resultSet.getInt("klantid");
+    		//voor testen
+    		System.out.println(klantid);
+    		//
     	}
     	
     	
