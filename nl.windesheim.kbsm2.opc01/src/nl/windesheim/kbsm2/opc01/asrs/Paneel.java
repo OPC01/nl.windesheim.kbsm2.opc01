@@ -5,12 +5,9 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import java.io.BufferedReader;
 import java.io.File;
+import java.sql.SQLException;
 
 public class Paneel extends JFrame implements ActionListener{
 	private final JButton BTKlantengegevens,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
@@ -90,7 +87,14 @@ public class Paneel extends JFrame implements ActionListener{
             }
         }
         else if(e.getSource() == BTOrderSelect) {
-            OrderlijstDialoog d = new OrderlijstDialoog(this, true);
+            OrderlijstDialoog d = null;
+			try {
+				d = new OrderlijstDialoog(this, true);
+			} catch (ClassNotFoundException | InstantiationException
+					| IllegalAccessException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
             d.setVisible(true);
         }
         else if(e.getSource() == BTProducten) {
