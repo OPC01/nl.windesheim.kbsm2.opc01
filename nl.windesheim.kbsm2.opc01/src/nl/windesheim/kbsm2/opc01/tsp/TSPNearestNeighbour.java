@@ -34,7 +34,7 @@ public class TSPNearestNeighbour
             min = Double.MAX_VALUE;
             while (i < numberOfNodes)
             {
-                if (adjacencyMatrix[element][i] > 1 && visited[i] == 0)
+                if (adjacencyMatrix[element][i] > 0.1 && visited[i] == 0)
                 {
                     if (min > adjacencyMatrix[element][i])
                     {
