@@ -11,14 +11,17 @@ import java.awt.event.ActionListener;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 public class Paneel extends JFrame implements ActionListener{
 	private final JButton BTKlantengegevens,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
 	private final JLabel JLStatus;
         
+        // file import
         private JFileChooser fileChooser = new JFileChooser();
         private BufferedReader br;
         private File file;
+        private String currentLine;
 	
 	public Paneel(){
                 this.setSize(1000,600);
@@ -87,6 +90,18 @@ public class Paneel extends JFrame implements ActionListener{
             if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
                 System.out.println("Geselecteerd bestand: " + selectedFile.getAbsolutePath());
+
+                // xml bestand uitlezen
+                try {
+                    XMLReader XMLReader = new XMLReader();
+                    File file = new File(selectedFile.getAbsolutePath());
+                    Order order = XMLReader.readXML(file);
+                    System.out.println(order.toString());
+                }
+                catch(Exception error) {
+                    error.printStackTrace();
+                }
+
             }
         }
         else if(e.getSource() == BTOrderSelect) {
@@ -101,9 +116,8 @@ public class Paneel extends JFrame implements ActionListener{
             ProductToevoegenDialoog d = new ProductToevoegenDialoog(this, true);
             d.setVisible(true);
         }
+
         
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
