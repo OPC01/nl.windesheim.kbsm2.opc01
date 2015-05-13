@@ -12,25 +12,31 @@ public class DatabaseCon {
 		
 	}
 	
-	public void connectDatabase(String username, String password) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public void connectDatabase() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-	    Connection con = DriverManager.getConnection(
-	                         "jdbc:mysql://localhost/kbsproject",
-	                         username,
-	                         password);
 
-	    Statement stmt = con.createStatement();
-	    ResultSet rs = stmt.executeQuery("SELECT * FROM klant");
-
-	    while (rs.next()) {
-//	        int x = rs.getInt("leeftijd");
-                String naam = rs.getString("voornaam");
-                String achternaam = rs.getString("achternaam");
-                String adres = rs.getString("adres");
-//	        String s = rs.getString("naam");
-                
-                System.out.println("Naam: "+naam+"  Achternaam: "+achternaam+"  Adres: "+adres);
-	    }
 	}
+	
+	public Connection con() throws SQLException{
+	    Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost/kbsproject",
+                "root",
+                "root");
+		
+		
+		return con;
+	}
+	
+    
+    public ResultSet getOrders() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        DatabaseCon db = new DatabaseCon();
+        db.connectDatabase();
+        Connection con = db.con();
+        
+        
+    	Statement stmt = con.createStatement();
+    	ResultSet rs = stmt.executeQuery("SELECT * FROM `order`");
+    	return rs;
+    }
 
 }
