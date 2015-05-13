@@ -4,46 +4,47 @@ import java.util.*;
 
 public class TSPBruteForce
 {
-    private static ArrayList<Integer> bestRoute;
+    private ArrayList<Integer> bestRoute;
 
-    public static void bruteForce(ArrayList<Integer> r, ArrayList<Integer> citiesNotInRoute)
+    public void bruteForce(ArrayList<Integer> routes, ArrayList<Integer> notInRoute)
     {
-        if (!citiesNotInRoute.isEmpty())
+        if (!notInRoute.isEmpty())
         {
-            for (int i = 0; i < citiesNotInRoute.size(); i++)
+            for (int i = 0; i < notInRoute.size(); i++)
             {
-                Integer justRemoved = citiesNotInRoute.remove(0);
-                ArrayList<Integer> newRoute = (ArrayList<Integer>) r.clone();
-                newRoute.add(justRemoved);
+                Integer removed = notInRoute.remove(0);
+                ArrayList<Integer> newRoute = (ArrayList<Integer>) routes.clone();
+                newRoute.add(removed);
 
-                bruteForce(newRoute, citiesNotInRoute);
-                citiesNotInRoute.add(justRemoved);
+                bruteForce(newRoute, notInRoute);
+                notInRoute.add(removed);
             }
         }
         else
         {
-            if (isBestRoute(r))
+            if (isBestRoute(routes))
             {
-                bestRoute = r;
+                bestRoute = routes;
             }
         }
 
     }
 
-    private static boolean isBestRoute(ArrayList<Integer> r)
+    private boolean isBestRoute(ArrayList<Integer> routes)
     {
-        System.out.println(r.toString());
+        System.out.println(routes.toString());
         return false;
     }
 
-    public static void main(String[] args)
+    public void activateBruteForce()
     {
-        ArrayList<Integer> lst = new ArrayList<Integer>();
+        ArrayList<Integer> first = new ArrayList<Integer>();
         for (int i = 0; i < 6; ++i)
         {
-            lst.add(i);
+            first.add(i);
         }
         ArrayList<Integer> route = new ArrayList<Integer>();
-        bruteForce(route, lst);
+        bruteForce(route, first);
     }
 }
+//TSPBruteForce.bruteForce(route, first);

@@ -34,6 +34,7 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -47,6 +48,8 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jSpinner2 = new javax.swing.JSpinner();
+        jSpinner3 = new javax.swing.JSpinner();
 
         jLabel6.setText("groote van het pakket");
 
@@ -61,16 +64,16 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
                 .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jCheckBox1.setText("First Fit");
         this.jCheckBox1.addActionListener(this);
 
         jCheckBox2.setText("Best Fit");
-        jCheckBox2.addActionListener(this);
+        this.jCheckBox2.addActionListener(this);
 
         jCheckBox3.setText("Next Fit");
-        jCheckBox3.addActionListener(this);
+        this.jCheckBox3.addActionListener(this);
 
         jLabel1.setText("Selecteer algoritmes");
 
@@ -81,10 +84,10 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         jLabel5.setText("Aantal van dit soort");
 
         jButton2.setText("Start");
-        jButton2.addActionListener(this);
+        this.jButton2.addActionListener(this);
 
         jButton1.setText("Voeg toe");
-        jButton1.addActionListener(this);
+        this.jButton1.addActionListener(this);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,10 +112,17 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
                                         .addComponent(jLabel5)
                                         .addGap(93, 93, 93))))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1)
-                                .addComponent(jButton2))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton2))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jButton1)))
                         .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
@@ -134,7 +144,10 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel5))
                         .addGap(7, 7, 7)
-                        .addComponent(jButton1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton1)
+                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addGap(51, 51, 51))
@@ -144,21 +157,17 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(137, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(185, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>   
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == jCheckBox1) { // checkbox van firstFit
@@ -186,19 +195,27 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
             }
         }
         if (e.getSource() == jButton2) {
-            if(algoritme.getFirstFit() == true){
-                new Simulatie(algoritme).setTitle("Simulatie First Fit");
-            }
-            if(algoritme.getBestFit() == true){
-                new Simulatie(algoritme).setTitle("Simulatie Best Fit");
-            }
-            if(algoritme.getNextFit() == true){
-                new Simulatie(algoritme).setTitle("Simulatie Next Fit");
+            int value = (int) jSpinner1.getValue();
+            if (value > 0) {
+                algoritme.setDoosGrootte(value);
+                if (algoritme.getFirstFit() == true) {
+                    new Simulatie(algoritme).setTitle("Simulatie First Fit");
+                }
+                if (algoritme.getBestFit() == true) {
+                    new Simulatie(algoritme).setTitle("Simulatie Best Fit");
+                }
+                if (algoritme.getNextFit() == true) {
+                    new Simulatie(algoritme).setTitle("Simulatie Next Fit");
+                }
+            } else {
+                System.out.println("De waarde moet boven 0 zijn");
             }
         }
-    }
+        if (e.getSource() == jButton1) {
 
-    // Variables declaration - do not modify                     
+        }
+    }
+    // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
@@ -212,6 +229,8 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinner3;
     private Algoritme algoritme;
     // End of variables declaration                   
 }
