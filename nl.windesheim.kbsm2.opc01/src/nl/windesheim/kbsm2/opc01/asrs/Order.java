@@ -4,15 +4,13 @@ import java.util.ArrayList;
 
 public class Order {
 	private int ordernummer;
-	private String datum;
 	private Klant klant;
-	private ArrayList<Integer> artikelNRs;
+	private ArrayList<Integer> productIDs;
 	
-	public Order(int ordernummer,Klant klant,String datum,ArrayList<Integer> artikelNRs){
+	public Order(int ordernummer,Klant klant,ArrayList<Integer> productIDs){
 		this.ordernummer = ordernummer;
-		this.datum = datum;
 		this.klant = klant;
-		this.artikelNRs = artikelNRs;
+		this.productIDs = productIDs;
 	}
 	public int getOrdernummer() {
 		return ordernummer;
@@ -20,28 +18,21 @@ public class Order {
 	public void setOrdernummer(int ordernummer) {
 		this.ordernummer = ordernummer;
 	}
-	public String getDatum() {
-		return datum;
-	}
-	public void setDatum(String datum) {
-		this.datum = datum;
-	}
 	public Klant getKlant() {
 		return klant;
 	}
 	public void setKlant(Klant klant) {
 		this.klant = klant;
 	}
-	public ArrayList<Integer> getArtikelNRs() {
-		return artikelNRs;
+	public ArrayList<Integer> getproductIDs() {
+		return productIDs;
 	}
-	public void setArtikelNRs(ArrayList<Integer> artikelNRs) {
-		this.artikelNRs = artikelNRs;
+	public void setproductIDs(ArrayList<Integer> productIDs) {
+		this.productIDs = productIDs;
 	}
 	@Override
 	public String toString() {
-		return "Order [ordernummer=" + ordernummer + ", datum=" + datum
-				+ ", klant=" + klant + ", artikelNRs=" + artikelNRs + "]";
+		return "Order [ordernummer=" + ordernummer + ", klant=" + klant + ", productIDs=" + productIDs + "]";
 	}
 
 }

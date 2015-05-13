@@ -2,31 +2,31 @@ package nl.windesheim.kbsm2.opc01.asrs;
 
 import javax.swing.*;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.*;
-import java.io.BufferedReader;
 import java.io.File;
 import java.sql.SQLException;
 
 public class Paneel extends JFrame implements ActionListener{
-	private final JButton BTKlantengegevens,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
-	private final JLabel JLStatus;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7958972375482775135L;
+	private final JButton BTStart,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
+	private final JLabel JLStatus,JLOrder,JLOrderNr,JLLocatie,JLLocatieId,JLPakketten,JLAantalP,JLBezig;
         
-        private JFileChooser fileChooser = new JFileChooser();
-        private BufferedReader br;
-        private File file;
+    private JFileChooser fileChooser = new JFileChooser();
+
 	
 	public Paneel(){
-                this.setSize(1000,600);
+        this.setSize(1000,600);
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		this.setTitle("AS/RS Systeem");
             
             
 		setLayout(null);
 		
-		BTKlantengegevens = new JButton("Klanten gegevens");
-		BTKlantengegevens.setBounds(10, 10, 150, 30);
+		BTStart = new JButton("Start");
+		BTStart.setBounds(10, 10, 150, 30);
 		
 		BTOrderMaken = new JButton("Order aanmaken");
 		BTOrderMaken.setBounds(165,10, 150,30);
@@ -46,35 +46,61 @@ public class Paneel extends JFrame implements ActionListener{
 		JLStatus = new JLabel("Status:");
 		JLStatus.setBounds(10,140,100,20);
 		
-		add(BTKlantengegevens);
+		JLOrderNr = new JLabel("...");
+		JLOrderNr.setBounds(160,160,100,20);
+		
+		JLOrder = new JLabel("Order Nummer:");
+		JLOrder.setBounds(10,160,150,20);
+		
+		JLLocatie = new JLabel("Locatie arm: ");
+		JLLocatie.setBounds(10,180,150,20);
+		
+		JLLocatieId = new JLabel("...");
+		JLLocatieId.setBounds(160,180,100,20);
+		
+		JLPakketten = new JLabel("Aantal pakketten: ");
+		JLPakketten.setBounds(10,200,150,20);
+		
+		JLAantalP = new JLabel("...");
+		JLAantalP.setBounds(160,200,100,20);
+		
+		JLBezig = new JLabel("Bezig :");
+		JLBezig.setBounds(10,220,100,20);
+		
+		
+		
+		
+		
+		
+		
+		add(BTStart);
 		add(BTOrderMaken);
 		add(BTProducten);
 		add(BTOrderSelect);
 		add(BTNieuwProduct);
 		add(BTPakbon);
 		add(JLStatus);
-                this.setVisible(true);
-
-                this.BTKlantengegevens.addActionListener(this);
-                this.BTOrderMaken.addActionListener(this);
-                this.BTOrderSelect.addActionListener(this);
-                this.BTProducten.addActionListener(this);
-                this.BTNieuwProduct.addActionListener(this);
+		add(JLOrderNr);
+		add(JLOrder);
+		add(JLLocatie);
+		add(JLLocatieId);
+		add(JLPakketten);
+		add(JLAantalP);
+		add(JLBezig);
+		
+        this.setVisible(true);
+        this.BTStart.addActionListener(this);
+        this.BTOrderMaken.addActionListener(this);
+        this.BTOrderSelect.addActionListener(this);
+        this.BTProducten.addActionListener(this);
+        this.BTNieuwProduct.addActionListener(this);
 		
 	}
-	/*
-	public void paintComponent(Graphics g)
-	  {
-	    super.paintComponent(g);
-		g.setColor(Color.BLACK);
-		g.drawRect(420, 10, 500, 450);
-		g.drawRect(10,180,300,300);
-	  }
-        */
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == BTKlantengegevens){;
+        if(e.getSource() == BTStart){;
             KlantDialoog d = new KlantDialoog(this);
             d.setVisible(true);
         }
