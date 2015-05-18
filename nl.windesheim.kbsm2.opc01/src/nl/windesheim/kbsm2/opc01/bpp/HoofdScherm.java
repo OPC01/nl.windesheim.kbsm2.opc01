@@ -212,7 +212,9 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
             }
         }
         if (e.getSource() == jButton1) {
-
+            int value1 = (int) jSpinner2.getValue();
+            int value2 = (int) jSpinner3.getValue();
+            
         }
     }
     // Variables declaration - do not modify
