@@ -4,39 +4,39 @@ import java.util.*;
 
 public class TSPBruteForce
 {
-    private ArrayList<Integer> bestRoute;
+    private static ArrayList<Integer> bestPath;
 
-    public void bruteForce(ArrayList<Integer> routes, ArrayList<Integer> notInRoute)
+    public static void bruteForce(ArrayList<Integer> inPath, ArrayList<Integer> notInPath)
     {
-        if (!notInRoute.isEmpty())
+        if (!notInPath.isEmpty())
         {
-            for (int i = 0; i < notInRoute.size(); i++)
+            for (int i = 0; i < notInPath.size(); i++)
             {
-                Integer removed = notInRoute.remove(0);
-                ArrayList<Integer> newRoute = (ArrayList<Integer>) routes.clone();
-                newRoute.add(removed);
+                Integer removed = notInPath.remove(0);
+                ArrayList<Integer> newPath = (ArrayList<Integer>) inPath.clone();
+                newPath.add(removed);
 
-                bruteForce(newRoute, notInRoute);
-                notInRoute.add(removed);
+                bruteForce(newPath, notInPath);
+                notInPath.add(removed);
             }
         }
         else
         {
-            if (isBestRoute(routes))
+            if (isBestPath(inPath))
             {
-                bestRoute = routes;
+                bestPath = inPath;
             }
         }
 
     }
 
-    private boolean isBestRoute(ArrayList<Integer> routes)
+    private static boolean isBestPath(ArrayList<Integer> path)
     {
-        System.out.println(routes.toString());
+        System.out.println(path.toString());
         return false;
     }
 
-    public void activateBruteForce()
+    public static void activateBruteForce()
     {
         ArrayList<Integer> first = new ArrayList<Integer>();
         for (int i = 0; i < 6; ++i)
@@ -44,7 +44,6 @@ public class TSPBruteForce
             first.add(i);
         }
         ArrayList<Integer> route = new ArrayList<Integer>();
-        bruteForce(route, first);
-    }
+        bruteForce(route, first);        
+    }    
 }
-//TSPBruteForce.bruteForce(route, first);

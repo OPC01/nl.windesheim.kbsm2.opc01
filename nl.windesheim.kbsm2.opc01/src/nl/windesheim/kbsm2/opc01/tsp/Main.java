@@ -9,7 +9,7 @@ public class Main
     public static void main(String[] args)
     {
         MainScreen m = new MainScreen();
-        m.setVisible(true);
+        m.setVisible(true);        
         /*
          DistanceMap z = new DistanceMap();
          Packet f = new Packet(0, 1);

@@ -5,6 +5,10 @@
  */
 package nl.windesheim.kbsm2.opc01.asrs;
 
+import java.text.NumberFormat;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author vanDijk
@@ -118,7 +122,7 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
                     .addComponent(jsY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbToevoegen)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -130,14 +134,25 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
 
     private void jbToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbToevoegenActionPerformed
         String productNaam = jtfProductnaam.getText();
-        int productNummer = (int) Integer.parseInt(jtfProductnummer.getText());
         int x = (int) jsX.getValue();
         int y = (int) jsY.getValue();
-        
-        System.out.println("Productnaam: " + productNaam);
-        System.out.println("Productnummer: " + productNummer);
-        System.out.println("X: " + x);
-        System.out.println("Y: " + y);
+        int productNummer = 0;
+
+        try {
+            productNummer = (int) Integer.parseInt(jtfProductnummer.getText());
+
+            System.out.println("Productnaam: " + productNaam);
+            System.out.println("Productnummer: " + productNummer);
+            System.out.println("X: " + x);
+            System.out.println("Y: " + y);
+            
+            JOptionPane.showMessageDialog(this, "Het product '"+productNaam+"' is toegevoegd.", "Product toegevoegd", JOptionPane.PLAIN_MESSAGE);
+            dispose();
+        } catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Productnummer is niet correct.", "Euh?", JOptionPane.WARNING_MESSAGE);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jbToevoegenActionPerformed
 
     /**
