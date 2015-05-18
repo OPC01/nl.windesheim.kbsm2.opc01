@@ -104,6 +104,21 @@ public class DatabaseCon {
     	
     }
     
+    public void addProduct(int size,String name,int x, int y) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+    	DatabaseCon db = new DatabaseCon();
+        db.connectDatabase();
+        Connection con = db.con();
+    	
+		java.sql.PreparedStatement preparedStatement = null;
+		String sql = "INSERT INTO product"+" (naam,grootte,locatieX,LocatieY) VALUES "+" (?,?,?,?)";
+		preparedStatement = con.prepareStatement(sql);
+		preparedStatement.setString(1, name);
+		preparedStatement.setInt(2, size);
+		preparedStatement.setInt(3, x);
+		preparedStatement.setInt(4, y);
+		preparedStatement.executeUpdate();
+    }
+    
     public void InsertOrder(Klant klant,ArrayList<Integer> productid,int ordernr) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
     	String voornaam,achternaam,adres,postcode,plaats;
     	achternaam = klant.getAchternaam();

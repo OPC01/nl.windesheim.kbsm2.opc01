@@ -6,6 +6,7 @@
 package nl.windesheim.kbsm2.opc01.asrs;
 
 import java.text.NumberFormat;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 
@@ -46,7 +47,7 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Product Toevoegen");
 
-        jlProductnummer.setText("Productnummer");
+        jlProductnummer.setText("Product grote");
 
         jlProductnaam.setText("Productnaam");
 
@@ -133,14 +134,15 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
     }//GEN-LAST:event_jtfProductnummerActionPerformed
 
     private void jbToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbToevoegenActionPerformed
-        String productNaam = jtfProductnaam.getText();
+    	DatabaseCon db = new DatabaseCon();
+    	String productNaam = jtfProductnaam.getText();
         int x = (int) jsX.getValue();
         int y = (int) jsY.getValue();
-        int productNummer = 0;
-
+        int productNummer;
+        
         try {
             productNummer = (int) Integer.parseInt(jtfProductnummer.getText());
-
+            db.addProduct(productNummer, productNaam, x, y);
             System.out.println("Productnaam: " + productNaam);
             System.out.println("Productnummer: " + productNummer);
             System.out.println("X: " + x);
@@ -153,6 +155,7 @@ public class ProductToevoegenDialoog extends javax.swing.JDialog {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        
     }//GEN-LAST:event_jbToevoegenActionPerformed
 
     /**

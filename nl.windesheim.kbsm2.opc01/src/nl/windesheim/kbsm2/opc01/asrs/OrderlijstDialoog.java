@@ -77,9 +77,6 @@ public class OrderlijstDialoog extends javax.swing.JDialog {
         jbSelecteer.setText("Selecteren");
         jbSelecteer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	/*uitvoer
-            	 * 
-            	 */
                 jbSelecteerActionPerformed(evt);
             }
         });
@@ -114,7 +111,11 @@ public class OrderlijstDialoog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSelecteerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecteerActionPerformed
-        // TODO add your handling code here:
+        
+    	String Selected = (String) this.jlistOrderlijst.getSelectedValue() ;
+    	Paneel.JLOrderNr.setText(Selected);
+    	this.dispose();
+    	
     }//GEN-LAST:event_jbSelecteerActionPerformed
 
     /**
