@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 public class DatabaseCon {
 	
 	public DatabaseCon(){
@@ -39,8 +38,7 @@ public class DatabaseCon {
     	Statement stmt = con.createStatement();
     	ResultSet rs = stmt.executeQuery("SELECT * FROM `order`");
     	return rs;
-    }
-    
+    } 
     public ResultSet getOrderById(int i) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
         DatabaseCon db = new DatabaseCon();
         db.connectDatabase();
