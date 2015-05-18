@@ -14,6 +14,7 @@ import javax.swing.*;
 public class Main {
     
     public static void main (String[] args){
+         System.out.println("test");
         Algoritme algoritme1 = new Algoritme("test");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
