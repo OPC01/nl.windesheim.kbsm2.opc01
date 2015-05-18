@@ -118,9 +118,9 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
                                         .addComponent(jButton2))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
-                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(40, 40, 40)
                                         .addComponent(jButton1)))
                         .addGap(18, 18, 18))
@@ -198,14 +198,19 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
             int value = (int) jSpinner1.getValue();
             if (value > 0) {
                 algoritme.setDoosGrootte(value);
+                algoritme.setAantalDozen(3); // dit is tijdelijk voor een test
                 if (algoritme.getFirstFit() == true) {
-                    new Simulatie(algoritme).setTitle("Simulatie First Fit");
+                    Simulatie FF = new Simulatie(algoritme);
+                    FF.setTitle("Simulatie First Fit");
+                    FF.paneel.repaint();
                 }
                 if (algoritme.getBestFit() == true) {
-                    new Simulatie(algoritme).setTitle("Simulatie Best Fit");
+                    Simulatie BF = new Simulatie(algoritme);
+                    BF.setTitle("Simulatie Best Fit");
                 }
                 if (algoritme.getNextFit() == true) {
-                    new Simulatie(algoritme).setTitle("Simulatie Next Fit");
+                    Simulatie NF = new Simulatie(algoritme);
+                    NF.setTitle("Simulatie Next Fit");
                 }
             } else {
                 System.out.println("De waarde moet boven 0 zijn");
@@ -214,7 +219,16 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         if (e.getSource() == jButton1) {
             int value1 = (int) jSpinner2.getValue();
             int value2 = (int) jSpinner3.getValue();
-            
+            if (value1 > 0 && value2 > 0) {
+                System.out.println(value1);
+                System.out.println(value2);
+
+                // hier moet er code komen voor het toevoegen van de dozen en
+                // ook moet er wat verzonnen worden om de pagina dynamisch te vullen
+            } else {
+                System.out.println("De waarde mag niet nul of lager zijn");
+            }
+
         }
     }
     // Variables declaration - do not modify
