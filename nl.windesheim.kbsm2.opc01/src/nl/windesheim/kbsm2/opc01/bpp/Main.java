@@ -42,7 +42,10 @@ public class Main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HoofdScherm(algoritme1).setVisible(true);
+//                new HoofdScherm(algoritme1).setVisible(true);
+                HoofdScherm main = new HoofdScherm();
+                main.setVisible(true);
+                
             }
         });
     }

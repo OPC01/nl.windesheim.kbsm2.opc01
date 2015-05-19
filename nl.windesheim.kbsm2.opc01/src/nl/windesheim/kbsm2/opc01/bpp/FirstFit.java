@@ -16,26 +16,26 @@ public class FirstFit extends Algoritme2 {
     /**
      *
      */
-    public FirstFit(int doosGrootte) {
-        super(doosGrootte);
+    public FirstFit(int doosGrootte, ArrayList<Integer> paketten) {
+        super(doosGrootte, paketten);
         int sum;
 
-//        paketten:
-//        for (Integer check : paketten) {
-//            for (int doos = 0; doos < dozen.size(); doos++) {
-//                sum = dozen.get(doos).stream().mapToInt(Integer::intValue).sum();
-//                //sum = berekenSum(dozen.get(doos));
-//                if ((sum + check) <= doosGrootte) {
-//                    dozen.get(doos).add(check);
-//                    nieuwpakketsim(check, doos);
-//                    continue paketten;
-//                }
-//            }
-//            aantalDozen++;
-//            ArrayList<Integer> nieuwedoos = new ArrayList<Integer>();
-//            nieuwedoos.add(check);
-//            dozen.add(nieuwedoos);
-//            nieuwpakketsim(check, aantalDozen - 1);
-//        }
+        paketten:
+        for (Integer check : paketten) {
+            for (int doos = 0; doos < dozen.size(); doos++) {
+                sum = dozen.get(doos).stream().mapToInt(Integer::intValue).sum();
+                //sum = berekenSum(dozen.get(doos));
+                if ((sum + check) <= doosGrootte) {
+                    dozen.get(doos).add(check);
+                    nieuwpakketsim(check, doos);
+                    continue paketten;
+                }
+            }
+            aantalDozen++;
+            ArrayList<Integer> nieuwedoos = new ArrayList<Integer>();
+            nieuwedoos.add(check);
+            dozen.add(nieuwedoos);
+            nieuwpakketsim(check, aantalDozen - 1);
+        }
     }
 }

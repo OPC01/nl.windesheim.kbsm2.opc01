@@ -14,10 +14,10 @@ import javax.swing.*;
  */
 public class Simulatie extends JFrame {
 
-    private Algoritme algoritme1;
+    private Algoritme2 algoritme1;
     public TekenPanel paneel;
 
-    public Simulatie(Algoritme algoritme1) {
+    public Simulatie(Algoritme2 algoritme1) {
         this.algoritme1 = algoritme1;
         setSize(500, 500);
         setFrame();

@@ -11,14 +11,39 @@ import java.util.ArrayList;
  *
  * @author W7Home
  */
-public class Algoritme2 {
+public class Algoritme2 extends AlgoritmeBase{
+
+    private ArrayList<Integer> dozenSimulatie;
     private int doosGrootte;
     private ArrayList<Integer> paketten;
     private int overschot;
-    private int aantalDozen = 0;
-    private ArrayList<ArrayList<Integer>> dozen;
-    
-    public Algoritme2(int doosGrootte){
+    public int aantalDozen = 0;
+    public ArrayList<ArrayList<Integer>> dozen;
+
+    public Algoritme2(int doosGrootte, ArrayList<Integer> paketten) {
         this.doosGrootte = doosGrootte;
+        this.paketten = paketten;
+
+    }
+
+    public void nieuwpakketsim(int pakket, int locatie) {
+        dozenSimulatie.add(pakket);
+        dozenSimulatie.add(locatie);
+    }
+
+    public int getDoosGrootte() {
+        return doosGrootte;
+    }
+
+    public int getAantalDozen() {
+        return aantalDozen;
+    }
+
+    public void setDoosGrootte(int doosGrootte) {
+        this.doosGrootte = doosGrootte;
+    }
+
+    public void setAantalDozen(int aantalDozen) {
+        this.aantalDozen = aantalDozen;
     }
 }

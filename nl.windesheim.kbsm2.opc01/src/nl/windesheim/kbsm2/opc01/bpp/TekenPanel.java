@@ -14,9 +14,9 @@ import javax.swing.*;
  */
 public class TekenPanel extends JPanel {
 
-    private Algoritme algoritme1;
+    private Algoritme2 algoritme1;
 
-    public TekenPanel(Algoritme algoritme1) {
+    public TekenPanel(Algoritme2 algoritme1) {
         this.algoritme1 = algoritme1;
         this.setPreferredSize(new Dimension(300, 400));
     }

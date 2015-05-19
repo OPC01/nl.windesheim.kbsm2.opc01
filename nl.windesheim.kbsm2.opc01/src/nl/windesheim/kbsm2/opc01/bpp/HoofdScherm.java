@@ -7,6 +7,7 @@ package nl.windesheim.kbsm2.opc01.bpp;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JLabel;
 
 /**
  *
@@ -17,14 +18,15 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
     /**
      * Creates new form HoofdScherm2
      */
-    public HoofdScherm(Algoritme algoritme) {
+    // public HoofdScherm(Algoritme algoritme) {
+//    this.algoritme  = algoritme;
+    public HoofdScherm() {
         initComponents();
-        this.algoritme = algoritme;
     }
 
-    public void setAlgoritme(Algoritme algoritme) {
-        this.algoritme = algoritme;
-    }
+//    public void setAlgoritme(Algoritme algoritme) {
+//        this.algoritme = algoritme;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +52,7 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         jButton1 = new javax.swing.JButton();
         jSpinner2 = new javax.swing.JSpinner();
         jSpinner3 = new javax.swing.JSpinner();
+//        jPanel3 = new javax.swing.JPanel();
 
         jLabel6.setText("groote van het pakket");
 
@@ -89,6 +92,16 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         jButton1.setText("Voeg toe");
         this.jButton1.addActionListener(this);
 
+//        javax.swing.GroupLayout jPanel3Layout = new FlowLayout(jPanel3);
+//        jPanel3.setLayout(jPanel3Layout);
+//        jPanel3Layout.setHorizontalGroup(
+//                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                .addGap(0, 0, Short.MAX_VALUE)
+//        );
+//        jPanel3Layout.setVerticalGroup(
+//                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                .addGap(0, 100, Short.MAX_VALUE)
+//        );
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,34 +109,33 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCheckBox1)
-                                .addComponent(jLabel1)
-                                .addComponent(jCheckBox2)
-                                .addComponent(jCheckBox3)
-                                .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap())
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(93, 93, 93))))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton2))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                //                                                .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jButton2)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(30, 30, 30)
+                                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(104, 104, 104)
+                                                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jButton1)))
+                                        .addGap(18, 18, 18))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jButton1)))
-                        .addGap(18, 18, 18))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jCheckBox1)
+                                                .addComponent(jLabel1)
+                                                .addComponent(jCheckBox2)
+                                                .addComponent(jCheckBox3)
+                                                .addComponent(jLabel3))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(jLabel2)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel5))
+                                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +162,9 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
                                 .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addGap(51, 51, 51))
+                        .addGap(23, 23, 23)
+                        //                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,21 +211,21 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
         if (e.getSource() == jButton2) {
             int value = (int) jSpinner1.getValue();
             if (value > 0) {
-                algoritme.setDoosGrootte(value);
-                algoritme.setAantalDozen(3); // dit is tijdelijk voor een test
-                if (algoritme.getFirstFit() == true) {
-                    Simulatie FF = new Simulatie(algoritme);
-                    FF.setTitle("Simulatie First Fit");
-                    FF.paneel.repaint();
-                }
-                if (algoritme.getBestFit() == true) {
-                    Simulatie BF = new Simulatie(algoritme);
-                    BF.setTitle("Simulatie Best Fit");
-                }
-                if (algoritme.getNextFit() == true) {
-                    Simulatie NF = new Simulatie(algoritme);
-                    NF.setTitle("Simulatie Next Fit");
-                }
+//                algoritme.setDoosGrootte(value);
+//                algoritme.setAantalDozen(3); // dit is tijdelijk voor een test
+//                if (algoritme.getFirstFit() == true) {
+//                    Simulatie FF = new Simulatie(algoritme);
+//                    FF.setTitle("Simulatie First Fit");
+//                    FF.paneel.repaint();
+//                }
+//                if (algoritme.getBestFit() == true) {
+//                    Simulatie BF = new Simulatie(algoritme);
+//                    BF.setTitle("Simulatie Best Fit");
+//                }
+//                if (algoritme.getNextFit() == true) {
+//                    Simulatie NF = new Simulatie(algoritme);
+//                    NF.setTitle("Simulatie Next Fit");
+//                }
             } else {
                 System.out.println("De waarde moet boven 0 zijn");
             }
@@ -222,12 +236,17 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
             if (value1 > 0 && value2 > 0) {
                 System.out.println(value1);
                 System.out.println(value2);
+                String str1 = Integer.toString(value1);
+                JLabel groottePakket = new JLabel("hallo", JLabel.BOTTOM);
+
+                add(groottePakket);
 
                 // hier moet er code komen voor het toevoegen van de dozen en
                 // ook moet er wat verzonnen worden om de pagina dynamisch te vullen
             } else {
                 System.out.println("De waarde mag niet nul of lager zijn");
             }
+            System.out.println("hallo");
 
         }
     }
@@ -248,5 +267,6 @@ public class HoofdScherm extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     private Algoritme algoritme;
+//    private javax.swing.JPanel jPanel3;
     // End of variables declaration                   
 }
