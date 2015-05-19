@@ -152,4 +152,3 @@ public class Paneel extends JFrame implements ActionListener{
     
     
 }
-
