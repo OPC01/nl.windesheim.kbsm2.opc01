@@ -19,6 +19,7 @@ public class Paneel extends JFrame implements ActionListener{
 	private final JLabel JLPakketten;
 	private final JLabel JLAantalP;
 	private final JLabel JLBezig;
+	private Teken TekenPaneel;
         
     private JFileChooser fileChooser = new JFileChooser();
 
@@ -29,7 +30,7 @@ public class Paneel extends JFrame implements ActionListener{
 		this.setTitle("AS/RS Systeem");
             
             
-		setLayout(null);
+		// setLayout(null);
 		
 		BTStart = new JButton("Start");
 		BTStart.setBounds(10, 10, 150, 30);
@@ -88,6 +89,10 @@ public class Paneel extends JFrame implements ActionListener{
 		add(JLAantalP);
 		add(JLBezig);
 		
+		TekenPaneel = new Teken();
+		add(TekenPaneel);
+		repaint();
+		
         this.setVisible(true);
         this.BTStart.addActionListener(this);
         this.BTOrderMaken.addActionListener(this);
@@ -143,5 +148,8 @@ public class Paneel extends JFrame implements ActionListener{
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
+    
 }
+
