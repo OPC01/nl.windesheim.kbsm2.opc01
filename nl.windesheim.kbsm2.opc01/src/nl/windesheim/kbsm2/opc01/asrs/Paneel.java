@@ -19,13 +19,15 @@ public class Paneel extends JFrame implements ActionListener{
         private File file;
         private String currentLine;
 	
+        private Teken TekenPaneel;
+        
 	public Paneel(){
                 this.setSize(1000,600);
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		this.setTitle("AS/RS Systeem");
             
             
-		setLayout(null);
+//		setLayout(null);
 		
 		BTKlantengegevens = new JButton("Klanten gegevens");
 		BTKlantengegevens.setBounds(10, 10, 150, 30);
@@ -55,24 +57,22 @@ public class Paneel extends JFrame implements ActionListener{
 		add(BTNieuwProduct);
 		add(BTPakbon);
 		add(JLStatus);
-                this.setVisible(true);
+                
+                TekenPaneel = new Teken();
+                add(TekenPaneel);
+                repaint();
+                
+                
 
-                this.BTKlantengegevens.addActionListener(this);
-                this.BTOrderMaken.addActionListener(this);
-                this.BTOrderSelect.addActionListener(this);
-                this.BTProducten.addActionListener(this);
-                this.BTNieuwProduct.addActionListener(this);
+                BTKlantengegevens.addActionListener(this);
+                BTOrderMaken.addActionListener(this);
+                BTOrderSelect.addActionListener(this);
+                BTProducten.addActionListener(this);
+                BTNieuwProduct.addActionListener(this);
 		
+//                setVisible(true);
 	}
-	/*
-	public void paintComponent(Graphics g)
-	  {
-	    super.paintComponent(g);
-		g.setColor(Color.BLACK);
-		g.drawRect(420, 10, 500, 450);
-		g.drawRect(10,180,300,300);
-	  }
-        */
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -87,8 +87,7 @@ public class Paneel extends JFrame implements ActionListener{
                 File selectedFile = fileChooser.getSelectedFile();
                 System.out.println("Geselecteerd bestand: " + selectedFile.getAbsolutePath());
 
-                // xml bestand uitlezen
-                try {
+                try { // xml bestand uitlezen
                     XMLReader XMLReader = new XMLReader();
                     File file = new File(selectedFile.getAbsolutePath());
                     Order order = XMLReader.readXML(file);
