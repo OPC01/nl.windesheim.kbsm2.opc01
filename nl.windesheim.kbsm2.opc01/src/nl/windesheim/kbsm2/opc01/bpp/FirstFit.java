@@ -16,7 +16,7 @@ public class FirstFit extends Algoritme2 {
     /**
      *
      */
-    public FirstFit(int doosGrootte, ArrayList<Integer> paketten) {
+    public FirstFit(int doosGrootte, ArrayList<Integer> paketten) { //ArrayList<ArrayList<Integer>> dozen
         super(doosGrootte, paketten);
         int sum;
 

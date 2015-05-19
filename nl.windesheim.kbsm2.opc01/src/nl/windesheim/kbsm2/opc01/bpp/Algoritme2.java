@@ -20,10 +20,10 @@ public class Algoritme2 extends AlgoritmeBase{
     public int aantalDozen = 0;
     public ArrayList<ArrayList<Integer>> dozen;
 
-    public Algoritme2(int doosGrootte, ArrayList<Integer> paketten) {
+    public Algoritme2(int doosGrootte, ArrayList<Integer> paketten) { //ArrayList<ArrayList<Integer>> dozen
         this.doosGrootte = doosGrootte;
         this.paketten = paketten;
-
+        //this.dozen = dozen;
     }
 
     public void nieuwpakketsim(int pakket, int locatie) {

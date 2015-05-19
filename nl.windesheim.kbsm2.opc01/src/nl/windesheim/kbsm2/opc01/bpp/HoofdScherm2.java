@@ -248,6 +248,8 @@ public class HoofdScherm2 extends javax.swing.JFrame {
 //                }
 //            }
             
+            ArrayList<ArrayList<Integer>> dozen = new ArrayList<ArrayList<Integer>>(); //fill this arraylist, example please
+            
             ArrayList<Integer> pakketten = new ArrayList<Integer>();
             for (int i = 0; i < jlistModel2.getSize(); i++) {
                 int aantalPakt = (int) jlistModel1.get(i);
@@ -259,7 +261,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
             }
             
             if (jCheckBox1.isSelected()) {
-                FirstFit ff = new FirstFit(doosGrootte, pakketten);               
+                FirstFit ff = new FirstFit(doosGrootte, pakketten); //dozen            
                 
                 Simulatie sim = new Simulatie(ff);
                 sim.setTitle("Simulatie First Fit");
