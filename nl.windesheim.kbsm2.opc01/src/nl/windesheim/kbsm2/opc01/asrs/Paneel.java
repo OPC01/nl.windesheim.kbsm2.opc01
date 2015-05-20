@@ -184,17 +184,17 @@ public class Paneel extends JFrame implements ActionListener{
                 int orderNr = 12;
                 DatabaseCon dbc = new DatabaseCon();
                 ResultSet order = dbc.getOrderById(orderNr);
-                ResultSet klant = dbc.getKlantById( Integer.parseInt(order.getString("klantid")) );
-                
                 order.next();
-                klant.next();
-
                 String  orderNummer = order.getString("ordernr");
                 
-                String voorAchternaam = klant.getString("voornaam") + " " + klant.getString("achternaam");
-                String adres = klant.getString("adres");
-                String postcode = klant.getString("postcode");
-                String plaats = klant.getString("plaats");
+                ResultSet klant = dbc.getKlantById( Integer.parseInt(order.getString("klantid")) );
+                String voorAchternaam=null,adres=null,postcode=null,plaats=null;
+                while(klant.next()) {
+                    voorAchternaam = klant.getString("voornaam") + " " + klant.getString("achternaam");
+                    adres = klant.getString("adres");
+                    postcode = klant.getString("postcode");
+                    plaats = klant.getString("plaats");   
+                }
                 
                 String fileName = sdf.format(date) + "_" + orderNummer + ".txt";
                 
