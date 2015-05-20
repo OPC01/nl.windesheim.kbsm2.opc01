@@ -22,7 +22,7 @@ public class DatabaseCon {
 	    Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost/kbsproject",
                 "root",
-                "root");
+                "admin");
 		
 		
 		return con;
@@ -129,34 +129,37 @@ public class DatabaseCon {
         db.connectDatabase();
         Connection con = db.con();
         
-        
-    	Statement stmt = con.createStatement();
-    	ResultSet rs = stmt.executeQuery("SELECT count(*) AS counter FROM klant WHERE voornaam="+voornaam+
-    			" AND achternaam="+achternaam+
-    			" AND postcode="+postcode+
-    			" AND plaats="+plaats+
-    			" AND adres="+adres);
+        java.sql.PreparedStatement stmt = null;
+        String sql = "SELECT count(*) AS counter FROM klant WHERE voornaam= ? AND achternaam= ? AND postcode= ? AND plaats= ? AND adres= ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, voornaam);
+        stmt.setString(2, achternaam);
+        stmt.setString(3, postcode);
+        stmt.setString(4, plaats);
+        stmt.setString(5, adres);
+    	ResultSet rs = stmt.executeQuery();
     	
+    	rs.next();
     	int rows = rs.getInt("counter");
-    	
+    	int klantid;
     	if(rows > 0){
-    		stmt = con.createStatement();
-    		
-        	String sql = "SELECT klantid FROM klant WHERE voornaam="+voornaam+
-        			" AND achternaam="+achternaam+
-        			" AND postcode="+postcode+
-        			" AND plaats="+plaats+
-        			" AND adres="+adres ;
-        	
-    		rs = stmt.executeQuery(sql);
-        	int klantid = rs.getInt("klantid");
+    		sql = "SELECT klantid FROM klant WHERE voornaam= ? AND achternaam= ? AND postcode= ? AND plaats= ? AND adres= ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, voornaam);
+            stmt.setString(2, achternaam);
+            stmt.setString(3, postcode);
+            stmt.setString(4, plaats);
+            stmt.setString(5, adres);
+        	rs = stmt.executeQuery();
+        	rs.next();
+        	klantid = rs.getInt("klantid");
         	//voor testen
         	System.out.println(klantid);
         	//
     	}
     	else{
     		java.sql.PreparedStatement preparedStatement = null;
-    		String sql = "INSERT INTO klant"+" (voornaam,achternaam,adres,postcode,plaats) VALUES "+" (?,?,?,?,?)";
+    		sql = "INSERT INTO klant"+" (voornaam,achternaam,adres,postcode,plaats) VALUES "+" (?,?,?,?,?)";
     		preparedStatement = con.prepareStatement(sql);
     		preparedStatement.setString(1, voornaam);
     		preparedStatement.setString(2, achternaam);
@@ -170,12 +173,24 @@ public class DatabaseCon {
     		sql = "SELECT klantid FROM klant ORDER BY klantid DESC LIMIT 1";
     		ResultSet resultSet = stmt.executeQuery(sql);
     		
-    		int klantid = resultSet.getInt("klantid");
+    		resultSet.next();
+    		klantid = resultSet.getInt("klantid");
     		//voor testen
     		System.out.println(klantid);
     		//
     	}
     	
+    	java.sql.PreparedStatement preparedStatement = null;
+    	
+    	for(int i = 0; i < productid.size(); i++){
+    		int product = productid.get(i);
+			sql = "INSERT INTO `order` "+" (klantid,productid,ordernr) VALUES "+" (?,?,?)";
+			preparedStatement = con.prepareStatement(sql);
+			preparedStatement.setInt(1, klantid);
+			preparedStatement.setInt(2, product);
+			preparedStatement.setInt(3, ordernr);
+			preparedStatement.executeUpdate();
+    	}
     	
     	
     }
