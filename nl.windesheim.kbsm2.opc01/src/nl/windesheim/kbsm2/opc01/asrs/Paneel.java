@@ -12,7 +12,14 @@ public class Paneel extends JFrame implements ActionListener{
 	 */
 	private static final long serialVersionUID = 7958972375482775135L;
 	private final JButton BTStart,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
-	private final JLabel JLStatus,JLOrder,JLOrderNr,JLLocatie,JLLocatieId,JLPakketten,JLAantalP,JLBezig;
+	private final JLabel JLStatus,JLOrder;
+	final static JLabel JLOrderNr = new JLabel();
+	private final JLabel JLLocatie;
+	private final JLabel JLLocatieId;
+	private final JLabel JLPakketten;
+	private final JLabel JLAantalP;
+	private final JLabel JLBezig;
+	private Teken TekenPaneel;
         
     private JFileChooser fileChooser = new JFileChooser();
 
@@ -23,12 +30,12 @@ public class Paneel extends JFrame implements ActionListener{
 		this.setTitle("AS/RS Systeem");
             
             
-		setLayout(null);
+		// setLayout(null);
 		
 		BTStart = new JButton("Start");
 		BTStart.setBounds(10, 10, 150, 30);
 		
-		BTOrderMaken = new JButton("Order aanmaken");
+		BTOrderMaken = new JButton("Order inbrengen");
 		BTOrderMaken.setBounds(165,10, 150,30);
 		
 		BTProducten = new JButton("Producten ophalen");
@@ -46,7 +53,7 @@ public class Paneel extends JFrame implements ActionListener{
 		JLStatus = new JLabel("Status:");
 		JLStatus.setBounds(10,140,100,20);
 		
-		JLOrderNr = new JLabel("...");
+		//JLOrderNr = new JLabel("...");
 		JLOrderNr.setBounds(160,160,100,20);
 		
 		JLOrder = new JLabel("Order Nummer:");
@@ -81,6 +88,10 @@ public class Paneel extends JFrame implements ActionListener{
 		add(JLPakketten);
 		add(JLAantalP);
 		add(JLBezig);
+		
+		TekenPaneel = new Teken();
+		add(TekenPaneel);
+		repaint();
 		
         this.setVisible(true);
         this.BTStart.addActionListener(this);
@@ -118,8 +129,16 @@ public class Paneel extends JFrame implements ActionListener{
             d.setVisible(true);
         }
         else if(e.getSource() == BTProducten) {
-            ProductSelecterenDialoog d = new ProductSelecterenDialoog(this, true);
-            d.setVisible(true);
+            ProductSelecterenDialoog d;
+			try {
+				d = new ProductSelecterenDialoog(this, true);
+				d.setVisible(true);
+			} catch (ClassNotFoundException | InstantiationException
+					| IllegalAccessException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            
         }
         else if(e.getSource() == BTNieuwProduct) {
             ProductToevoegenDialoog d = new ProductToevoegenDialoog(this, true);
@@ -129,5 +148,7 @@ public class Paneel extends JFrame implements ActionListener{
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
+    
 }

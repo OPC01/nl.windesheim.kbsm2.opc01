@@ -33,6 +33,8 @@ public class XMLReader {
 
         String ordernummer = doc.getElementsByTagName("ordernummer").item(0).getTextContent();
 
+        String datum = doc.getElementsByTagName("datum").item(0).getTextContent();
+
         NodeList nListKlant = doc.getElementsByTagName("klant");
         String voornaam = null;
         String achternaam = null;
@@ -56,6 +58,6 @@ public class XMLReader {
             }
         }
         Klant klant = new Klant(voornaam, achternaam, adres, postcode, plaats);
-        return new Order(Integer.valueOf(ordernummer), klant, artikelNRs);
+        return new Order(Integer.valueOf(ordernummer), klant, datum, artikelNRs);
     }
 }

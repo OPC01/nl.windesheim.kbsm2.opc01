@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 public class DatabaseCon {
 	
 	public DatabaseCon(){
@@ -39,8 +38,7 @@ public class DatabaseCon {
     	Statement stmt = con.createStatement();
     	ResultSet rs = stmt.executeQuery("SELECT * FROM `order`");
     	return rs;
-    }
-    
+    } 
     public ResultSet getOrderById(int i) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
         DatabaseCon db = new DatabaseCon();
         db.connectDatabase();
@@ -104,6 +102,21 @@ public class DatabaseCon {
     	
     }
     
+    public void addProduct(int size,String name,int x, int y) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+    	DatabaseCon db = new DatabaseCon();
+        db.connectDatabase();
+        Connection con = db.con();
+    	
+		java.sql.PreparedStatement preparedStatement = null;
+		String sql = "INSERT INTO product"+" (naam,grootte,locatieX,LocatieY) VALUES "+" (?,?,?,?)";
+		preparedStatement = con.prepareStatement(sql);
+		preparedStatement.setString(1, name);
+		preparedStatement.setInt(2, size);
+		preparedStatement.setInt(3, x);
+		preparedStatement.setInt(4, y);
+		preparedStatement.executeUpdate();
+    }
+    
     public void InsertOrder(Klant klant,ArrayList<Integer> productid,int ordernr) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
     	String voornaam,achternaam,adres,postcode,plaats;
     	achternaam = klant.getAchternaam();
@@ -137,8 +150,9 @@ public class DatabaseCon {
         	
     		rs = stmt.executeQuery(sql);
         	int klantid = rs.getInt("klantid");
-        	
+        	//voor testen
         	System.out.println(klantid);
+        	//
     	}
     	else{
     		java.sql.PreparedStatement preparedStatement = null;
@@ -152,6 +166,14 @@ public class DatabaseCon {
     		int i = preparedStatement.executeUpdate();
     		//voor testen
     		System.out.println(Integer.toString(i));
+    		//
+    		sql = "SELECT klantid FROM klant ORDER BY klantid DESC LIMIT 1";
+    		ResultSet resultSet = stmt.executeQuery(sql);
+    		
+    		int klantid = resultSet.getInt("klantid");
+    		//voor testen
+    		System.out.println(klantid);
+    		//
     	}
     	
     	
