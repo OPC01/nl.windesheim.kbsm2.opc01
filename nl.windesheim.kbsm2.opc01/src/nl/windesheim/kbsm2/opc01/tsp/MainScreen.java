@@ -5,6 +5,8 @@
  */
 package nl.windesheim.kbsm2.opc01.tsp;
 
+import nl.windesheim.kbsm2.opc01.tsp.BruteForce.DynProgram;
+
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -19,8 +21,9 @@ public class MainScreen extends javax.swing.JFrame
 {
 
     private ArrayList<CheckBox> boxReference = new ArrayList<CheckBox>();
-    private TSPBruteForce bruteForce = new TSPBruteForce();
+    private DynProgram  bruteForce = new DynProgram();
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
+
     private DistanceMap map = new DistanceMap();
 
     public MainScreen()
@@ -185,6 +188,7 @@ public class MainScreen extends javax.swing.JFrame
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
         ArrayList<Packet> list = new ArrayList<Packet>();
+        list.add(new Packet(0,0));
         for (CheckBox a : boxReference)
         {
             if (a.isSelected())
@@ -198,16 +202,19 @@ public class MainScreen extends javax.swing.JFrame
 
         if (jBruteForce.isSelected())
         {
-            TSPBruteForce.activateBruteForce();
+            bruteForce.activate(map.getMap());
         }
         if (jNearestNeigbour.isSelected())
         {
             nearestNeighbour.tsp(map.getMap());
             for (int a : nearestNeighbour.getPath())
             {
-                Packet q = boxReference.get(a).getPacket();
+                Packet q = list.get(a);
                 System.out.print(q);
             }
+        }
+        if(jCheckBox3.isSelected()){
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

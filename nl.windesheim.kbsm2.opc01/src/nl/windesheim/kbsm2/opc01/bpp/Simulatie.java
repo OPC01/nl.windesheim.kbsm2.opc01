@@ -14,22 +14,24 @@ import javax.swing.*;
  */
 public class Simulatie extends JFrame {
 
-    private Algoritme algoritme1;
-    private TekenPanel paneel;
+    private Algoritme2 algoritme1;
+    public TekenPanel paneel;
 
-    public Simulatie(Algoritme algoritme1) {
+    public Simulatie(Algoritme2 algoritme1) {
         this.algoritme1 = algoritme1;
         setSize(500, 500);
         setFrame();
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        this.paneel = new TekenPanel(algoritme1);
+        
+        TekenPanel dozen = new TekenPanel(algoritme1); // dit is nodig om te kunnen verwijzen naar dit tekenPanel
+        this.paneel = dozen;
         add(paneel);
         setVisible(true);
     }
 
     private void setFrame() {
+        // code moet nog worden gemaakt waardoor de 3 simulatie schermen naast elkaar komen te staan
         Dimension windowSize = getSize();
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Point centerPoint = ge.getCenterPoint();

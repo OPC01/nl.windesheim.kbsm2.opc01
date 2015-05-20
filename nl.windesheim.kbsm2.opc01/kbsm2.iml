@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/dist/lib/ardulink.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/dist/lib/ch.ntb.usb-0.5.9.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/dist/lib/javax.mail-1.5.1.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/dist/lib/RXTXcomm.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/dist/nl.windesheim.kbsm2.opc01.jar!/" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/build/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="ardulink.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/dist/lib/ardulink.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ch.ntb.usb-0.5.9.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/dist/lib/ch.ntb.usb-0.5.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javax.mail-1.5.1.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/dist/lib/javax.mail-1.5.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="RXTXcomm.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/dist/lib/RXTXcomm.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="nl.windesheim.kbsm2.opc01.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/dist/nl.windesheim.kbsm2.opc01.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="inheritedJdk" />
+  </component>
+</module>
