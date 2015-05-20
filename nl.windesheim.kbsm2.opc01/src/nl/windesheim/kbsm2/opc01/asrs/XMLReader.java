@@ -8,8 +8,10 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +20,7 @@ import java.util.ArrayList;
  */
 public class XMLReader {
 
-    public static Order readXML(File xmlFile) throws ParserConfigurationException, IOException, SAXException {
+    public static void readXML(File xmlFile) throws ParserConfigurationException, IOException, SAXException, ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(xmlFile);
@@ -32,8 +34,6 @@ public class XMLReader {
         }
 
         String ordernummer = doc.getElementsByTagName("ordernummer").item(0).getTextContent();
-
-        String datum = doc.getElementsByTagName("datum").item(0).getTextContent();
 
         NodeList nListKlant = doc.getElementsByTagName("klant");
         String voornaam = null;
@@ -58,6 +58,12 @@ public class XMLReader {
             }
         }
         Klant klant = new Klant(voornaam, achternaam, adres, postcode, plaats);
-        return new Order(Integer.valueOf(ordernummer), klant, datum, artikelNRs);
+        Order order = new Order(Integer.valueOf(ordernummer), klant, artikelNRs);
+        order.toString();
+        
+        int ordernr = Integer.valueOf(ordernummer);
+        
+        DatabaseCon con = new DatabaseCon();
+        con.InsertOrder(klant, artikelNRs, ordernr);
     }
 }

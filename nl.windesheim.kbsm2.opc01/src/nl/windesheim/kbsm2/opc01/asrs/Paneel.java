@@ -1,9 +1,15 @@
 package nl.windesheim.kbsm2.opc01.asrs;
 
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import java.awt.event.*;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.ResultSet;
@@ -123,6 +129,13 @@ public class Paneel extends JFrame implements ActionListener{
             if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
                 System.out.println("Geselecteerd bestand: " + selectedFile.getAbsolutePath());
+                try {
+					XMLReader.readXML(selectedFile);
+				} catch (ParserConfigurationException | IOException
+						| SAXException | ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         }
         else if(e.getSource() == BTOrderSelect) {
