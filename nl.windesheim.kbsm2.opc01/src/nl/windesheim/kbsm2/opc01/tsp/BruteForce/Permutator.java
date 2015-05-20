@@ -1,5 +1,7 @@
 package nl.windesheim.kbsm2.opc01.tsp.BruteForce;
 
+import java.util.Arrays;
+
 class Permutator
 {
 
@@ -26,6 +28,7 @@ class Permutator
         {
             array[i] = i + firstNum;
         }
+        System.out.println(Arrays.toString(array));
         firstReady = false;
     }
 //asking for more permutation
