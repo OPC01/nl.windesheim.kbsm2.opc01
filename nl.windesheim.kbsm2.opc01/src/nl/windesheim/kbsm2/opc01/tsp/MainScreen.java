@@ -12,6 +12,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JCheckBox;
+import org.apache.commons.lang3.time.StopWatch;
 
 /**
  *
@@ -21,10 +22,11 @@ public class MainScreen extends javax.swing.JFrame
 {
 
     private ArrayList<CheckBox> boxReference = new ArrayList<CheckBox>();
-    private DynProgram  bruteForce = new DynProgram();
+    private DynProgram bruteForce;
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
-
     private DistanceMap map = new DistanceMap();
+    private ResultatenScherm s = new ResultatenScherm(this, false);
+    private StopWatch stopwatch = new StopWatch();
 
     public MainScreen()
     {
@@ -187,35 +189,69 @@ public class MainScreen extends javax.swing.JFrame
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        ArrayList<Packet> list = new ArrayList<Packet>();
-        list.add(new Packet(0,0));
-        for (CheckBox a : boxReference)
+        boolean hasBeenPressed = false;
+
+        if (!hasBeenPressed)
         {
-            if (a.isSelected())
+
+            ArrayList<Packet> list = new ArrayList<Packet>();
+            list.add(new Packet(0, 0));
+            for (CheckBox a : boxReference)
             {
-                a.packet.setGetPacket(true);
-                list.add(a.getPacket());
+                if (a.isSelected())
+                {
+                    a.packet.setGetPacket(true);
+                    list.add(a.getPacket());
+                }
             }
+
+            map.createMatrix(list);
+            s.setVisible(true);
+
         }
-
-        map.createMatrix(list);
-
         if (jBruteForce.isSelected())
         {
+
+            stopwatch.start();
+            DynProgram bruteForce = new DynProgram();
             bruteForce.activate(map.getMap());
+            stopwatch.stop();
+            long time = stopwatch.getTime();
+            String length = String.valueOf(bruteForce.getLeast_value());
+            String timeS = String.valueOf(time);
+            s.getBfDistance().setText(length);
+            s.getBfTime().setText(timeS);
+            stopwatch.reset();
+            s.revalidate();
+
         }
         if (jNearestNeigbour.isSelected())
         {
+            stopwatch.start();
             nearestNeighbour.tsp(map.getMap());
-            for (int a : nearestNeighbour.getPath())
-            {
-                Packet q = list.get(a);
-                System.out.print(q);
-            }
+            stopwatch.stop();
+            long time = stopwatch.getTime();
+            String length = String.valueOf(nearestNeighbour.getLengthOfPath());
+            String timeS = String.valueOf(time);
+            s.getNnDistance().setText(length);
+            s.getNnTime().setText(timeS);
+            s.revalidate();
+            stopwatch.reset();
         }
-        if(jCheckBox3.isSelected()){
-
+        if (jCheckBox3.isSelected())
+        {
+            stopwatch.start();
+            // add Genetic
+            stopwatch.stop();
+            long time = stopwatch.getTime();
+            //String length = String.valueOf(/*Add geneticget*/));
+            String timeS = String.valueOf(time);
+            //s.getgDistance().setText(length);
+            s.getgTime().setText(timeS);
+            s.revalidate();
+            stopwatch.reset();
         }
+        hasBeenPressed = true;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
