@@ -14,6 +14,7 @@ import javax.swing.*;
 public class Main {
     
     public static void main (String[] args){
+         System.out.println("test");
         Algoritme algoritme1 = new Algoritme("test");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -41,7 +42,10 @@ public class Main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HoofdScherm(algoritme1).setVisible(true);
+//                new HoofdScherm(algoritme1).setVisible(true);
+                HoofdScherm main = new HoofdScherm();
+                main.setVisible(true);
+                
             }
         });
     }

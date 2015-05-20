@@ -6,8 +6,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import java.awt.event.*;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.FileWriter;
 import java.sql.SQLException;
 
 public class Paneel extends JFrame implements ActionListener{
@@ -15,9 +17,10 @@ public class Paneel extends JFrame implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 7958972375482775135L;
-	private final JButton BTStart,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
+	final JButton BTStart,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct;
 	private final JLabel JLStatus,JLOrder;
 	final static JLabel JLOrderNr = new JLabel();
+        final static JButton BTPakbon = new JButton("Pakbon genereren");
 	private final JLabel JLLocatie;
 	private final JLabel JLLocatieId;
 	private final JLabel JLPakketten;
@@ -51,7 +54,8 @@ public class Paneel extends JFrame implements ActionListener{
 		BTNieuwProduct = new JButton("Product toevoegen");
 		BTNieuwProduct.setBounds(440,500,150,30);
 		
-		BTPakbon = new JButton("Pakbon genereren");
+//		BTPakbon = new JButton("Pakbon genereren");
+                BTPakbon.setEnabled(false);
 		BTPakbon.setBounds(600,500,150,30);
 		
 		JLStatus = new JLabel("Status:");
@@ -103,6 +107,7 @@ public class Paneel extends JFrame implements ActionListener{
         this.BTOrderSelect.addActionListener(this);
         this.BTProducten.addActionListener(this);
         this.BTNieuwProduct.addActionListener(this);
+        this.BTPakbon.addActionListener(this);
 		
 	}
 
@@ -154,6 +159,36 @@ public class Paneel extends JFrame implements ActionListener{
         else if(e.getSource() == BTNieuwProduct) {
             ProductToevoegenDialoog d = new ProductToevoegenDialoog(this, true);
             d.setVisible(true);
+        }
+        else if(e.getSource() == BTPakbon) {
+            String path = System.getProperty("user.home") + "/Desktop/pakbonnen/";
+            File pakbonDir = new File(path);
+            
+            // als directory 'pakbonnen' niet bestaat, aanmaken
+            if( ! pakbonDir.exists()) {
+                System.out.println("Map 'pakbonnen' aanmaken");
+                pakbonDir.mkdir();
+            }
+            
+            try {
+                // tekst bestand aanmaken
+                FileWriter fstream = new FileWriter(path + "testt.txt");
+                BufferedWriter out = new BufferedWriter(fstream);
+                out.write("Datum: 201X-XX-XX \n");
+                out.write("Ordernummer: xxxx \n\n");
+                out.write("Naam: [naam] [achternaam] \n");
+                out.write("Adres: [straatnaam] [nummer] \n");
+                out.write("Postcode: 1234AB \n");
+                out.write("Plaats: [plaatsnaam] \n\n\n");
+                for (int i = 1; i < 5; i++) {
+                    out.write("Artikelnummer: " + i + "\n");
+                }
+                
+                out.close();
+            }
+            catch(Exception error) {
+                System.err.println("Error: " + error.getMessage());
+            }
         }
         
         

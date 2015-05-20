@@ -57,6 +57,9 @@ public class Algoritme {
     public int getDoosGrootte(){
         return doosGrootte;
     }
+    public int getAantalDozen(){
+        return aantalDozen;
+    }
 
     public boolean getFirstFit() {
         return firstFit;
@@ -84,6 +87,10 @@ public class Algoritme {
     
     public void setDoosGrootte(int doosGrootte){
         this.doosGrootte = doosGrootte;
+    }
+    
+    public void setAantalDozen( int aantalDozen){
+        this.aantalDozen = aantalDozen;
     }
 
 }
