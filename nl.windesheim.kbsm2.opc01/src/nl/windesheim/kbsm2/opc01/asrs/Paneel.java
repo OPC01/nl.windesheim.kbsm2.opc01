@@ -6,7 +6,10 @@ import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Paneel extends JFrame implements ActionListener{
 	/**
@@ -51,7 +54,7 @@ public class Paneel extends JFrame implements ActionListener{
 		BTNieuwProduct.setBounds(440,500,150,30);
 		
 //		BTPakbon = new JButton("Pakbon genereren");
-                BTPakbon.setEnabled(false);
+                BTPakbon.setEnabled(true);
 		BTPakbon.setBounds(600,500,150,30);
 		
 		JLStatus = new JLabel("Status:");
@@ -160,15 +163,37 @@ public class Paneel extends JFrame implements ActionListener{
             }
             
             try {
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                
+                
+//                int orderNr = Integer.parseInt(JLOrderNr.getText());
+                int orderNr = 12;
+                DatabaseCon dbc = new DatabaseCon();
+                ResultSet order = dbc.getOrderById(orderNr);
+                ResultSet klant = dbc.getKlantById( Integer.parseInt(order.getString("klantid")) );
+                
+                order.next();
+                klant.next();
+
+                String  orderNummer = order.getString("ordernr");
+                
+                String voorAchternaam = klant.getString("voornaam") + " " + klant.getString("achternaam");
+                String adres = klant.getString("adres");
+                String postcode = klant.getString("postcode");
+                String plaats = klant.getString("plaats");
+                
+                String fileName = sdf.format(date) + "_" + orderNummer + ".txt";
+                
                 // tekst bestand aanmaken
-                FileWriter fstream = new FileWriter(path + "testt.txt");
+                FileWriter fstream = new FileWriter(path + fileName);
                 BufferedWriter out = new BufferedWriter(fstream);
-                out.write("Datum: 201X-XX-XX \n");
-                out.write("Ordernummer: xxxx \n\n");
-                out.write("Naam: [naam] [achternaam] \n");
-                out.write("Adres: [straatnaam] [nummer] \n");
-                out.write("Postcode: 1234AB \n");
-                out.write("Plaats: [plaatsnaam] \n\n\n");
+                out.write("Datum: " + sdf.format(date) + "\n");
+                out.write("Ordernummer: " + orderNummer +"\n\n");
+                out.write("Naam: " + voorAchternaam + "\n");
+                out.write("Adres: " + adres + "\n");
+                out.write("Postcode: " + postcode + "\n");
+                out.write("Plaats: " + plaats + "\n\n\n");
                 for (int i = 1; i < 5; i++) {
                     out.write("Artikelnummer: " + i + "\n");
                 }

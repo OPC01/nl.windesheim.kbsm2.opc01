@@ -22,7 +22,7 @@ public class DatabaseCon {
 	    Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost/kbsproject",
                 "root",
-                "root");
+                "admin");
 		
 		
 		return con;
