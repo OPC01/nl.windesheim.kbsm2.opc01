@@ -25,6 +25,7 @@ public class MainScreen extends javax.swing.JFrame
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
     private DistanceMap map = new DistanceMap();
     private ResultatenScherm s = new ResultatenScherm(this, false);
+    private Point checkboxSizes;
 
     public MainScreen()
     {
@@ -162,6 +163,7 @@ public class MainScreen extends javax.swing.JFrame
             {
                 jPanel1.add(a);
             }
+            checkboxSizes = new Point(options.hight, options.width);
             jPanel1.revalidate();
             jPanel1.repaint();
 
