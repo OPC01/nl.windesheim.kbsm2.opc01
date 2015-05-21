@@ -1,19 +1,31 @@
 package nl.windesheim.kbsm2.opc01.asrs;
 
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import java.awt.event.*;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Paneel extends JFrame implements ActionListener{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7958972375482775135L;
-	private final JButton BTStart,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct,BTPakbon;
+	final JButton BTStart,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct;
 	private final JLabel JLStatus,JLOrder;
 	final static JLabel JLOrderNr = new JLabel();
+        final static JButton BTPakbon = new JButton("Pakbon genereren");
 	private final JLabel JLLocatie;
 	private final JLabel JLLocatieId;
 	private final JLabel JLPakketten;
@@ -47,7 +59,8 @@ public class Paneel extends JFrame implements ActionListener{
 		BTNieuwProduct = new JButton("Product toevoegen");
 		BTNieuwProduct.setBounds(440,500,150,30);
 		
-		BTPakbon = new JButton("Pakbon genereren");
+//		BTPakbon = new JButton("Pakbon genereren");
+                BTPakbon.setEnabled(true);
 		BTPakbon.setBounds(600,500,150,30);
 		
 		JLStatus = new JLabel("Status:");
@@ -99,6 +112,7 @@ public class Paneel extends JFrame implements ActionListener{
         this.BTOrderSelect.addActionListener(this);
         this.BTProducten.addActionListener(this);
         this.BTNieuwProduct.addActionListener(this);
+        this.BTPakbon.addActionListener(this);
 		
 	}
 
@@ -115,6 +129,13 @@ public class Paneel extends JFrame implements ActionListener{
             if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
                 System.out.println("Geselecteerd bestand: " + selectedFile.getAbsolutePath());
+                try {
+					XMLReader.readXML(selectedFile);
+				} catch (ParserConfigurationException | IOException
+						| SAXException | ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         }
         else if(e.getSource() == BTOrderSelect) {
@@ -143,6 +164,58 @@ public class Paneel extends JFrame implements ActionListener{
         else if(e.getSource() == BTNieuwProduct) {
             ProductToevoegenDialoog d = new ProductToevoegenDialoog(this, true);
             d.setVisible(true);
+        }
+        else if(e.getSource() == BTPakbon) {
+            String path = System.getProperty("user.home") + "/Desktop/pakbonnen/";
+            File pakbonDir = new File(path);
+            
+            // als directory 'pakbonnen' niet bestaat, aanmaken
+            if( ! pakbonDir.exists()) {
+                System.out.println("Map 'pakbonnen' aanmaken");
+                pakbonDir.mkdir();
+            }
+            
+            try {
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                
+                
+//                int orderNr = Integer.parseInt(JLOrderNr.getText());
+                int orderNr = 12;
+                DatabaseCon dbc = new DatabaseCon();
+                ResultSet order = dbc.getOrderById(orderNr);
+                order.next();
+                String  orderNummer = order.getString("ordernr");
+                
+                ResultSet klant = dbc.getKlantById( Integer.parseInt(order.getString("klantid")) );
+                String voorAchternaam=null,adres=null,postcode=null,plaats=null;
+                while(klant.next()) {
+                    voorAchternaam = klant.getString("voornaam") + " " + klant.getString("achternaam");
+                    adres = klant.getString("adres");
+                    postcode = klant.getString("postcode");
+                    plaats = klant.getString("plaats");   
+                }
+                
+                String fileName = sdf.format(date) + "_" + orderNummer + ".txt";
+                
+                // tekst bestand aanmaken
+                FileWriter fstream = new FileWriter(path + fileName);
+                BufferedWriter out = new BufferedWriter(fstream);
+                out.write("Datum: " + sdf.format(date) + "\n");
+                out.write("Ordernummer: " + orderNummer +"\n\n");
+                out.write("Naam: " + voorAchternaam + "\n");
+                out.write("Adres: " + adres + "\n");
+                out.write("Postcode: " + postcode + "\n");
+                out.write("Plaats: " + plaats + "\n\n\n");
+                for (int i = 1; i < 5; i++) {
+                    out.write("Artikelnummer: " + i + "\n");
+                }
+                
+                out.close();
+            }
+            catch(Exception error) {
+                System.err.println("Error: " + error.getMessage());
+            }
         }
         
         
