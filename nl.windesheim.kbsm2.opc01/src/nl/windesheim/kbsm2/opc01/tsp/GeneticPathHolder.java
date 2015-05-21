@@ -3,24 +3,28 @@ package nl.windesheim.kbsm2.opc01.tsp;
 import java.util.ArrayList;
 
 public class GeneticPathHolder
-{    
+{
+    private ArrayList points;
     
-    private static ArrayList points;
+    public GeneticPathHolder(ArrayList<Packet> points)
+    {
+        this.points= points;
+    }       
 
     // Point toevoegen
-    public static void addPoint(Packet point)
+    public void addPoint(Packet point)
     {
         points.add(point);
     }
 
     // Point ophalen
-    public static Packet getPacket(int index)
+    public Packet getPacket(int index)
     {
         return (Packet) points.get(index);
     }
 
     // Aantal points terug krijgen
-    public static int numberOfPoints()
+    public int numberOfPoints()
     {
         return points.size();
     }

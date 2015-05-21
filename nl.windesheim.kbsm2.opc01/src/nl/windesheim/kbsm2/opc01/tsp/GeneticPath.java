@@ -6,6 +6,7 @@ import java.util.Collections;
 public class GeneticPath
 {    
     private ArrayList<Packet> packets = new ArrayList<Packet>();
+    private GeneticPathHolder pathHolder = new GeneticPathHolder(packets);
     
     private double fitness = 0;
     private int distance = 0;
@@ -13,7 +14,7 @@ public class GeneticPath
     
     public GeneticPath()
     {
-        for (int i = 0; i < GeneticPathHolder.numberOfPoints(); i++)
+        for (int i = 0; i < pathHolder.numberOfPoints(); i++)
         {
             packets.add(null);
         }
@@ -26,9 +27,9 @@ public class GeneticPath
     
     public void generateIndividual()
     {        
-        for (int pointIndex = 0; pointIndex < GeneticPathHolder.numberOfPoints(); pointIndex++)
+        for (int pointIndex = 0; pointIndex < pathHolder.numberOfPoints(); pointIndex++)
         {
-            setPoint(pointIndex, GeneticPathHolder.getPacket(pointIndex));
+            setPoint(pointIndex, pathHolder.getPacket(pointIndex));
         }        
         Collections.shuffle(packets);
     }

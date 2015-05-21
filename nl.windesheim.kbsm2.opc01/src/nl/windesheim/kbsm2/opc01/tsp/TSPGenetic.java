@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class TSPGenetic
 {
     ArrayList<Packet> packets;
+    private GeneticPathHolder pathHolder = new GeneticPathHolder(packets);
 
     public TSPGenetic(ArrayList<Packet> packets)
     {
@@ -13,10 +14,10 @@ public class TSPGenetic
 
     public void activateGenetic()
     {
-        packets.stream().forEach((a) ->
+        for(Packet a: packets)
         {
-            GeneticPathHolder.addPoint(a);
-        });
+            pathHolder.addPoint(a);
+        }
         GeneticPoints pop = new GeneticPoints(50, true);
         System.out.println("Initial distance: " + pop.getFittest().getDistance());
 

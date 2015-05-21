@@ -2,9 +2,9 @@ package nl.windesheim.kbsm2.opc01.tsp;
 
 public class GeneticAlgorithm
 {
-    private static final double mutationRate = 0.015;
-    private static final int tournamentSize = 5;
-    private static final boolean elitism = true;
+    private static double mutationRate = 0.015;
+    private static int tournamentSize = 5;
+    private static boolean elitism = true;
 
     public static GeneticPoints evolvePopulation(GeneticPoints pop)
     {
