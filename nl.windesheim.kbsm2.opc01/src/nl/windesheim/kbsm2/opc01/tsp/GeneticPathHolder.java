@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class GeneticPathHolder
 {    
-    private static ArrayList points = new ArrayList<Packet>();
+    
+    private static ArrayList points;
 
     // Point toevoegen
     public static void addPoint(Packet point)
@@ -23,4 +24,5 @@ public class GeneticPathHolder
     {
         return points.size();
     }
+    
 }
