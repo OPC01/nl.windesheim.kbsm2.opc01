@@ -26,6 +26,7 @@ public class MainScreen extends javax.swing.JFrame
     private DistanceMap map = new DistanceMap();
     private ResultatenScherm s = new ResultatenScherm(this, false);
     private Point checkboxSizes;
+    private ArrayList<Packet> currentList;
 
     public MainScreen()
     {
@@ -207,14 +208,16 @@ public class MainScreen extends javax.swing.JFrame
 
             map.createMatrix(list);
             s.setVisible(true);
+            currentList = list;
 
         }
+
         if (jBruteForce.isSelected())
         {
 
             DynProgram bruteForce = new DynProgram();
-            bruteForce.activate(map.getMap());
             long timeStart = System.nanoTime();
+            bruteForce.activate(map.getMap());
             String length = String.valueOf(bruteForce.getLeast_value());
             long timeEnd = System.nanoTime();
             long time = timeEnd - timeStart;
@@ -246,7 +249,8 @@ public class MainScreen extends javax.swing.JFrame
             long time = timeEnd - timeStart;
             String timeS = String.valueOf(time);
         }
-        hasBeenPressed = true;
+        VisualisatieScherm V = new VisualisatieScherm(this, false, currentList, checkboxSizes);
+        currentList.clear();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
