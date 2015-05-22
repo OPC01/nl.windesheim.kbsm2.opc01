@@ -11,7 +11,7 @@ package nl.windesheim.kbsm2.opc01.tsp;
  */
 public class Visualisatie extends javax.swing.JFrame
 {
-    private Visualisatie v;
+    private Visualisatie v1;
     /**
      * Creates new form Visualisatie
      */
@@ -19,8 +19,8 @@ public class Visualisatie extends javax.swing.JFrame
     {
         initComponents();
         setTitle("Visuele weergave");
-        v = new Visualisatie();
-        Draw draw1 = new Draw(v);
+        v1 = new Visualisatie();
+        Draw draw1 = new Draw(v1);
         add(draw1);
     }
 
