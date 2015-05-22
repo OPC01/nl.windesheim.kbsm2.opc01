@@ -9,19 +9,17 @@ package nl.windesheim.kbsm2.opc01.tsp;
  *
  * @author DeeJayOsti
  */
-public class Visualisatie extends javax.swing.JFrame
+public class Visualisatie extends javax.swing.JDialog
 {
-    private Visualisatie v1;
+    private Visualisatie v;
+
     /**
      * Creates new form Visualisatie
      */
-    public Visualisatie()
+    public Visualisatie(java.awt.Frame parent, boolean modal)
     {
+        super(parent, modal);        
         initComponents();
-        setTitle("Visuele weergave");
-        v1 = new Visualisatie();
-        Draw draw1 = new Draw(v1);
-        add(draw1);
     }
 
     /**
@@ -34,27 +32,18 @@ public class Visualisatie extends javax.swing.JFrame
     private void initComponents()
     {
 
-        jTekenPaneel = new javax.swing.JPanel();
-        jExit = new javax.swing.JButton();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        javax.swing.GroupLayout jTekenPaneelLayout = new javax.swing.GroupLayout(jTekenPaneel);
-        jTekenPaneel.setLayout(jTekenPaneelLayout);
-        jTekenPaneelLayout.setHorizontalGroup(
-            jTekenPaneelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
-        jTekenPaneelLayout.setVerticalGroup(
-            jTekenPaneelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 260, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jTekenPaneel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 260));
-
-        jExit.setText("Exit");
-        getContentPane().add(jExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -98,18 +87,25 @@ public class Visualisatie extends javax.swing.JFrame
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable()
         {
             public void run()
             {
-                new Visualisatie().setVisible(true);
+                Visualisatie dialog = new Visualisatie(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e)
+                    {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jExit;
-    private javax.swing.JPanel jTekenPaneel;
     // End of variables declaration//GEN-END:variables
 }

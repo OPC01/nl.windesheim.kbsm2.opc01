@@ -25,7 +25,7 @@ public class MainScreen extends javax.swing.JFrame
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
     private TSPSnake tspSnake;
     private DistanceMap map = new DistanceMap();
-    private ResultatenScherm s = new ResultatenScherm(this, false);     
+    private ResultatenScherm s = new ResultatenScherm(this, false);  
     private Point checkboxSizes;
     private ArrayList<Packet> currentList;
     private ArrayList<Packet> allPackets;
