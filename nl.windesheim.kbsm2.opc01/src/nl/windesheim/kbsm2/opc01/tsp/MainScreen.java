@@ -33,6 +33,7 @@ public class MainScreen extends javax.swing.JFrame
     {
 
         initComponents();
+        setTitle("TSP Simulatie");
     }
 
     public ArrayList<CheckBox> getBoxReference()

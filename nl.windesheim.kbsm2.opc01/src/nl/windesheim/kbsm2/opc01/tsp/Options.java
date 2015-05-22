@@ -19,6 +19,7 @@ public class Options extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
+        setTitle("Opties");
     }
 
     /**
