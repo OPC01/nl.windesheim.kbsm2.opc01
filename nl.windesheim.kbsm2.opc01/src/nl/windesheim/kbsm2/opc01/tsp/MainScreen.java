@@ -253,8 +253,8 @@ public class MainScreen extends javax.swing.JFrame
             
             long timeStart = System.nanoTime();
             
-            tspSnake = new TSPSnake(currentList);
-            
+            tspSnake = new TSPSnake(map.getMap(), currentList, checkboxSizes);
+            tspSnake.SnakeAlgorithm();
             
             /*String length = String.valueOf(bruteForce.getLeast_value());
             long timeEnd = System.nanoTime();
