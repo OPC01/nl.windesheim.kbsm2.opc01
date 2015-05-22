@@ -11,6 +11,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /**
@@ -23,7 +24,6 @@ public class HoofdScherm2 extends javax.swing.JFrame {
      * Creates new form HoofdScherm2
      */
     public HoofdScherm2() {
-        algoritme = new Algoritme("test");
         initComponents();
     }
 
@@ -225,12 +225,6 @@ public class HoofdScherm2 extends javax.swing.JFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add yoboolean checked = jCheckBox1.isSelected();
-        boolean checked = jCheckBox1.isSelected();
-        if (checked) {
-            algoritme.setFirstFit(true);
-        } else {
-            algoritme.setFirstFit(false);
-        }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -239,7 +233,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
         int aantalDozen = (int) jSpinner2.getValue();
         if (doosGrootte > 0) {
             AlgoritmeBase ab = new AlgoritmeBase();
-            
+
 //            ArrayList<Integer> pakketten = new ArrayList<Integer>();
 //            for (int i = 0; i < jlistModel2.getSize(); i++) {
 //                int aantalPakt = (int) jlistModel1.get(i);
@@ -249,9 +243,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
 //                    pakketten.add(groottePakt);
 //                }
 //            }
-            
             //ArrayList<ArrayList<Integer>> dozen = new ArrayList<ArrayList<Integer>>(); //fill this arraylist, example please
-            
             ArrayList<Integer> pakketten = new ArrayList<Integer>();
             for (int i = 0; i < jlistModel2.getSize(); i++) {
                 int aantalPakt = (int) jlistModel2.get(i);
@@ -262,60 +254,70 @@ public class HoofdScherm2 extends javax.swing.JFrame {
                     System.out.println(groottePakt);
                 }
             }
-            
+
             if (jCheckBox1.isSelected()) {
-                FirstFit ff = new FirstFit(doosGrootte, pakketten);            
+                FirstFit ff = new FirstFit(doosGrootte, pakketten);
+                ab.AddAlgoritme(ff);
                 ff.testPrint();
                 Simulatie1 sim = new Simulatie1(ff);
                 sim.setTitle("Simulatie First Fit");
 //                sim.paneel.repaint();
             }
             if (jCheckBox2.isSelected()) {
-                BestFit bf = new BestFit(doosGrootte, pakketten);               
+                BestFit bf = new BestFit(doosGrootte, pakketten);
+                ab.AddAlgoritme(bf);
                 bf.testPrint();
                 Simulatie1 sim = new Simulatie1(bf);
                 sim.setTitle("Simulatie Best Fit");
 //                sim.paneel.repaint();
             }
             if (jCheckBox3.isSelected()) {
-                NextFit nf = new NextFit(doosGrootte, pakketten);               
+                NextFit nf = new NextFit(doosGrootte, pakketten);
+                ab.AddAlgoritme(nf);
                 nf.testPrint();
                 Simulatie1 sim = new Simulatie1(nf);
                 sim.setTitle("Simulatie Next Fit");
 //                sim.paneel.repaint();
             }
+            if (jCheckBox1.isSelected() || jCheckBox2.isSelected() || jCheckBox3.isSelected()) {
+                ResultatenScherm result = new ResultatenScherm(ab);
+            }
         } else {
             System.out.println("De waarde moet boven 0 zijn");
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int value1 = (int) jSpinner2.getValue();
         int value2 = (int) jSpinner3.getValue();
-        if (value1 > 0 && value2 > 0) {
-            jlistModel1.addElement(value1);
-            jList1.setModel(jlistModel1);
 
-            jlistModel2.addElement(value2);
-            jList2.setModel(jlistModel2);
+        if ((int) jSpinner1.getValue() >= value1) {
+            System.out.println(value1);
+            System.out.println((int) jSpinner1.getValue());
+            if (value1 > 0 && value2 > 0) {
+                jlistModel1.addElement(value1);
+                jList1.setModel(jlistModel1);
 
-            // hier moet er code komen voor het toevoegen van de dozen en
-            // ook moet er wat verzonnen worden om de pagina dynamisch te vullen
+                jlistModel2.addElement(value2);
+                jList2.setModel(jlistModel2);
+
+                // hier moet er code komen voor het toevoegen van de dozen en
+                // ook moet er wat verzonnen worden om de pagina dynamisch te vullen
+            } else {
+                JOptionPane.showMessageDialog(this, "De waarde mag niet nul of lager zijn", "Bericht", JOptionPane.WARNING_MESSAGE);
+                System.out.println("De waarde mag niet nul of lager zijn");
+            }
         } else {
-            System.out.println("De waarde mag niet nul of lager zijn");
+            JOptionPane.showMessageDialog(this, "Het pakket mag niet groter zijn dan de doos grootte", "Bericht", JOptionPane.WARNING_MESSAGE);
+            System.out.println("De doos mag niet groter zijn dan de pakket grootte");
         }
-        System.out.println("hallo");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        boolean checked = jCheckBox2.isSelected();
-        if (checked) {
-            algoritme.setBestFit(true);
-        } else {
-            algoritme.setBestFit(false);
-        }
+
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     /**
@@ -349,7 +351,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new HoofdScherm2().setVisible(true);
             }
         });
@@ -378,7 +380,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     // End of variables declaration//GEN-END:variables
-    private Algoritme algoritme;
+    private Algoritme2 algoritme;
     DefaultListModel jlistModel1 = new DefaultListModel();
     DefaultListModel jlistModel2 = new DefaultListModel();
 

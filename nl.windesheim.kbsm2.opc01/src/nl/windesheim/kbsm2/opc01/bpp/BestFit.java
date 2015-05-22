@@ -23,9 +23,9 @@ public class BestFit extends Algoritme2 {
 
         ArrayList<Integer> startdoos = new ArrayList<Integer>();
         startdoos.add(0);
-        dozen.add(startdoos);
+        dozen.add(startdoos); //startdoos aanmaken
 
-        for (Integer pakket : paketten) {
+        for (Integer pakket : paketten) { 
             bestFit = 0;
             doosvol = true;
             for (int doos = 1; doos < dozen.size(); doos++) {

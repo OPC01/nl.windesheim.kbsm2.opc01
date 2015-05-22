@@ -7,40 +7,27 @@ package nl.windesheim.kbsm2.opc01.bpp;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author W7Home
- */
 public class FirstFit extends Algoritme2 {
 
-    /**
-     *
-     */
     public FirstFit(int doosGrootte, ArrayList<Integer> paketten) { //ArrayList<ArrayList<Integer>> dozen
         super(doosGrootte, paketten);
         int sum;
 
         paketten:
-        for (Integer check : paketten) {
-            for (int doos = 0; doos < dozen.size(); doos++) {
+        for (Integer check : paketten) { //per pakket inpakken
+            for (int doos = 0; doos < dozen.size(); doos++) { //per doos kijken of het pakket past
                 sum = dozen.get(doos).stream().mapToInt(Integer::intValue).sum();
-                //sum = berekenSum(dozen.get(doos));
                 if ((sum + check) <= doosGrootte) {
-                    dozen.get(doos).add(check);
-                    nieuwpakketsim(check, doos);
+                    dozen.get(doos).add(check); //zo ja: voeg pakket aan doos toe en ga na volgende pakket
+                    nieuwpakketsim(check, doos); 
                     continue paketten;
                 }
             }
-            aantalDozen++;
+            aantalDozen++; //zo nee: maar nieuwe doos aan en voeg pakket toe
             ArrayList<Integer> nieuwedoos = new ArrayList<Integer>();
             nieuwedoos.add(check);
             dozen.add(nieuwedoos);
-            nieuwpakketsim(check, aantalDozen - 1);
-        }
-        for (int i = 0; i < dozen.size(); i++) {
-            System.out.println("First Fit");
-            System.out.println(dozen.get(i));
-            
+            nieuwpakketsim(check, aantalDozen - 1); //nieuwepakketsum is voor simulatie uitvoer
         }
     }
 }

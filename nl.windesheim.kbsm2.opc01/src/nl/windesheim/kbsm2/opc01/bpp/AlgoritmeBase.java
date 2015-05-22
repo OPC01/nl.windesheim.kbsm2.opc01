@@ -19,8 +19,20 @@ public class AlgoritmeBase{
         myAlgoritmes = new ArrayList<Algoritme2>();
     }
     
+    public int getLengte(){
+        return myAlgoritmes.size();
+    }
+    
     public void AddAlgoritme(Algoritme2 alg)
     {
         myAlgoritmes.add(alg);
+    }
+    
+    public Algoritme2 getAlogritme(int i){
+        return myAlgoritmes.get(i);
+    }
+    
+    public String toString(){
+        return "sadasd";//getAlgoritme(1)+"gg";
     }
 }
