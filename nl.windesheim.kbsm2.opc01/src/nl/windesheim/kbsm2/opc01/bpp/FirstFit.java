@@ -37,5 +37,10 @@ public class FirstFit extends Algoritme2 {
             dozen.add(nieuwedoos);
             nieuwpakketsim(check, aantalDozen - 1);
         }
+        for (int i = 0; i < dozen.size(); i++) {
+            System.out.println("First Fit");
+            System.out.println(dozen.get(i));
+            
+        }
     }
 }

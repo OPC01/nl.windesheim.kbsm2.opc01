@@ -21,10 +21,13 @@ public class MainScreen extends javax.swing.JFrame
 {
 
     private ArrayList<CheckBox> boxReference = new ArrayList<CheckBox>();
-    private DynProgram  bruteForce = new DynProgram();
+    private DynProgram bruteForce;
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
-
+    private TSPGenetic tspGenetic;
     private DistanceMap map = new DistanceMap();
+    private ResultatenScherm s = new ResultatenScherm(this, false);
+    private Point checkboxSizes;
+    private ArrayList<Packet> currentList;
 
     public MainScreen()
     {
@@ -50,7 +53,7 @@ public class MainScreen extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         jBruteForce = new javax.swing.JCheckBox();
         jNearestNeigbour = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        jGenetic = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -74,7 +77,7 @@ public class MainScreen extends javax.swing.JFrame
 
         jNearestNeigbour.setText("Nearest Neighbour");
 
-        jCheckBox3.setText("jCheckBox1");
+        jGenetic.setText("Genetic");
 
         jButton1.setText("Start Simulatie");
         jButton1.addActionListener(new java.awt.event.ActionListener()
@@ -112,7 +115,7 @@ public class MainScreen extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jNearestNeigbour)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3))
+                        .addComponent(jGenetic))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -123,7 +126,7 @@ public class MainScreen extends javax.swing.JFrame
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox3)
+                    .addComponent(jGenetic)
                     .addComponent(jNearestNeigbour)
                     .addComponent(jBruteForce))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
@@ -162,6 +165,7 @@ public class MainScreen extends javax.swing.JFrame
             {
                 jPanel1.add(a);
             }
+            checkboxSizes = new Point(options.hight, options.width);
             jPanel1.revalidate();
             jPanel1.repaint();
 
@@ -187,35 +191,73 @@ public class MainScreen extends javax.swing.JFrame
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        ArrayList<Packet> list = new ArrayList<Packet>();
-        list.add(new Packet(0,0));
-        for (CheckBox a : boxReference)
-        {
-            if (a.isSelected())
-            {
-                a.packet.setGetPacket(true);
-                list.add(a.getPacket());
-            }
-        }
+        boolean hasBeenPressed = false;
 
-        map.createMatrix(list);
+        if (!hasBeenPressed)
+        {
+
+            ArrayList<Packet> list = new ArrayList<Packet>();
+            list.add(new Packet(0, 0));
+            for (CheckBox a : boxReference)
+            {
+                if (a.isSelected())
+                {
+                    a.packet.setGetPacket(true);
+                    list.add(a.getPacket());
+                }
+            }
+
+            map.createMatrix(list);
+            s.setVisible(true);
+            currentList = list;
+
+        }
 
         if (jBruteForce.isSelected())
         {
+
+            DynProgram bruteForce = new DynProgram();
+            long timeStart = System.nanoTime();
             bruteForce.activate(map.getMap());
+            String length = String.valueOf(bruteForce.getLeast_value());
+            long timeEnd = System.nanoTime();
+            long time = timeEnd - timeStart;
+            String timeS = String.valueOf(time);
+            s.getBfDistance().setText(length);
+            s.getBfTime().setText(timeS);
+            s.revalidate();
+
         }
         if (jNearestNeigbour.isSelected())
         {
+            long timeStart = System.nanoTime();
             nearestNeighbour.tsp(map.getMap());
-            for (int a : nearestNeighbour.getPath())
-            {
-                Packet q = list.get(a);
-                System.out.print(q);
-            }
-        }
-        if(jCheckBox3.isSelected()){
+            long timeEnd = System.nanoTime();
+            long time = timeEnd - timeStart;
+            String length = String.valueOf(nearestNeighbour.getLengthOfPath());
+            String timeS = String.valueOf(time);
+            s.getNnDistance().setText(length);
+            s.getNnTime().setText(timeS);
+            s.revalidate();
 
         }
+        if (jGenetic.isSelected())
+        {
+            
+            long timeStart = System.nanoTime();
+            
+            tspGenetic = new TSPGenetic(currentList);
+            tspGenetic.activateGenetic();
+            
+            /*String length = String.valueOf(bruteForce.getLeast_value());
+            long timeEnd = System.nanoTime();
+            long time = timeEnd - timeStart;
+            String timeS = String.valueOf(time);*/
+            
+            
+        }
+        VisualisatieScherm V = new VisualisatieScherm(this, false, currentList, checkboxSizes);
+        currentList.clear();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -279,7 +321,7 @@ public class MainScreen extends javax.swing.JFrame
     private javax.swing.JCheckBox jBruteForce;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jGenetic;
     private javax.swing.JCheckBox jNearestNeigbour;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
