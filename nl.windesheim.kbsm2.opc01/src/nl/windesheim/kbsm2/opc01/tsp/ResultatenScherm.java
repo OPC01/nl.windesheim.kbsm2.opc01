@@ -49,7 +49,6 @@ public class ResultatenScherm extends javax.swing.JDialog
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Distance");
@@ -61,7 +60,6 @@ public class ResultatenScherm extends javax.swing.JDialog
         jLabel3.setText("Genetic");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 184, -1, -1));
 
-        bfTime.setText("jLabel4");
         bfTime.setEnabled(false);
         jPanel1.add(bfTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 67, -1, -1));
         bfTime.getAccessibleContext().setAccessibleName("bfTime");
@@ -72,27 +70,22 @@ public class ResultatenScherm extends javax.swing.JDialog
         jLabel5.setText("Brute Force");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 67, -1, -1));
 
-        nnTime.setText("jLabel4");
         nnTime.setEnabled(false);
         jPanel1.add(nnTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 124, -1, -1));
         nnTime.getAccessibleContext().setAccessibleName("nnTime");
 
-        gTime.setText("jLabel4");
         gTime.setEnabled(false);
         jPanel1.add(gTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 184, -1, -1));
         gTime.getAccessibleContext().setAccessibleName("gTime");
 
-        gDistance.setText("jLabel4");
         gDistance.setEnabled(false);
         jPanel1.add(gDistance, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
         gDistance.getAccessibleContext().setAccessibleName("gDistance");
 
-        nnDistance.setText("jLabel4");
         nnDistance.setEnabled(false);
         jPanel1.add(nnDistance, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 124, -1, -1));
         nnDistance.getAccessibleContext().setAccessibleName("nnDistance");
 
-        bfDIstance.setText("jLabel4");
         bfDIstance.setEnabled(false);
         jPanel1.add(bfDIstance, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 67, -1, -1));
         bfDIstance.getAccessibleContext().setAccessibleName("bfDistance");
@@ -103,14 +96,14 @@ public class ResultatenScherm extends javax.swing.JDialog
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
