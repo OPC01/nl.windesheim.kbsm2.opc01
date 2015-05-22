@@ -8,33 +8,39 @@ import java.util.Stack;
 public class TSPSnake {
 
     private int numberOfNodes;
-    private ArrayList<Integer> path = new ArrayList<Integer>();
+    private ArrayList<Packet> path = new ArrayList<Packet>();
 
     private double lengthOfPath;
     private double[][] adjMatrix;
     private ArrayList<Packet> packets;
     private Point checkboxSizes;
-    ArrayList<Packet> allPackets;
 
-    public TSPSnake(double[][] adjMatrix, ArrayList<Packet> packets, Point checkboxSizes, ArrayList<Packet> allPackets) {
+    public TSPSnake(double[][] adjMatrix, ArrayList<Packet> packets, Point checkboxSizes) {
         this.adjMatrix = adjMatrix;
         this.packets = packets;
         this.checkboxSizes = checkboxSizes;
-        this.allPackets = allPackets;
     }
 
     public void SnakeAlgorithm() {
-        for (int y = 0; y < checkboxSizes.getY(); y++) {
-            for (int x = 0; x < checkboxSizes.getX(); x++) {
+        System.out.println("Y =" + checkboxSizes.getY() + "x= " + checkboxSizes.getX());
+        for (int y = 0; y < checkboxSizes.getY() +1; y++) {
+            for (int x = 0; x < checkboxSizes.getX() +1; x++) {
                 for (Packet p : packets) {
                     if (p.getX() == x && p.getY() == y) {
-                        path.add(packets.indexOf(p));
+                        path.add(p);
                     }
                 }
             }
         }
-        for(Integer I: path){
-            System.out.println(I + " ");
-        }
+        this.path = path;
     }
+
+    public ArrayList<Packet> getPath() {
+        return path;
+    }
+
+    public double getLengthOfPath() {
+        return lengthOfPath;
+    }
+    
 }

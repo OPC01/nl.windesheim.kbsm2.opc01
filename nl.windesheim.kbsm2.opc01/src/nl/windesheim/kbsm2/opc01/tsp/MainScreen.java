@@ -169,7 +169,6 @@ public class MainScreen extends javax.swing.JFrame
             for (CheckBox a : boxReference)
             {
                 jPanel1.add(a);
-                allPackets.add(a.getPacket());
             }
             
             checkboxSizes = new Point(options.hight, options.width);
@@ -253,8 +252,9 @@ public class MainScreen extends javax.swing.JFrame
             
             long timeStart = System.nanoTime();
             
-            tspSnake = new TSPSnake(map.getMap(), currentList, checkboxSizes, allPackets);
+            tspSnake = new TSPSnake(map.getMap(), currentList, checkboxSizes);
             tspSnake.SnakeAlgorithm();
+            System.out.println(tspSnake.getPath());
             
             /*String length = String.valueOf(bruteForce.getLeast_value());
             long timeEnd = System.nanoTime();
