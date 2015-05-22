@@ -23,7 +23,7 @@ public class MainScreen extends javax.swing.JFrame
     private ArrayList<CheckBox> boxReference = new ArrayList<CheckBox>();
     private DynProgram bruteForce;
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
-    private TSPGenetic tspGenetic;
+    private TSPSnake tspSnake;
     private DistanceMap map = new DistanceMap();
     private ResultatenScherm s = new ResultatenScherm(this, false);
     private Point checkboxSizes;
@@ -53,7 +53,7 @@ public class MainScreen extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         jBruteForce = new javax.swing.JCheckBox();
         jNearestNeigbour = new javax.swing.JCheckBox();
-        jGenetic = new javax.swing.JCheckBox();
+        jSnake = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -77,7 +77,14 @@ public class MainScreen extends javax.swing.JFrame
 
         jNearestNeigbour.setText("Nearest Neighbour");
 
-        jGenetic.setText("Genetic");
+        jSnake.setText("Snake");
+        jSnake.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jSnakeActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Start Simulatie");
         jButton1.addActionListener(new java.awt.event.ActionListener()
@@ -115,7 +122,7 @@ public class MainScreen extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jNearestNeigbour)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jGenetic))
+                        .addComponent(jSnake))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -126,7 +133,7 @@ public class MainScreen extends javax.swing.JFrame
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jGenetic)
+                    .addComponent(jSnake)
                     .addComponent(jNearestNeigbour)
                     .addComponent(jBruteForce))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
@@ -241,13 +248,13 @@ public class MainScreen extends javax.swing.JFrame
             s.revalidate();
 
         }
-        if (jGenetic.isSelected())
+        if (jSnake.isSelected())
         {
             
             long timeStart = System.nanoTime();
             
-            tspGenetic = new TSPGenetic(currentList);
-            tspGenetic.activateGenetic();
+            tspSnake = new TSPSnake(currentList);
+            
             
             /*String length = String.valueOf(bruteForce.getLeast_value());
             long timeEnd = System.nanoTime();
@@ -259,6 +266,11 @@ public class MainScreen extends javax.swing.JFrame
         VisualisatieScherm V = new VisualisatieScherm(this, false, currentList, checkboxSizes);
         currentList.clear();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jSnakeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jSnakeActionPerformed
+    {//GEN-HEADEREND:event_jSnakeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSnakeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,8 +333,8 @@ public class MainScreen extends javax.swing.JFrame
     private javax.swing.JCheckBox jBruteForce;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jGenetic;
     private javax.swing.JCheckBox jNearestNeigbour;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JCheckBox jSnake;
     // End of variables declaration//GEN-END:variables
 }

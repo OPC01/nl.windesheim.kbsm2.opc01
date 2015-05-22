@@ -41,7 +41,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jNearestNeigbour" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jGenetic" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSnake" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -56,7 +56,7 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jGenetic" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSnake" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jNearestNeigbour" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBruteForce" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -103,10 +103,13 @@
         <Property name="text" type="java.lang.String" value="Nearest Neighbour"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jGenetic">
+    <Component class="javax.swing.JCheckBox" name="jSnake">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Genetic"/>
+        <Property name="text" type="java.lang.String" value="Snake"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSnakeActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>

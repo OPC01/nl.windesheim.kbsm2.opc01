@@ -45,7 +45,7 @@ public class VisualisatieScherm extends javax.swing.JDialog
     {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,12 +63,12 @@ public class VisualisatieScherm extends javax.swing.JDialog
             .addGap(0, 227, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Exit");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
+        jExit.setText("Exit");
+        jExit.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton1ActionPerformed(evt);
+                jExitActionPerformed(evt);
             }
         });
 
@@ -82,7 +82,7 @@ public class VisualisatieScherm extends javax.swing.JDialog
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 325, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jExit)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,25 +91,23 @@ public class VisualisatieScherm extends javax.swing.JDialog
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jExit)
                 .addGap(16, 16, 16))
         );
-
-        jButton1.getAccessibleContext().setAccessibleName("Exit");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jExitActionPerformed
+    {//GEN-HEADEREND:event_jExitActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jExitActionPerformed
 
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jExit;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
