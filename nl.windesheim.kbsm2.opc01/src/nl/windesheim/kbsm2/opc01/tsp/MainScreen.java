@@ -251,16 +251,16 @@ public class MainScreen extends javax.swing.JFrame
         {
             
             long timeStart = System.nanoTime();
-            
             tspSnake = new TSPSnake(map.getMap(), currentList, checkboxSizes);
             tspSnake.SnakeAlgorithm();
-            System.out.println(tspSnake.getPath());
-            
-            /*String length = String.valueOf(bruteForce.getLeast_value());
+            tspSnake.calculatePathLength(map.getMap());
+            String length = String.valueOf(tspSnake.getLengthOfPath());
             long timeEnd = System.nanoTime();
             long time = timeEnd - timeStart;
-            String timeS = String.valueOf(time);*/
-            
+            String timeS = String.valueOf(time);
+            s.getgDistance().setText(length);
+            s.getgTime().setText(timeS);
+            s.revalidate();
             
         }        
         currentList.clear();

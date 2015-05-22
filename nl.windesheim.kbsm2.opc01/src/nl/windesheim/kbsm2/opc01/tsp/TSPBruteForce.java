@@ -32,7 +32,6 @@ public class TSPBruteForce
 
     private static boolean isBestPath(ArrayList<Integer> path)
     {
-        System.out.println(path.toString());
         return false;
     }
 
