@@ -35,6 +35,10 @@ public class NextFit extends Algoritme2 {
                 dooscheck++;
             }
         }
+        for (int i = 0; i < dozen.size(); i++) {
+            System.out.println("Next Fit");
+            System.out.println(dozen.get(i));
+        }
     }
 
 }

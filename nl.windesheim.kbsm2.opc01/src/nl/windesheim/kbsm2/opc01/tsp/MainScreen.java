@@ -21,15 +21,20 @@ public class MainScreen extends javax.swing.JFrame
 {
 
     private ArrayList<CheckBox> boxReference = new ArrayList<CheckBox>();
-    private DynProgram  bruteForce = new DynProgram();
+    private DynProgram bruteForce;
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
-
+    private TSPSnake tspSnake;
     private DistanceMap map = new DistanceMap();
+    private ResultatenScherm s = new ResultatenScherm(this, false);  
+    private Point checkboxSizes;
+    private ArrayList<Packet> currentList;
+    private ArrayList<Packet> allPackets;
 
     public MainScreen()
     {
 
         initComponents();
+        setTitle("TSP Simulatie");
     }
 
     public ArrayList<CheckBox> getBoxReference()
@@ -50,47 +55,54 @@ public class MainScreen extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         jBruteForce = new javax.swing.JCheckBox();
         jNearestNeigbour = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jSnake = new javax.swing.JCheckBox();
+        jStart = new javax.swing.JButton();
+        jSettings = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Route"));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
         );
 
         jBruteForce.setText("Brute Force");
 
         jNearestNeigbour.setText("Nearest Neighbour");
 
-        jCheckBox3.setText("jCheckBox1");
-
-        jButton1.setText("Start Simulatie");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
+        jSnake.setText("Snake");
+        jSnake.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton1ActionPerformed(evt);
+                jSnakeActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Instelling");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
+        jStart.setText("Start Simulatie");
+        jStart.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton2ActionPerformed(evt);
+                jStartActionPerformed(evt);
+            }
+        });
+
+        jSettings.setText("Instelling");
+        jSettings.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jSettingsActionPerformed(evt);
             }
         });
 
@@ -99,45 +111,41 @@ public class MainScreen extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(281, 281, 281)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
                         .addComponent(jBruteForce)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jNearestNeigbour)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSnake)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(jSettings)
+                        .addGap(18, 18, 18)
+                        .addComponent(jStart)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox3)
+                    .addComponent(jStart)
+                    .addComponent(jSettings)
+                    .addComponent(jBruteForce)
                     .addComponent(jNearestNeigbour)
-                    .addComponent(jBruteForce))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jSnake))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void jSettingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jSettingsActionPerformed
+    {//GEN-HEADEREND:event_jSettingsActionPerformed
         Options options = new Options(this, true);
         options.setVisible(true);
         jPanel1.removeAll();
@@ -162,12 +170,14 @@ public class MainScreen extends javax.swing.JFrame
             {
                 jPanel1.add(a);
             }
+            
+            checkboxSizes = new Point(options.hight, options.width);
             jPanel1.revalidate();
             jPanel1.repaint();
 
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jSettingsActionPerformed
 
     class CheckBox extends JCheckBox
     {
@@ -185,38 +195,81 @@ public class MainScreen extends javax.swing.JFrame
             return packet;
         }
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
-        ArrayList<Packet> list = new ArrayList<Packet>();
-        list.add(new Packet(0,0));
-        for (CheckBox a : boxReference)
-        {
-            if (a.isSelected())
-            {
-                a.packet.setGetPacket(true);
-                list.add(a.getPacket());
-            }
-        }
+    private void jStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jStartActionPerformed
+    {//GEN-HEADEREND:event_jStartActionPerformed
+        boolean hasBeenPressed = false;
 
-        map.createMatrix(list);
+        if (!hasBeenPressed)
+        {
+
+            ArrayList<Packet> list = new ArrayList<Packet>();
+            list.add(new Packet(0, 0));
+            for (CheckBox a : boxReference)
+            {
+                if (a.isSelected())
+                {
+                    a.packet.setGetPacket(true);
+                    list.add(a.getPacket());
+                }
+            }
+
+            map.createMatrix(list);
+            s.setVisible(true);            
+            currentList = list;
+
+        }
 
         if (jBruteForce.isSelected())
         {
+
+            DynProgram bruteForce = new DynProgram();
+            long timeStart = System.nanoTime();
             bruteForce.activate(map.getMap());
+            String length = String.valueOf(bruteForce.getLeast_value());
+            long timeEnd = System.nanoTime();
+            long time = timeEnd - timeStart;
+            String timeS = String.valueOf(time);
+            s.getBfDistance().setText(length);
+            s.getBfTime().setText(timeS);
+            s.revalidate();
+
         }
         if (jNearestNeigbour.isSelected())
         {
+            long timeStart = System.nanoTime();
             nearestNeighbour.tsp(map.getMap());
-            for (int a : nearestNeighbour.getPath())
-            {
-                Packet q = list.get(a);
-                System.out.print(q);
-            }
-        }
-        if(jCheckBox3.isSelected()){
+            long timeEnd = System.nanoTime();
+            long time = timeEnd - timeStart;
+            String length = String.valueOf(nearestNeighbour.getLengthOfPath());
+            String timeS = String.valueOf(time);
+            s.getNnDistance().setText(length);
+            s.getNnTime().setText(timeS);
+            s.revalidate();
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (jSnake.isSelected())
+        {
+            
+            long timeStart = System.nanoTime();
+            tspSnake = new TSPSnake(map.getMap(), currentList, checkboxSizes);
+            tspSnake.SnakeAlgorithm();
+            tspSnake.calculatePathLength(map.getMap());
+            String length = String.valueOf(tspSnake.getLengthOfPath());
+            long timeEnd = System.nanoTime();
+            long time = timeEnd - timeStart;
+            String timeS = String.valueOf(time);
+            s.getgDistance().setText(length);
+            s.getgTime().setText(timeS);
+            s.revalidate();
+            
+        }        
+        currentList.clear();
+    }//GEN-LAST:event_jStartActionPerformed
+
+    private void jSnakeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jSnakeActionPerformed
+    {//GEN-HEADEREND:event_jSnakeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSnakeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,10 +330,10 @@ public class MainScreen extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jBruteForce;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jNearestNeigbour;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jSettings;
+    private javax.swing.JCheckBox jSnake;
+    private javax.swing.JButton jStart;
     // End of variables declaration//GEN-END:variables
 }

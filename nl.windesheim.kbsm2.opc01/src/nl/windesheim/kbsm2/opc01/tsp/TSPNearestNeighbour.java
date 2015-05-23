@@ -15,7 +15,7 @@ public class TSPNearestNeighbour
         stack = new Stack<Integer>();
     }
 
-    public void tsp(double adjacencyMatrix[][])
+    public void tsp(double[][] adjacencyMatrix)
     {
         ArrayList<Integer> path = new ArrayList<Integer>();
         path.add(0);
@@ -57,6 +57,7 @@ public class TSPNearestNeighbour
         }
 
         this.path = path;
+        this.calculatePathLength(adjacencyMatrix);
     }
 
     public int getNumberOfNodes()
@@ -99,7 +100,7 @@ public class TSPNearestNeighbour
         this.lengthOfPath = lengthOfPath;
     }
 
-    public void calculatePathLength(double adjMatrix[][], ArrayList<Packet> packets)
+    public void calculatePathLength(double adjMatrix[][])
     {
         double length = 0;
         for (int i = 0; i < path.size() - 1; i++)
