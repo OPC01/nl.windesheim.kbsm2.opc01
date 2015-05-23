@@ -21,7 +21,7 @@ public class BestFit extends Algoritme2 {
         int bestFit = 0;
         boolean doosvol = true;
 
-        ArrayList<Integer> startdoos = new ArrayList<Integer>();
+        ArrayList<Integer> startdoos = new ArrayList<>();
         startdoos.add(0);
         dozen.add(startdoos); //startdoos aanmaken
 
@@ -42,7 +42,7 @@ public class BestFit extends Algoritme2 {
                 nieuwpakketsim(pakket, bestFit - 1);
             } else {
                 aantalDozen++;
-                ArrayList<Integer> nieuwedoos = new ArrayList<Integer>();
+                ArrayList<Integer> nieuwedoos = new ArrayList<>();
                 nieuwedoos.add(pakket);
                 dozen.add(nieuwedoos);
                 nieuwpakketsim(pakket, aantalDozen - 1);

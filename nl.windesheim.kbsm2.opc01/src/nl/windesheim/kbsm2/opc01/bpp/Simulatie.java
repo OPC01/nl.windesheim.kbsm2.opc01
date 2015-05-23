@@ -15,7 +15,7 @@ import javax.swing.*;
 public class Simulatie extends JFrame {
 
     private Algoritme2 algoritme1;
-    public TekenPanel paneel;
+    public TekenPaneel paneel;
 
     public Simulatie(Algoritme2 algoritme1) {
         this.algoritme1 = algoritme1;
@@ -24,7 +24,7 @@ public class Simulatie extends JFrame {
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        TekenPanel dozen = new TekenPanel(algoritme1); // dit is nodig om te kunnen verwijzen naar dit tekenPanel
+        TekenPaneel dozen = new TekenPaneel(algoritme1); // dit is nodig om te kunnen verwijzen naar dit tekenPanel
         this.paneel = dozen;
         add(paneel);
         setVisible(true);

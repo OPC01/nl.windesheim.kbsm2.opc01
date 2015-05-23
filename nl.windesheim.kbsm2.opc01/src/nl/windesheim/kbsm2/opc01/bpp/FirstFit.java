@@ -24,7 +24,7 @@ public class FirstFit extends Algoritme2 {
                 }
             }
             aantalDozen++; //zo nee: maar nieuwe doos aan en voeg pakket toe
-            ArrayList<Integer> nieuwedoos = new ArrayList<Integer>();
+            ArrayList<Integer> nieuwedoos = new ArrayList<>();
             nieuwedoos.add(check);
             dozen.add(nieuwedoos);
             nieuwpakketsim(check, aantalDozen - 1); //nieuwepakketsum is voor simulatie uitvoer
