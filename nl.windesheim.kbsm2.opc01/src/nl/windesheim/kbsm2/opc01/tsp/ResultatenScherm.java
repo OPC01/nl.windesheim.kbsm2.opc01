@@ -151,6 +151,30 @@ public class ResultatenScherm extends javax.swing.JDialog {
         });
     }
 
+    public JLabel getBfDistance() {
+        return bfDIstance;
+    }
+
+    public JLabel getBfTime() {
+        return bfTime;
+    }
+
+    public JLabel getgDistance() {
+        return gDistance;
+    }
+
+    public JLabel getgTime() {
+        return gTime;
+    }
+
+    public JLabel getNnDistance() {
+        return nnDistance;
+    }
+
+    public JLabel getNnTime() {
+        return nnTime;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bfDIstance;
     private javax.swing.JLabel bfTime;
