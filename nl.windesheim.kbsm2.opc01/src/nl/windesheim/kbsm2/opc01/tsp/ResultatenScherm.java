@@ -12,14 +12,12 @@ import javax.swing.JPanel;
  *
  * @author Gebruiker
  */
-public class ResultatenScherm extends javax.swing.JDialog
-{
+public class ResultatenScherm extends javax.swing.JDialog {
 
     /**
      * Creates new form ResultatenScherm
      */
-    public ResultatenScherm(java.awt.Frame parent, boolean modal)
-    {
+    public ResultatenScherm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Resultaten");
@@ -114,119 +112,43 @@ public class ResultatenScherm extends javax.swing.JDialog
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        }
-        catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ResultatenScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(ResultatenScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(ResultatenScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ResultatenScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 ResultatenScherm dialog = new ResultatenScherm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter()
-                {
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
-                    public void windowClosing(java.awt.event.WindowEvent e)
-                    {
+                    public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });
                 dialog.setVisible(true);
             }
         });
-    }
-
-    public JLabel getBfDistance()
-    {
-        return bfDIstance;
-    }
-
-    public JLabel getBfTime()
-    {
-        return bfTime;
-    }
-
-    public JLabel getgDistance()
-    {
-        return gDistance;
-    }
-
-    public JLabel getgTime()
-    {
-        return gTime;
-    }
-
-    public JLabel getjLabel1()
-    {
-        return jLabel1;
-    }
-
-    public JLabel getjLabel2()
-    {
-        return jLabel2;
-    }
-
-    public JLabel getjLabel3()
-    {
-        return jLabel3;
-    }
-
-    public JLabel getjLabel5()
-    {
-        return jLabel5;
-    }
-
-    public JLabel getjLabel6()
-    {
-        return jLabel6;
-    }
-
-    public JPanel getjPanel1()
-    {
-        return jPanel1;
-    }
-
-    public JLabel getNnDistance()
-    {
-        return nnDistance;
-    }
-
-    public JLabel getNnTime()
-    {
-        return nnTime;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
