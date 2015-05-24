@@ -7,7 +7,6 @@ import java.util.Stack;
 
 public class TSPSnake {
 
-    private int numberOfNodes;
     private ArrayList<Packet> path = new ArrayList<Packet>();
     private ArrayList<Integer> sequence = new ArrayList<Integer>();
     private double lengthOfPath;
@@ -23,8 +22,8 @@ public class TSPSnake {
 
     public void SnakeAlgorithm() {
         System.out.println("Y =" + checkboxSizes.getY() + "x= " + checkboxSizes.getX());
-        for (int y = 0; y < checkboxSizes.getY() +1; y++) {
-            for (int x = 0; x < checkboxSizes.getX() +1; x++) {
+        for (int y = 0; y < checkboxSizes.getY() + 1; y++) {
+            for (int x = 0; x < checkboxSizes.getX() + 1; x++) {
                 for (Packet p : packets) {
                     if (p.getX() == x && p.getY() == y) {
                         path.add(p);
@@ -43,15 +42,13 @@ public class TSPSnake {
     public double getLengthOfPath() {
         return lengthOfPath;
     }
-        public void calculatePathLength(double adjMatrix[][])
-    {
+
+    public void calculatePathLength(double adjMatrix[][]) {
         double length = 0;
-        for (int i = 0; i < path.size() - 1; i++)
-        {
+        for (int i = 0; i < path.size() - 1; i++) {
             length = length + adjMatrix[sequence.get(i)][sequence.get(i + 1)];
         }
         this.lengthOfPath = length;
     }
-    
-    
+
 }
