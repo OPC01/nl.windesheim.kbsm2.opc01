@@ -10,12 +10,10 @@ public class TSPSnake {
     private ArrayList<Packet> path = new ArrayList<Packet>();
     private ArrayList<Integer> sequence = new ArrayList<Integer>();
     private double lengthOfPath;
-    private double[][] adjMatrix;
     private ArrayList<Packet> packets;
     private Point checkboxSizes;
 
-    public TSPSnake(double[][] adjMatrix, ArrayList<Packet> packets, Point checkboxSizes) {
-        this.adjMatrix = adjMatrix;
+    public TSPSnake(ArrayList<Packet> packets, Point checkboxSizes) {
         this.packets = packets;
         this.checkboxSizes = checkboxSizes;
     }

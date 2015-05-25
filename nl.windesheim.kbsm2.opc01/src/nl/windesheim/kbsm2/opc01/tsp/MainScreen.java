@@ -235,7 +235,7 @@ public class MainScreen extends javax.swing.JFrame {
         if (jSnake.isSelected()) {
 
             long timeStart = System.nanoTime();
-            tspSnake = new TSPSnake(map.getMap(), currentList, checkboxSizes);
+            tspSnake = new TSPSnake(currentList, checkboxSizes);
             tspSnake.SnakeAlgorithm();
             tspSnake.calculatePathLength(map.getMap());
             String length = String.valueOf(tspSnake.getLengthOfPath());
