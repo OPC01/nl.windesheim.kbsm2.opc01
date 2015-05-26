@@ -65,9 +65,12 @@ public class Grijparm {
 		//omlaag
 		link.sendPowerPinSwitch(motor1, 1);
 		link.sendPowerPinIntensity(speed1, 200);
+		//naar rechts bewegen.
+		link.sendPowerPinSwitch(motor2, 0);
+		link.sendPowerPinIntensity(speed2, 255);
 		//naar links bewegen.
-		
-		
+		link.sendPowerPinSwitch(motor2, 1);
+		link.sendPowerPinIntensity(speed2, 255);
         
                       
     }
