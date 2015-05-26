@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.windesheim.kbsm2.opc01.bpp;
+package bpp;
 
 import java.util.ArrayList;
 
@@ -23,8 +23,8 @@ public class Algoritme2{
     public Algoritme2(int doosGrootte, ArrayList<Integer> paketten) { //ArrayList<ArrayList<Integer>> dozen
         this.doosGrootte = doosGrootte;
         this.paketten = paketten;
-        dozen  = new ArrayList<ArrayList<Integer>>();
-        dozenSimulatie = new ArrayList<Integer>();
+        dozen  = new ArrayList<>();
+        dozenSimulatie = new ArrayList<>();
         
         //this.dozen = dozen;
     }
@@ -95,6 +95,10 @@ public class Algoritme2{
 
     public void setDoosGrootte(int doosGrootte) {
         this.doosGrootte = doosGrootte;
+    }
+    
+    public ArrayList getDozenSimulatie(){
+        return dozenSimulatie;
     }
 
 //    public void setAantalDozen(int aantalDozen) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.windesheim.kbsm2.opc01.bpp;
+package bpp;
 
 
 
@@ -13,7 +13,7 @@ package nl.windesheim.kbsm2.opc01.bpp;
  */
 public class Simulatie1 extends javax.swing.JFrame {
 
-    private TekenPaneel dozen;
+
     
     private final Algoritme2 algoritme1;
 
@@ -24,13 +24,11 @@ public class Simulatie1 extends javax.swing.JFrame {
     public Simulatie1(Algoritme2 algoritme1) {
         this.algoritme1 = algoritme1;
 
-        dozen = new TekenPaneel(algoritme1);
+//        dozen = new TekenTest(algoritme1);
         initComponents(); 
-        System.out.println("simulatie gemaakt");
-        jPanel1.add(dozen);
-        System.out.println("TekenPanel aangemaakt");
+        jPanel1.repaint();
+        System.out.println("opnieuw painted");
         setVisible(true);
-        dozen.repaint();
     }
 
     /**
@@ -43,7 +41,7 @@ public class Simulatie1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new nl.windesheim.kbsm2.opc01.bpp.TekenPaneel(algoritme1);
+        jPanel1 = new bpp.TekenTest(algoritme1);
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -56,7 +54,7 @@ public class Simulatie1 extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -74,15 +72,14 @@ public class Simulatie1 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 280, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(290, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(10, 10, 10)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -104,7 +101,7 @@ public class Simulatie1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        dozen.update(dozen.getGraphics());
+        jPanel1.repaint();
         System.out.println("opnieuw painted");
     }//GEN-LAST:event_jButton1ActionPerformed
 

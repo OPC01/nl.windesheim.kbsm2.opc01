@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.windesheim.kbsm2.opc01.bpp;
+package bpp;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -221,9 +221,10 @@ public class HoofdScherm2 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO int value = (int) jSpinner1.getValue();
+
         int doosGrootte = (int) jSpinner1.getValue();
         int aantalDozen = (int) jSpinner2.getValue();
-        if (doosGrootte > 0) {
+        if (doosGrootte > 0 && doosGrootte <= 10 && aantalDozen > 0) {
             AlgoritmeBase ab = new AlgoritmeBase();
 
 //            ArrayList<Integer> pakketten = new ArrayList<Integer>();
@@ -277,6 +278,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
                 result.setTitle("Resultaten");
             }
         } else {
+            JOptionPane.showMessageDialog(this, "De doosgrootte mag niet kleiner zijn dan 1 of groter dan 10 en er moeten dozen worden toegevoegd aan de lijsten.", "Bericht", JOptionPane.WARNING_MESSAGE);
             System.out.println("De waarde moet boven 0 zijn");
         }
 
