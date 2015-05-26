@@ -60,9 +60,9 @@ public class Options extends javax.swing.JDialog
             }
         });
 
-        jsHight.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+        jsHight.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
 
-        jsWidth.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+        jsWidth.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,7 +82,7 @@ public class Options extends javax.swing.JDialog
                                     .addComponent(jsHight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jsWidth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel3))
-                        .addGap(0, 102, Short.MAX_VALUE))
+                        .addGap(0, 110, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbCreate)))
