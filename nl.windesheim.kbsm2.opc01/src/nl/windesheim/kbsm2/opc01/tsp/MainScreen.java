@@ -187,52 +187,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
     private void jStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jStartActionPerformed
     {//GEN-HEADEREND:event_jStartActionPerformed
-        boolean hasBeenPressed = false;
 
-<<<<<<< HEAD
-        if (!hasBeenPressed) {
-
-            ArrayList<Packet> list = new ArrayList<Packet>();
-            list.add(new Packet(0, 0));
-            for (CheckBox a : boxReference) {
-                if (a.isSelected()) {
-                    a.packet.setGetPacket(true);
-                    list.add(a.getPacket());
-                }
-            }
-
-            map.createMatrix(list);
-            s.setVisible(true);
-            currentList = list;
-
-        }
-
-        if (jBruteForce.isSelected()) {
-
-            bruteForce = new DynProgram();
-            long timeStart = System.nanoTime();
-            bruteForce.activate(map.getMap());
-            String length = String.valueOf(bruteForce.getLeast_value());
-            long timeEnd = System.nanoTime();
-            long time = timeEnd - timeStart;
-            String timeS = String.valueOf(time);
-            s.getBfDistance().setText(length);
-            s.getBfTime().setText(timeS);
-            s.revalidate();
-
-        }
-        if (jNearestNeigbour.isSelected()) {
-            long timeStart = System.nanoTime();
-            nearestNeighbour.tsp(map.getMap());
-            long timeEnd = System.nanoTime();
-            long time = timeEnd - timeStart;
-            String length = String.valueOf(nearestNeighbour.getLengthOfPath());
-            String timeS = String.valueOf(time);
-            s.getNnDistance().setText(length);
-            s.getNnTime().setText(timeS);
-            s.revalidate();
-           
-=======
         ArrayList<Packet> list = new ArrayList<>();
         list.add(new Packet(0, 0));
         for (CheckBox a : boxReference) {
@@ -272,7 +227,6 @@ public class MainScreen extends javax.swing.JFrame {
                 s.getNnDistance().setText(length);
                 s.getNnTime().setText(timeS);
                 s.revalidate();
->>>>>>> ceda59251a85744467df3cf274d267fc660731a5
 
             }
             if (jSnake.isSelected()) {
