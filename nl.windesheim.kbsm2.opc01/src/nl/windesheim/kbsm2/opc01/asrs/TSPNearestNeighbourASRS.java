@@ -6,12 +6,14 @@ import java.util.*;
 public class TSPNearestNeighbourASRS {
 
     private Stack<Integer> stack;
-
+private double[][] adjacencyMatrix;
     public TSPNearestNeighbourASRS() {
         stack = new Stack<Integer>();
     }
 
-    public ArrayList<Packet> tsp(double[][] adjacencyMatrix, ArrayList<Packet> packets) {
+    public ArrayList<Packet> tsp(ArrayList<Packet> packets) {
+        DistanceMap m = new DistanceMap();
+        adjacencyMatrix = m.createMatrix(packets);
         ArrayList<Packet> path = new ArrayList<Packet>();
         path.add(packets.get(0));
         int numberOfNodes = adjacencyMatrix[0].length;

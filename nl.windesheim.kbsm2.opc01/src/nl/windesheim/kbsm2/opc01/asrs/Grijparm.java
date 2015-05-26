@@ -1,5 +1,6 @@
 package nl.windesheim.kbsm2.opc01.asrs;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import org.zu.ardulink.Link;
@@ -102,6 +103,8 @@ public class Grijparm {
 		// haal artikelid's op
 		// haal locatie artikelen op
 		// verwerk in algoritme
+            TSPNearestNeighbourASRS algoritme = new TSPNearestNeighbourASRS();
+            ArrayList<Packet> volgorde = algoritme.tsp(null /*voeg arrayList Packets toe */);
 		// get locatie
 		// haal pakket 1 op
 		// set locatie
