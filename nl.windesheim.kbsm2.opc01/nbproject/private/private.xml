@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/BestFit.java</file>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/AlgoritmeBase.java</file>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/Main.java</file>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/NextFit.java</file>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/Simulatie.java</file>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/Algoritme2.java</file>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/HoofdScherm2.java</file>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/Simulatie1.java</file>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/TekenPanel.java</file>
-            <file>file:/C:/Users/W7Home/Desktop/code/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/bpp/FirstFit.java</file>
+            <file>file:/C:/Users/Gebruiker/Documents/NetBeansProjects/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/tsp/Main.java</file>
+            <file>file:/C:/Users/Gebruiker/Documents/NetBeansProjects/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/tsp/Packet.java</file>
+            <file>file:/C:/Users/Gebruiker/Documents/NetBeansProjects/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/tsp/ResultatenScherm.java</file>
+            <file>file:/C:/Users/Gebruiker/Documents/NetBeansProjects/nl.windesheim.kbsm2.opc01/nl.windesheim.kbsm2.opc01/src/nl/windesheim/kbsm2/opc01/tsp/TSPNearestNeighbour.java</file>
         </group>
     </open-files>
 </project-private>

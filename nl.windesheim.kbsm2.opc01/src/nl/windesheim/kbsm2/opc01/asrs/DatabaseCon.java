@@ -22,7 +22,7 @@ public class DatabaseCon {
 	    Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost/kbsproject",
                 "root",
-                "admin");
+                "root");
 		
 		
 		return con;
@@ -46,7 +46,7 @@ public class DatabaseCon {
         
         
     	Statement stmt = con.createStatement();
-    	ResultSet rs = stmt.executeQuery("SELECT * FROM `order` WHERE orderid="+i);
+    	ResultSet rs = stmt.executeQuery("SELECT * FROM `order` WHERE ordernr="+i);
     	
     	return rs;
     }

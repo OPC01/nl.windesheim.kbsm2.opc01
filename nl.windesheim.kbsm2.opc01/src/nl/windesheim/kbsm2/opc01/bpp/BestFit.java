@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bpp;
+package nl.windesheim.kbsm2.opc01.bpp;
 
 import java.util.ArrayList;
 
@@ -21,11 +21,11 @@ public class BestFit extends Algoritme2 {
         int bestFit = 0;
         boolean doosvol = true;
 
-        ArrayList<Integer> startdoos = new ArrayList<>();
+        ArrayList<Integer> startdoos = new ArrayList<Integer>();
         startdoos.add(0);
-        dozen.add(startdoos); //startdoos aanmaken
+        dozen.add(startdoos);
 
-        for (Integer pakket : paketten) { 
+        for (Integer pakket : paketten) {
             bestFit = 0;
             doosvol = true;
             for (int doos = 1; doos < dozen.size(); doos++) {
@@ -42,7 +42,7 @@ public class BestFit extends Algoritme2 {
                 nieuwpakketsim(pakket, bestFit - 1);
             } else {
                 aantalDozen++;
-                ArrayList<Integer> nieuwedoos = new ArrayList<>();
+                ArrayList<Integer> nieuwedoos = new ArrayList<Integer>();
                 nieuwedoos.add(pakket);
                 dozen.add(nieuwedoos);
                 nieuwpakketsim(pakket, aantalDozen - 1);

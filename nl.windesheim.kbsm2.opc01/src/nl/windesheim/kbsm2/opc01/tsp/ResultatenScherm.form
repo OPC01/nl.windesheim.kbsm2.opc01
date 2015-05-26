@@ -25,7 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="324" max="32767" attributes="0"/>
+              <Component id="jPanel1" pref="346" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -34,7 +34,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="225" max="32767" attributes="0"/>
+              <Component id="jPanel1" pref="236" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -42,13 +42,6 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
-          </Border>
-        </Property>
-      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="false"/>
@@ -86,7 +79,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="bfTime">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel4"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AccessibilityProperties>
@@ -120,7 +112,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="nnTime">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel4"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AccessibilityProperties>
@@ -134,7 +125,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="gTime">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel4"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AccessibilityProperties>
@@ -148,7 +138,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="gDistance">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel4"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AccessibilityProperties>
@@ -162,7 +151,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="nnDistance">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel4"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AccessibilityProperties>
@@ -176,7 +164,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="bfDIstance">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel4"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AccessibilityProperties>

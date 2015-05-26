@@ -17,26 +17,25 @@ import javax.swing.JCheckBox;
  *
  * @author Gebruiker
  */
-public class MainScreen extends javax.swing.JFrame
-{
+public class MainScreen extends javax.swing.JFrame {
 
     private ArrayList<CheckBox> boxReference = new ArrayList<CheckBox>();
     private DynProgram bruteForce;
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
-    private TSPGenetic tspGenetic;
+    private TSPSnake tspSnake;
     private DistanceMap map = new DistanceMap();
     private ResultatenScherm s = new ResultatenScherm(this, false);
     private Point checkboxSizes;
     private ArrayList<Packet> currentList;
+    private ArrayList<Packet> allPackets;
 
-    public MainScreen()
-    {
+    public MainScreen() {
 
         initComponents();
+        setTitle("TSP Simulatie");
     }
 
-    public ArrayList<CheckBox> getBoxReference()
-    {
+    public ArrayList<CheckBox> getBoxReference() {
         return boxReference;
     }
 
@@ -53,47 +52,54 @@ public class MainScreen extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         jBruteForce = new javax.swing.JCheckBox();
         jNearestNeigbour = new javax.swing.JCheckBox();
-        jGenetic = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jSnake = new javax.swing.JCheckBox();
+        jStart = new javax.swing.JButton();
+        jSettings = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Route"));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
         );
 
         jBruteForce.setText("Brute Force");
 
         jNearestNeigbour.setText("Nearest Neighbour");
 
-        jGenetic.setText("Genetic");
-
-        jButton1.setText("Start Simulatie");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
+        jSnake.setText("Snake");
+        jSnake.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton1ActionPerformed(evt);
+                jSnakeActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Instelling");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
+        jStart.setText("Start Simulatie");
+        jStart.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton2ActionPerformed(evt);
+                jStartActionPerformed(evt);
+            }
+        });
+
+        jSettings.setText("Instelling");
+        jSettings.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jSettingsActionPerformed(evt);
             }
         });
 
@@ -102,58 +108,51 @@ public class MainScreen extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(281, 281, 281)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
                         .addComponent(jBruteForce)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jNearestNeigbour)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jGenetic))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSnake)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(jSettings)
+                        .addGap(18, 18, 18)
+                        .addComponent(jStart)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jGenetic)
+                    .addComponent(jStart)
+                    .addComponent(jSettings)
+                    .addComponent(jBruteForce)
                     .addComponent(jNearestNeigbour)
-                    .addComponent(jBruteForce))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jSnake))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void jSettingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jSettingsActionPerformed
+    {//GEN-HEADEREND:event_jSettingsActionPerformed
         Options options = new Options(this, true);
         options.setVisible(true);
         jPanel1.removeAll();
         boxReference.clear();
-        if (options.created)
-        {
+        if (options.created) {
             GridLayout jPanelLayout = new GridLayout(options.hight, options.width);
             jPanel1.setLayout(jPanelLayout);
 
-            for (int i = 0; i < options.hight; i++)
-            {
-                for (int ii = 0; ii < options.width; ii++)
-                {
+            for (int i = 0; i < options.hight; i++) {
+                for (int ii = 0; ii < options.width; ii++) {
                     int z = i - options.hight;
                     int x = ii + 1;
                     CheckBox box = new CheckBox(x + "." + -z, x, -z);
@@ -161,62 +160,50 @@ public class MainScreen extends javax.swing.JFrame
 
                 }
             }
-            for (CheckBox a : boxReference)
-            {
+            for (CheckBox a : boxReference) {
                 jPanel1.add(a);
             }
+
             checkboxSizes = new Point(options.hight, options.width);
             jPanel1.revalidate();
             jPanel1.repaint();
 
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jSettingsActionPerformed
 
-    class CheckBox extends JCheckBox
-    {
+    class CheckBox extends JCheckBox {
 
         private Packet packet;
 
-        public CheckBox(String name, int x, int y)
-        {
+        public CheckBox(String name, int x, int y) {
             super(name);
             this.packet = new Packet(x, y);
         }
 
-        public Packet getPacket()
-        {
+        public Packet getPacket() {
             return packet;
         }
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
-        boolean hasBeenPressed = false;
+    private void jStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jStartActionPerformed
+    {//GEN-HEADEREND:event_jStartActionPerformed
 
-        if (!hasBeenPressed)
-        {
-
-            ArrayList<Packet> list = new ArrayList<Packet>();
-            list.add(new Packet(0, 0));
-            for (CheckBox a : boxReference)
-            {
-                if (a.isSelected())
-                {
-                    a.packet.setGetPacket(true);
-                    list.add(a.getPacket());
-                }
+        ArrayList<Packet> list = new ArrayList<Packet>();
+        list.add(new Packet(0, 0));
+        for (CheckBox a : boxReference) {
+            if (a.isSelected()) {
+                a.packet.setGetPacket(true);
+                list.add(a.getPacket());
             }
-
-            map.createMatrix(list);
-            s.setVisible(true);
-            currentList = list;
-
         }
 
-        if (jBruteForce.isSelected())
-        {
+        map.createMatrix(list);
+        s.setVisible(true);
+        currentList = list;
 
-            DynProgram bruteForce = new DynProgram();
+        if (jBruteForce.isSelected()) {
+
+            bruteForce = new DynProgram();
             long timeStart = System.nanoTime();
             bruteForce.activate(map.getMap());
             String length = String.valueOf(bruteForce.getLeast_value());
@@ -228,10 +215,9 @@ public class MainScreen extends javax.swing.JFrame
             s.revalidate();
 
         }
-        if (jNearestNeigbour.isSelected())
-        {
+        if (jNearestNeigbour.isSelected()) {
             long timeStart = System.nanoTime();
-            nearestNeighbour.tsp(map.getMap());
+            nearestNeighbour.tsp(map.getMap(), currentList);
             long timeEnd = System.nanoTime();
             long time = timeEnd - timeStart;
             String length = String.valueOf(nearestNeighbour.getLengthOfPath());
@@ -241,77 +227,64 @@ public class MainScreen extends javax.swing.JFrame
             s.revalidate();
 
         }
-        if (jGenetic.isSelected())
-        {
-            
+        if (jSnake.isSelected()) {
+
             long timeStart = System.nanoTime();
-            
-            tspGenetic = new TSPGenetic(currentList);
-            tspGenetic.activateGenetic();
-            
-            /*String length = String.valueOf(bruteForce.getLeast_value());
+            tspSnake = new TSPSnake(currentList, checkboxSizes);
+            tspSnake.SnakeAlgorithm();
+            tspSnake.calculatePathLength(map.getMap());
+            String length = String.valueOf(tspSnake.getLengthOfPath());
             long timeEnd = System.nanoTime();
             long time = timeEnd - timeStart;
-            String timeS = String.valueOf(time);*/
-            
-            
+            String timeS = String.valueOf(time);
+            s.getgDistance().setText(length);
+            s.getgTime().setText(timeS);
+            s.revalidate();
+
         }
-        VisualisatieScherm V = new VisualisatieScherm(this, false, currentList, checkboxSizes);
         currentList.clear();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jStartActionPerformed
+
+    private void jSnakeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jSnakeActionPerformed
+    {//GEN-HEADEREND:event_jSnakeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSnakeActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
                 }
             }
-        }
-        catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 new MainScreen().setVisible(true);
             }
         });
@@ -319,10 +292,10 @@ public class MainScreen extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jBruteForce;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jGenetic;
     private javax.swing.JCheckBox jNearestNeigbour;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jSettings;
+    private javax.swing.JCheckBox jSnake;
+    private javax.swing.JButton jStart;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,16 +18,9 @@ limitations under the License.
 
 package nl.windesheim.kbsm2.opc01.rxtxArdruino;
 
-import java.util.List;
-import java.util.Set;
-
-//import org.zu.ardulink.Link;
-//import org.zu.ardulink.connection.usb.DigisparkUSBConnection;
-//import org.zu.ardulink.protocol.IProtocol;
-//import org.zu.ardulink.protocol.ProtocolHandler;
-//import org.zu.ardulink.protocol.SimpleBinaryProtocol;
-
-
+import org.zu.ardulink.Link;
+import org.zu.ardulink.event.AnalogReadChangeEvent;
+import org.zu.ardulink.event.AnalogReadChangeListener;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
@@ -36,11 +29,32 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 public class BlinkLED extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3681838353444631779L;
 	public static Link link = Link.createInstance("TEST");
 	public static int motor1 = 4;
 	public static int motor2 = 7;
 	public static int speed1 = 5;
 	public static int speed2 = 6;
+	public static int power = 3;
+	public static int armW = 2;
+	public static int armS = 8;
+	public static int lijnsensorV = 0;
+	public static int lijnsensorH = 1;
+	public static int x;
+	public static int y;
+	public static int counterY = 0;
+	
+    public static void delay(int tijd) {
+		try {
+			Thread.sleep(tijd);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    };
 
 	public static void main(String[] args) {
 		JFrame frame = new BlinkLED();
@@ -51,7 +65,7 @@ public class BlinkLED extends JFrame {
 		
 		try {
 
-            link.connect("COM7",115200);
+            link.connect("COM5",115200);
             Thread.sleep(2000);
             System.out.println("verbinding gemaakt");   
 
@@ -60,7 +74,34 @@ public class BlinkLED extends JFrame {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+        link.addAnalogReadChangeListener(new AnalogReadChangeListener() {
+            
+            @Override
+            public void stateChanged(AnalogReadChangeEvent e) {
+               y = e.getValue();
+               
+            }
+            
+            @Override
+            public int getPinListening() {
+               return 0; // So it executes an analogRead(0)
+            }
+         });
+        
+        link.addAnalogReadChangeListener(new AnalogReadChangeListener() {
+            
+            @Override
+            public void stateChanged(AnalogReadChangeEvent e) {
+               x = e.getValue();
+               
+            }
+            
+            @Override
+            public int getPinListening() {
+               return 1; // So it executes an analogRead(1)
+            }
+         });
+						
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
         	
             @Override
@@ -71,22 +112,43 @@ public class BlinkLED extends JFrame {
                         if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
         					link.sendPowerPinSwitch(motor1, 0);
         					link.sendPowerPinIntensity(speed1, 255);
-        					System.out.println("poort 5 aan");
+//                        	System.out.println(y);
+                        	if(y > 1008){
+                        		counterY++;
+                        		System.out.println(counterY);
+                        		delay(500);
+                        	}
                         }
                         if (ke.getKeyCode() == KeyEvent.VK_UP) {
         					link.sendPowerPinSwitch(motor2, 1);
         					link.sendPowerPinIntensity(speed2, 255);
-                        	System.out.println("poort 7 aan");
+                        	System.out.println(x);
                         }
                         if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
         					link.sendPowerPinSwitch(motor2, 0);
         					link.sendPowerPinIntensity(speed2, 255);
-                        	System.out.println("poort 8 aan");
+        					link.startListenAnalogPin(lijnsensorH);
+                        	System.out.println(x);
                         }
                         if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
         					link.sendPowerPinSwitch(motor1, 1);
-        					link.sendPowerPinIntensity(speed1, 255);
-                            System.out.println("poort 6 aan");
+        					link.sendPowerPinIntensity(speed1, 200);
+                        	//System.out.println(y);
+                        	if(y > 1008){
+                        		counterY--;
+                        		System.out.println(counterY);
+                        		delay(500);
+                        	}
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_W) {
+                        	link.sendPowerPinSwitch(armW, 1);
+                        	link.sendPowerPinSwitch(armS, 0);
+                        	link.sendPowerPinIntensity(power, 255);
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_S){
+                        	link.sendPowerPinSwitch(armW, 0);
+                        	link.sendPowerPinSwitch(armS,1);
+                        	link.sendPowerPinIntensity(power, 255);
                         }
                         break;
 
@@ -130,15 +192,5 @@ public class BlinkLED extends JFrame {
 				}
 			}
 		}).start();
-	}
-
-	private static Link getDigisparkConnection() {
-		Set<String> protocolNames = ProtocolHandler.getInstalledProtocolImplementationNames();
-		SimpleBinaryProtocol protocol = new SimpleBinaryProtocol();
-		if(!protocolNames.contains(SimpleBinaryProtocol.NAME)) {
-			ProtocolHandler.installProtocolImplementation(protocol);
-		}
-		return Link.createInstance("digisparkConnection", SimpleBinaryProtocol.NAME, new DigisparkUSBConnection("digisparkConnection", protocol.getIncomingMessageDivider()));
-	}
-	
+	}	
 }

@@ -59,8 +59,11 @@ public class OrderlijstDialoog extends javax.swing.JDialog {
        
         ArrayList<String> strings = new ArrayList<>();
         while(rs.next()){
-        	String content = Integer.toString(rs.getInt("orderid"));
-        	strings.add(content);
+        	String content = Integer.toString(rs.getInt("ordernr"));
+        	if(!strings.contains(content)){
+        		strings.add(content);
+        	}
+
         	System.out.println(content);
         }
 
