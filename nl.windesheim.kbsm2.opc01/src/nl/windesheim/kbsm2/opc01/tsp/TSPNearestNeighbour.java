@@ -6,7 +6,8 @@ public class TSPNearestNeighbour {
 
     private int numberOfNodes;
     private Stack<Integer> stack;
-    private ArrayList<Packet> path;
+    private ArrayList<Packet> pathP;
+    private ArrayList<Integer> path;
     private double lengthOfPath;
 
     public TSPNearestNeighbour() {
@@ -14,8 +15,10 @@ public class TSPNearestNeighbour {
     }
 
     public void tsp(double[][] adjacencyMatrix, ArrayList<Packet> packets) {
-        ArrayList<Packet> path = new ArrayList<Packet>();
-        path.add(packets.get(0));
+        pathP = new ArrayList<Packet>();
+        path = new ArrayList<Integer>();
+        path.add(0);
+        pathP.add(packets.get(0));
         int numberOfNodes = adjacencyMatrix[0].length;
         int[] visited = new int[numberOfNodes];
         visited[0] = 1;
@@ -39,7 +42,8 @@ public class TSPNearestNeighbour {
                 i++;
             }
             if (minFlag) {
-                path.add(packets.get(dst));
+                pathP.add(packets.get(dst));
+                path.add(dst);
                 visited[dst] = 1;
                 stack.push(dst);
                 minFlag = false;
@@ -47,8 +51,8 @@ public class TSPNearestNeighbour {
             }
             stack.pop();
         }
-
         this.path = path;
+        this.pathP = pathP;
         this.calculatePathLength(adjacencyMatrix);
     }
 
@@ -69,11 +73,11 @@ public class TSPNearestNeighbour {
     }
 
     public ArrayList<Packet> getPath() {
-        return path;
+        return pathP;
     }
 
     public void setPath(ArrayList<Packet> path) {
-        this.path = path;
+        this.pathP = pathP;
     }
 
     public double getLengthOfPath() {
@@ -87,7 +91,7 @@ public class TSPNearestNeighbour {
     public void calculatePathLength(double[][] adjMatrix) {
         double length = 0;
         for (int i = 0; i < path.size() - 1; i++) {
-            length = length + path.get(i).getDistance(path.get(i+1));
+            length = length + pathP.get(i).getDistance(pathP.get(i + 1));
         }
         this.lengthOfPath = length;
     }
