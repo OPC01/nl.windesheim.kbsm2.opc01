@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bpp;
+package nl.windesheim.kbsm2.opc01.bpp;
 
 
 
@@ -41,7 +41,7 @@ public class Simulatie1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new bpp.TekenTest(algoritme1);
+        jPanel1 = new nl.windesheim.kbsm2.opc01.bpp.TekenTest(algoritme1);
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
