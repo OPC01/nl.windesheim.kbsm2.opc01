@@ -116,8 +116,7 @@ public class BlinkLED extends JFrame {
                         	if(y > 1008){
                         		counterY++;
                         		System.out.println(counterY);
-                        		delay(500);
-[]                        	}
+                        		delay(500);                        	}
                         }
                         if (ke.getKeyCode() == KeyEvent.VK_UP) {
         					link.sendPowerPinSwitch(motor2, 1);
