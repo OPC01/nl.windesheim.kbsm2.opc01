@@ -1,6 +1,6 @@
 package nl.windesheim.kbsm2.opc01.asrs;
 
-import java.awt.Point;
+
 import java.util.*;
 
 public class TSPNearestNeighbourASRS {
