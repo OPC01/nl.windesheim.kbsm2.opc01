@@ -187,19 +187,24 @@ public class MainScreen extends javax.swing.JFrame {
     }
     private void jStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jStartActionPerformed
     {//GEN-HEADEREND:event_jStartActionPerformed
+        boolean hasBeenPressed = false;
 
-        ArrayList<Packet> list = new ArrayList<Packet>();
-        list.add(new Packet(0, 0));
-        for (CheckBox a : boxReference) {
-            if (a.isSelected()) {
-                a.packet.setGetPacket(true);
-                list.add(a.getPacket());
+        if (!hasBeenPressed) {
+
+            ArrayList<Packet> list = new ArrayList<Packet>();
+            list.add(new Packet(0, 0));
+            for (CheckBox a : boxReference) {
+                if (a.isSelected()) {
+                    a.packet.setGetPacket(true);
+                    list.add(a.getPacket());
+                }
             }
-        }
 
-        map.createMatrix(list);
-        s.setVisible(true);
-        currentList = list;
+            map.createMatrix(list);
+            s.setVisible(true);
+            currentList = list;
+
+        }
 
         if (jBruteForce.isSelected()) {
 
@@ -217,7 +222,7 @@ public class MainScreen extends javax.swing.JFrame {
         }
         if (jNearestNeigbour.isSelected()) {
             long timeStart = System.nanoTime();
-            nearestNeighbour.tsp(map.getMap(), currentList);
+            nearestNeighbour.tsp(map.getMap());
             long timeEnd = System.nanoTime();
             long time = timeEnd - timeStart;
             String length = String.valueOf(nearestNeighbour.getLengthOfPath());
@@ -225,6 +230,7 @@ public class MainScreen extends javax.swing.JFrame {
             s.getNnDistance().setText(length);
             s.getNnTime().setText(timeS);
             s.revalidate();
+           
 
         }
         if (jSnake.isSelected()) {
