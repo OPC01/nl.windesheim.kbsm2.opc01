@@ -225,7 +225,6 @@ public class MainScreen extends javax.swing.JFrame {
             s.getNnDistance().setText(length);
             s.getNnTime().setText(timeS);
             s.revalidate();
-            System.out.println(nearestNeighbour.getPath());
 
         }
         if (jSnake.isSelected()) {
