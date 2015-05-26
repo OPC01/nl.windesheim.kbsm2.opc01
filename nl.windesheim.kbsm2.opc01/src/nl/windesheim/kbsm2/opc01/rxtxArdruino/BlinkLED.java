@@ -65,7 +65,11 @@ public class BlinkLED extends JFrame {
 		
 		try {
 
+<<<<<<< HEAD
             link.connect("COM11",115200);
+=======
+            link.connect("COM5",115200);
+>>>>>>> ceda59251a85744467df3cf274d267fc660731a5
             Thread.sleep(2000);
             System.out.println("verbinding gemaakt");   
 

@@ -6,7 +6,6 @@
 package nl.windesheim.kbsm2.opc01.tsp;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *

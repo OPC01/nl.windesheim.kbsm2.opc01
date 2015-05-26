@@ -5,10 +5,7 @@
  */
 package nl.windesheim.kbsm2.opc01.bpp;
 
-import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
-import javax.swing.JLabel;
+
 
 /**
  *
@@ -16,21 +13,21 @@ import javax.swing.JLabel;
  */
 public class Simulatie1 extends javax.swing.JFrame {
 
-    private TekenPanel dozen;
+
     
-    private Algoritme2 algoritme1;
+    private final Algoritme2 algoritme1;
 
     /**
      * Creates new form Simulatie1
+     * @param algoritme1
      */
     public Simulatie1(Algoritme2 algoritme1) {
         this.algoritme1 = algoritme1;
 
-        dozen = new TekenPanel(algoritme1);
-        //this.paneel = dozen;
-        System.out.println("test");
+//        dozen = new TekenTest(algoritme1);
         initComponents(); 
-        jPanel1.add(dozen);
+        jPanel1.repaint();
+        System.out.println("opnieuw painted");
         setVisible(true);
     }
 
@@ -44,10 +41,10 @@ public class Simulatie1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new TekenPanel(algoritme1);
+        jPanel1 = new nl.windesheim.kbsm2.opc01.bpp.TekenTest(algoritme1);
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setFocusable(false);
         setPreferredSize(new java.awt.Dimension(700, 500));
 
@@ -57,11 +54,11 @@ public class Simulatie1 extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 218, Short.MAX_VALUE)
+            .addGap(0, 295, Short.MAX_VALUE)
         );
 
         jButton1.setText("deponeer");
@@ -75,23 +72,22 @@ public class Simulatie1 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 280, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(290, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(10, 10, 10)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
@@ -105,7 +101,8 @@ public class Simulatie1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        dozen.repaint();
+        jPanel1.repaint();
+        System.out.println("opnieuw painted");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -117,15 +114,15 @@ public class Simulatie1 extends javax.swing.JFrame {
 
     
     
-    private void setFrame() {
-        // code moet nog worden gemaakt waardoor de 3 simulatie schermen naast elkaar komen te staan
-
-        Dimension windowSize = getSize();
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Point centerPoint = ge.getCenterPoint();
-        int dx = centerPoint.x - windowSize.width / 2 - 200;
-        int dy = centerPoint.y - windowSize.height / 2 + 200;
-        setLocation(dx, dy);
-    }
+//    private void setFrame() {
+//        // code moet nog worden gemaakt waardoor de 3 simulatie schermen naast elkaar komen te staan
+//
+//        Dimension windowSize = getSize();
+//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//        Point centerPoint = ge.getCenterPoint();
+//        int dx = centerPoint.x - windowSize.width / 2 - 200;
+//        int dy = centerPoint.y - windowSize.height / 2 + 200;
+//        setLocation(dx, dy);
+//    }
 
 }

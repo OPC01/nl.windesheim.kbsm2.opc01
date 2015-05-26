@@ -5,13 +5,9 @@
  */
 package nl.windesheim.kbsm2.opc01.bpp;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.ListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +19,6 @@ public class HoofdScherm2 extends javax.swing.JFrame {
      * Creates new form HoofdScherm2
      */
     public HoofdScherm2() {
-        algoritme = new Algoritme("test");
         initComponents();
     }
 
@@ -158,23 +153,20 @@ public class HoofdScherm2 extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(26, 26, 26))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton2)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
+                            .addComponent(jButton2)
+                            .addComponent(jButton1))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,21 +217,16 @@ public class HoofdScherm2 extends javax.swing.JFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add yoboolean checked = jCheckBox1.isSelected();
-        boolean checked = jCheckBox1.isSelected();
-        if (checked) {
-            algoritme.setFirstFit(true);
-        } else {
-            algoritme.setFirstFit(false);
-        }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO int value = (int) jSpinner1.getValue();
+
         int doosGrootte = (int) jSpinner1.getValue();
         int aantalDozen = (int) jSpinner2.getValue();
-        if (doosGrootte > 0) {
+        if (doosGrootte > 0 && doosGrootte <= 10 && aantalDozen > 0) {
             AlgoritmeBase ab = new AlgoritmeBase();
-            
+
 //            ArrayList<Integer> pakketten = new ArrayList<Integer>();
 //            for (int i = 0; i < jlistModel2.getSize(); i++) {
 //                int aantalPakt = (int) jlistModel1.get(i);
@@ -249,10 +236,8 @@ public class HoofdScherm2 extends javax.swing.JFrame {
 //                    pakketten.add(groottePakt);
 //                }
 //            }
-            
             //ArrayList<ArrayList<Integer>> dozen = new ArrayList<ArrayList<Integer>>(); //fill this arraylist, example please
-            
-            ArrayList<Integer> pakketten = new ArrayList<Integer>();
+            ArrayList<Integer> pakketten = new ArrayList<>();
             for (int i = 0; i < jlistModel2.getSize(); i++) {
                 int aantalPakt = (int) jlistModel2.get(i);
                 int groottePakt = (int) jlistModel1.get(i);
@@ -262,98 +247,71 @@ public class HoofdScherm2 extends javax.swing.JFrame {
                     System.out.println(groottePakt);
                 }
             }
-            
+
             if (jCheckBox1.isSelected()) {
-                FirstFit ff = new FirstFit(doosGrootte, pakketten);            
+                FirstFit ff = new FirstFit(doosGrootte, pakketten);
+                ab.AddAlgoritme(ff);
                 ff.testPrint();
                 Simulatie1 sim = new Simulatie1(ff);
                 sim.setTitle("Simulatie First Fit");
+                System.out.println("FirstFit");
 //                sim.paneel.repaint();
             }
             if (jCheckBox2.isSelected()) {
-                BestFit bf = new BestFit(doosGrootte, pakketten);               
+                BestFit bf = new BestFit(doosGrootte, pakketten);
+                ab.AddAlgoritme(bf);
                 bf.testPrint();
                 Simulatie1 sim = new Simulatie1(bf);
                 sim.setTitle("Simulatie Best Fit");
 //                sim.paneel.repaint();
             }
             if (jCheckBox3.isSelected()) {
-                NextFit nf = new NextFit(doosGrootte, pakketten);               
+                NextFit nf = new NextFit(doosGrootte, pakketten);
+                ab.AddAlgoritme(nf);
                 nf.testPrint();
                 Simulatie1 sim = new Simulatie1(nf);
                 sim.setTitle("Simulatie Next Fit");
 //                sim.paneel.repaint();
             }
+            if (jCheckBox1.isSelected() || jCheckBox2.isSelected() || jCheckBox3.isSelected()) {
+                ResultatenScherm result = new ResultatenScherm(ab);
+                result.setTitle("Resultaten");
+            }
         } else {
+            JOptionPane.showMessageDialog(this, "De doosgrootte mag niet kleiner zijn dan 1 of groter dan 10 en er moeten dozen worden toegevoegd aan de lijsten.", "Bericht", JOptionPane.WARNING_MESSAGE);
             System.out.println("De waarde moet boven 0 zijn");
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int value1 = (int) jSpinner2.getValue();
         int value2 = (int) jSpinner3.getValue();
-        if (value1 > 0 && value2 > 0) {
-            jlistModel1.addElement(value1);
-            jList1.setModel(jlistModel1);
 
-            jlistModel2.addElement(value2);
-            jList2.setModel(jlistModel2);
+        if ((int) jSpinner1.getValue() >= value1) {
+            System.out.println(value1);
+            System.out.println((int) jSpinner1.getValue());
+            if (value1 > 0 && value2 > 0) {
+                jlistModel1.addElement(value1);
+                jList1.setModel(jlistModel1);
 
-            // hier moet er code komen voor het toevoegen van de dozen en
-            // ook moet er wat verzonnen worden om de pagina dynamisch te vullen
+                jlistModel2.addElement(value2);
+                jList2.setModel(jlistModel2);
+            } else {
+                JOptionPane.showMessageDialog(this, "De waarde mag niet nul of lager zijn", "Bericht", JOptionPane.WARNING_MESSAGE);
+                System.out.println("De waarde mag niet nul of lager zijn");
+            }
         } else {
-            System.out.println("De waarde mag niet nul of lager zijn");
+            JOptionPane.showMessageDialog(this, "Het pakket mag niet groter zijn dan de doos grootte", "Bericht", JOptionPane.WARNING_MESSAGE);
+            System.out.println("De doos mag niet groter zijn dan de pakket grootte");
         }
-        System.out.println("hallo");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        boolean checked = jCheckBox2.isSelected();
-        if (checked) {
-            algoritme.setBestFit(true);
-        } else {
-            algoritme.setBestFit(false);
-        }
+
     }//GEN-LAST:event_jCheckBox2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HoofdScherm2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HoofdScherm2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HoofdScherm2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HoofdScherm2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-                new HoofdScherm2().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -378,7 +336,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     // End of variables declaration//GEN-END:variables
-    private Algoritme algoritme;
+    private Algoritme2 algoritme;
     DefaultListModel jlistModel1 = new DefaultListModel();
     DefaultListModel jlistModel2 = new DefaultListModel();
 

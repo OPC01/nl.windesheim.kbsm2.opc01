@@ -171,10 +171,10 @@ public class MainScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jSettingsActionPerformed
-
+//maakt een aangepaste versie van een checkbox aan zodat je sneller de packets kan verbinden aan de checkboxes.
     class CheckBox extends JCheckBox {
 
-        private Packet packet;
+        private final Packet packet;
 
         public CheckBox(String name, int x, int y) {
             super(name);
@@ -189,6 +189,7 @@ public class MainScreen extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jStartActionPerformed
         boolean hasBeenPressed = false;
 
+<<<<<<< HEAD
         if (!hasBeenPressed) {
 
             ArrayList<Packet> list = new ArrayList<Packet>();
@@ -231,24 +232,67 @@ public class MainScreen extends javax.swing.JFrame {
             s.getNnTime().setText(timeS);
             s.revalidate();
            
-
+=======
+        ArrayList<Packet> list = new ArrayList<>();
+        list.add(new Packet(0, 0));
+        for (CheckBox a : boxReference) {
+            if (a.isSelected()) {
+                list.add(a.getPacket());
+            }
         }
-        if (jSnake.isSelected()) {
+        // checkt of er meer dan 1 packet is geselecteerd door de checkboxes zodat je niet onnodig de simulatie start.
+        if (list.size() > 1) {
+            map.createMatrix(list);
+            s.setVisible(true);
+            currentList = list;
 
-            long timeStart = System.nanoTime();
-            tspSnake = new TSPSnake(currentList, checkboxSizes);
-            tspSnake.SnakeAlgorithm();
-            tspSnake.calculatePathLength(map.getMap());
-            String length = String.valueOf(tspSnake.getLengthOfPath());
-            long timeEnd = System.nanoTime();
-            long time = timeEnd - timeStart;
-            String timeS = String.valueOf(time);
-            s.getgDistance().setText(length);
-            s.getgTime().setText(timeS);
-            s.revalidate();
+            if (jBruteForce.isSelected()) {
 
+                bruteForce = new DynProgram();
+                //tijd wordt heer opgeslagen in nanosecondes
+                long timeStart = System.nanoTime();
+                bruteForce.activate(map.getMap());
+                String length = String.valueOf(bruteForce.getLeast_value());
+                long timeEnd = System.nanoTime();
+                long time = timeEnd - timeStart;
+                String timeS = String.valueOf(time);
+                s.getBfDistance().setText(length);
+                s.getBfTime().setText(timeS);
+                s.revalidate();
+
+            }
+            if (jNearestNeigbour.isSelected()) {
+                long timeStart = System.nanoTime();
+                //tijd wordt heer opgeslagen in nanosecondes
+                nearestNeighbour.tsp(map.getMap(), currentList);
+                long timeEnd = System.nanoTime();
+                long time = timeEnd - timeStart;
+                String length = String.valueOf(nearestNeighbour.getLengthOfPath());
+                String timeS = String.valueOf(time);
+                s.getNnDistance().setText(length);
+                s.getNnTime().setText(timeS);
+                s.revalidate();
+>>>>>>> ceda59251a85744467df3cf274d267fc660731a5
+
+            }
+            if (jSnake.isSelected()) {
+
+                long timeStart = System.nanoTime();
+                //tijd wordt heer opgeslagen in nanosecondes
+                tspSnake = new TSPSnake(currentList, checkboxSizes);
+                tspSnake.SnakeAlgorithm();
+                tspSnake.calculatePathLength(map.getMap());
+                String length = String.valueOf(tspSnake.getLengthOfPath());
+                long timeEnd = System.nanoTime();
+                long time = timeEnd - timeStart;
+                String timeS = String.valueOf(time);
+                s.getgDistance().setText(length);
+                s.getgTime().setText(timeS);
+                s.revalidate();
+
+            }
+            currentList.clear();
         }
-        currentList.clear();
     }//GEN-LAST:event_jStartActionPerformed
 
     private void jSnakeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jSnakeActionPerformed
