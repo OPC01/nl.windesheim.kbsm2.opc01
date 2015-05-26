@@ -171,10 +171,10 @@ public class MainScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jSettingsActionPerformed
-
+//maakt een aangepaste versie van een checkbox aan zodat je sneller de packets kan verbinden aan de checkboxes.
     class CheckBox extends JCheckBox {
 
-        private Packet packet;
+        private final Packet packet;
 
         public CheckBox(String name, int x, int y) {
             super(name);
@@ -188,14 +188,14 @@ public class MainScreen extends javax.swing.JFrame {
     private void jStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jStartActionPerformed
     {//GEN-HEADEREND:event_jStartActionPerformed
 
-        ArrayList<Packet> list = new ArrayList<Packet>();
+        ArrayList<Packet> list = new ArrayList<>();
         list.add(new Packet(0, 0));
         for (CheckBox a : boxReference) {
             if (a.isSelected()) {
-                a.packet.setGetPacket(true);
                 list.add(a.getPacket());
             }
         }
+        // checkt of er meer dan 1 packet is geselecteerd door de checkboxes zodat je niet onnodig de simulatie start.
         if (list.size() > 1) {
             map.createMatrix(list);
             s.setVisible(true);
@@ -204,6 +204,7 @@ public class MainScreen extends javax.swing.JFrame {
             if (jBruteForce.isSelected()) {
 
                 bruteForce = new DynProgram();
+                //tijd wordt heer opgeslagen in nanosecondes
                 long timeStart = System.nanoTime();
                 bruteForce.activate(map.getMap());
                 String length = String.valueOf(bruteForce.getLeast_value());
@@ -217,6 +218,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
             if (jNearestNeigbour.isSelected()) {
                 long timeStart = System.nanoTime();
+                //tijd wordt heer opgeslagen in nanosecondes
                 nearestNeighbour.tsp(map.getMap(), currentList);
                 long timeEnd = System.nanoTime();
                 long time = timeEnd - timeStart;
@@ -230,6 +232,7 @@ public class MainScreen extends javax.swing.JFrame {
             if (jSnake.isSelected()) {
 
                 long timeStart = System.nanoTime();
+                //tijd wordt heer opgeslagen in nanosecondes
                 tspSnake = new TSPSnake(currentList, checkboxSizes);
                 tspSnake.SnakeAlgorithm();
                 tspSnake.calculatePathLength(map.getMap());
