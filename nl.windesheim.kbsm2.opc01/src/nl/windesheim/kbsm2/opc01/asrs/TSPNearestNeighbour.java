@@ -1,5 +1,6 @@
-package nl.windesheim.kbsm2.opc01.tsp;
+package nl.windesheim.kbsm2.opc01.asrs;
 
+import nl.windesheim.kbsm2.opc01.tsp.*;
 import java.util.*;
 
 public class TSPNearestNeighbour {

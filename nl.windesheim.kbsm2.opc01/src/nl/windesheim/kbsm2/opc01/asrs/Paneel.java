@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Paneel extends JFrame implements ActionListener{
@@ -59,8 +60,8 @@ public class Paneel extends JFrame implements ActionListener{
 		BTNieuwProduct = new JButton("Product toevoegen");
 		BTNieuwProduct.setBounds(440,500,150,30);
 		
-//		BTPakbon = new JButton("Pakbon genereren");
-                BTPakbon.setEnabled(true);
+
+        BTPakbon.setEnabled(false);
 		BTPakbon.setBounds(600,500,150,30);
 		
 		JLStatus = new JLabel("Status:");
@@ -180,35 +181,37 @@ public class Paneel extends JFrame implements ActionListener{
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 
                 
-//                int orderNr = Integer.parseInt(JLOrderNr.getText());
-                int orderNr = 12;
+                int orderNr = Integer.parseInt(JLOrderNr.getText());
                 DatabaseCon dbc = new DatabaseCon();
                 ResultSet order = dbc.getOrderById(orderNr);
-                order.next();
-                String  orderNummer = order.getString("ordernr");
-                
-                ResultSet klant = dbc.getKlantById( Integer.parseInt(order.getString("klantid")) );
-                String voorAchternaam=null,adres=null,postcode=null,plaats=null;
-                while(klant.next()) {
-                    voorAchternaam = klant.getString("voornaam") + " " + klant.getString("achternaam");
-                    adres = klant.getString("adres");
-                    postcode = klant.getString("postcode");
-                    plaats = klant.getString("plaats");   
+                int klantid = 0;
+                ArrayList<Integer> artikels = new ArrayList<>();
+                while(order.next()){
+                	klantid = order.getInt("klantid");
+                	artikels.add(order.getInt("productid"));
                 }
-                
-                String fileName = sdf.format(date) + "_" + orderNummer + ".txt";
+                ResultSet klant = dbc.getKlantById(klantid);
+                String voorAchternaam=null,adres=null,postcode=null,plaats=null;
+               
+                while(klant.next()){ 
+	                voorAchternaam = klant.getString("voornaam") + " " + klant.getString("achternaam");
+	                adres = klant.getString("adres");
+	                postcode = klant.getString("postcode");
+	                plaats = klant.getString("plaats");   
+                }
+                String fileName = sdf.format(date) + "_" + orderNr + ".txt";
                 
                 // tekst bestand aanmaken
                 FileWriter fstream = new FileWriter(path + fileName);
                 BufferedWriter out = new BufferedWriter(fstream);
                 out.write("Datum: " + sdf.format(date) + "\n");
-                out.write("Ordernummer: " + orderNummer +"\n\n");
+                out.write("Ordernummer: " + orderNr +"\n\n");
                 out.write("Naam: " + voorAchternaam + "\n");
                 out.write("Adres: " + adres + "\n");
                 out.write("Postcode: " + postcode + "\n");
                 out.write("Plaats: " + plaats + "\n\n\n");
-                for (int i = 1; i < 5; i++) {
-                    out.write("Artikelnummer: " + i + "\n");
+                for (int i = 0; i < artikels.size(); i++) {
+                    out.write("Artikelnummer: " + artikels.get(i) + "\n");
                 }
                 
                 out.close();

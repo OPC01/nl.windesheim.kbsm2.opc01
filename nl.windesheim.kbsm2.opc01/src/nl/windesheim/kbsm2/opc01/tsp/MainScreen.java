@@ -17,28 +17,25 @@ import javax.swing.JCheckBox;
  *
  * @author Gebruiker
  */
-public class MainScreen extends javax.swing.JFrame
-{
+public class MainScreen extends javax.swing.JFrame {
 
     private ArrayList<CheckBox> boxReference = new ArrayList<CheckBox>();
     private DynProgram bruteForce;
     private TSPNearestNeighbour nearestNeighbour = new TSPNearestNeighbour();
     private TSPSnake tspSnake;
     private DistanceMap map = new DistanceMap();
-    private ResultatenScherm s = new ResultatenScherm(this, false);     
+    private ResultatenScherm s = new ResultatenScherm(this, false);
     private Point checkboxSizes;
     private ArrayList<Packet> currentList;
     private ArrayList<Packet> allPackets;
 
-    public MainScreen()
-    {
+    public MainScreen() {
 
         initComponents();
         setTitle("TSP Simulatie");
     }
 
-    public ArrayList<CheckBox> getBoxReference()
-    {
+    public ArrayList<CheckBox> getBoxReference() {
         return boxReference;
     }
 
@@ -150,15 +147,12 @@ public class MainScreen extends javax.swing.JFrame
         options.setVisible(true);
         jPanel1.removeAll();
         boxReference.clear();
-        if (options.created)
-        {
+        if (options.created) {
             GridLayout jPanelLayout = new GridLayout(options.hight, options.width);
             jPanel1.setLayout(jPanelLayout);
 
-            for (int i = 0; i < options.hight; i++)
-            {
-                for (int ii = 0; ii < options.width; ii++)
-                {
+            for (int i = 0; i < options.hight; i++) {
+                for (int ii = 0; ii < options.width; ii++) {
                     int z = i - options.hight;
                     int x = ii + 1;
                     CheckBox box = new CheckBox(x + "." + -z, x, -z);
@@ -166,11 +160,10 @@ public class MainScreen extends javax.swing.JFrame
 
                 }
             }
-            for (CheckBox a : boxReference)
-            {
+            for (CheckBox a : boxReference) {
                 jPanel1.add(a);
             }
-            
+
             checkboxSizes = new Point(options.hight, options.width);
             jPanel1.revalidate();
             jPanel1.repaint();
@@ -179,19 +172,16 @@ public class MainScreen extends javax.swing.JFrame
 
     }//GEN-LAST:event_jSettingsActionPerformed
 
-    class CheckBox extends JCheckBox
-    {
+    class CheckBox extends JCheckBox {
 
         private Packet packet;
 
-        public CheckBox(String name, int x, int y)
-        {
+        public CheckBox(String name, int x, int y) {
             super(name);
             this.packet = new Packet(x, y);
         }
 
-        public Packet getPacket()
-        {
+        public Packet getPacket() {
             return packet;
         }
     }
@@ -199,30 +189,26 @@ public class MainScreen extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jStartActionPerformed
         boolean hasBeenPressed = false;
 
-        if (!hasBeenPressed)
-        {
+        if (!hasBeenPressed) {
 
             ArrayList<Packet> list = new ArrayList<Packet>();
             list.add(new Packet(0, 0));
-            for (CheckBox a : boxReference)
-            {
-                if (a.isSelected())
-                {
+            for (CheckBox a : boxReference) {
+                if (a.isSelected()) {
                     a.packet.setGetPacket(true);
                     list.add(a.getPacket());
                 }
             }
 
             map.createMatrix(list);
-            s.setVisible(true);            
+            s.setVisible(true);
             currentList = list;
 
         }
 
-        if (jBruteForce.isSelected())
-        {
+        if (jBruteForce.isSelected()) {
 
-            DynProgram bruteForce = new DynProgram();
+            bruteForce = new DynProgram();
             long timeStart = System.nanoTime();
             bruteForce.activate(map.getMap());
             String length = String.valueOf(bruteForce.getLeast_value());
@@ -234,8 +220,7 @@ public class MainScreen extends javax.swing.JFrame
             s.revalidate();
 
         }
-        if (jNearestNeigbour.isSelected())
-        {
+        if (jNearestNeigbour.isSelected()) {
             long timeStart = System.nanoTime();
             nearestNeighbour.tsp(map.getMap());
             long timeEnd = System.nanoTime();
@@ -247,11 +232,10 @@ public class MainScreen extends javax.swing.JFrame
             s.revalidate();
 
         }
-        if (jSnake.isSelected())
-        {
-            
+        if (jSnake.isSelected()) {
+
             long timeStart = System.nanoTime();
-            tspSnake = new TSPSnake(map.getMap(), currentList, checkboxSizes);
+            tspSnake = new TSPSnake(currentList, checkboxSizes);
             tspSnake.SnakeAlgorithm();
             tspSnake.calculatePathLength(map.getMap());
             String length = String.valueOf(tspSnake.getLengthOfPath());
@@ -261,8 +245,8 @@ public class MainScreen extends javax.swing.JFrame
             s.getgDistance().setText(length);
             s.getgTime().setText(timeS);
             s.revalidate();
-            
-        }        
+
+        }
         currentList.clear();
     }//GEN-LAST:event_jStartActionPerformed
 
@@ -274,55 +258,38 @@ public class MainScreen extends javax.swing.JFrame
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
                 }
             }
-        }
-        catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 new MainScreen().setVisible(true);
             }
         });
