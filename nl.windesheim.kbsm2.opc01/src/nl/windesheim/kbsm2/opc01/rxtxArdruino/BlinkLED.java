@@ -21,11 +21,11 @@ package nl.windesheim.kbsm2.opc01.rxtxArdruino;
 import java.util.List;
 import java.util.Set;
 
-import org.zu.ardulink.Link;
-import org.zu.ardulink.connection.usb.DigisparkUSBConnection;
-import org.zu.ardulink.protocol.IProtocol;
-import org.zu.ardulink.protocol.ProtocolHandler;
-import org.zu.ardulink.protocol.SimpleBinaryProtocol;
+//import org.zu.ardulink.Link;
+//import org.zu.ardulink.connection.usb.DigisparkUSBConnection;
+//import org.zu.ardulink.protocol.IProtocol;
+//import org.zu.ardulink.protocol.ProtocolHandler;
+//import org.zu.ardulink.protocol.SimpleBinaryProtocol;
 
 
 
