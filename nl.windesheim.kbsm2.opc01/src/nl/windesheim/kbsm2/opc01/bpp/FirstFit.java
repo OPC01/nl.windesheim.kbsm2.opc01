@@ -19,7 +19,7 @@ public class FirstFit extends Algoritme2 {
                 sum = dozen.get(doos).stream().mapToInt(Integer::intValue).sum();
                 if ((sum + check) <= doosGrootte) {
                     dozen.get(doos).add(check); //zo ja: voeg pakket aan doos toe en ga na volgende pakket
-                    nieuwpakketsim(check, doos); 
+                    nieuwpakketsim(doos); 
                     continue paketten;
                 }
             }
@@ -27,7 +27,7 @@ public class FirstFit extends Algoritme2 {
             ArrayList<Integer> nieuwedoos = new ArrayList<>();
             nieuwedoos.add(check);
             dozen.add(nieuwedoos);
-            nieuwpakketsim(check, aantalDozen - 1); //nieuwepakketsum is voor simulatie uitvoer
+            nieuwpakketsim(aantalDozen - 1); //nieuwepakketsum is voor simulatie uitvoer
         }
     }
 }

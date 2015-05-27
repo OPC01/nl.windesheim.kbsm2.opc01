@@ -17,27 +17,23 @@ public class NextFit extends Algoritme2 {
         super(doosGrootte, paketten);
         int sum;
         int dooscheck = 0;
-        ArrayList<Integer> startdoos = new ArrayList<>();
+        ArrayList<Integer> startdoos = new ArrayList<>(); //startdoos initialiseren
         dozen.add(startdoos);
         aantalDozen++;
 
-        for (Integer check : paketten) {
+        for (Integer check : paketten) { //paketten langsgaan
             sum = dozen.get(dooscheck).stream().mapToInt(Integer::intValue).sum();
-            if ((sum + check) <= doosGrootte) {
-                dozen.get(dooscheck).add(check);
-                nieuwpakketsim(check, dooscheck);
+            if ((sum + check) <= doosGrootte) { //checken of pakket past
+                dozen.get(dooscheck).add(check); //zo ja: paket toevoegen aan huidige doos
+                nieuwpakketsim(dooscheck);
             } else {
-                aantalDozen++;
+                aantalDozen++; //zo nee: huidige doos verhogen en pakket toevoegen
                 ArrayList<Integer> nieuwedoos = new ArrayList<>();
                 nieuwedoos.add(check);
                 dozen.add(nieuwedoos);
-                nieuwpakketsim(check, dooscheck);
+                nieuwpakketsim(aantalDozen-1);
                 dooscheck++;
             }
-        }
-        for (int i = 0; i < dozen.size(); i++) {
-            System.out.println("Next Fit");
-            System.out.println(dozen.get(i));
         }
     }
 

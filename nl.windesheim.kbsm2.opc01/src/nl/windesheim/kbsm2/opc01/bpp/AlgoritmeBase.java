@@ -16,25 +16,19 @@ public class AlgoritmeBase{
     private ArrayList<Algoritme2> myAlgoritmes;
     
     public AlgoritmeBase(){
-        myAlgoritmes = new ArrayList<Algoritme2>();
+        myAlgoritmes = new ArrayList<Algoritme2>();// dit is de lijst met de algoritmen aan de hand van deze lijst kunnen we de resultaten in kijken
     }
     
     public int getLengte(){
         return myAlgoritmes.size();
     }
     
-    public void AddAlgoritme(Algoritme2 alg)
+    public void addAlgoritme(Algoritme2 alg)
     {
         myAlgoritmes.add(alg);
     }
     
     public Algoritme2 getAlogritme(int i){
         return myAlgoritmes.get(i);
-    }
-    
-    public String toString(){
-        return "sadasd";//getAlgoritme(1)+"gg";
-        
-        //delete this at end
     }
 }
