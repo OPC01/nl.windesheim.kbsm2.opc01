@@ -25,8 +25,7 @@ public class Paneel extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 7958972375482775135L;
 	final JButton BTStart,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct;
 	private final JLabel JLStatus,JLOrder;
-	private final JLabel JLOrderNr;
-	static int ordernr = 0;
+	public static final JLabel JLOrderNr = new JLabel("test  22");
     final static JButton BTPakbon = new JButton("Pakbon genereren");
 	private final JLabel JLLocatie;
 	private final JLabel JLLocatieId;
@@ -69,7 +68,7 @@ public class Paneel extends JFrame implements ActionListener{
 		JLStatus = new JLabel("Status:");
 		JLStatus.setBounds(10,140,100,20);
 		
-		JLOrderNr = new JLabel(Integer.toString(ordernr));
+		//JLOrderNr = new JLabel(Integer.toString(ordernr));
 		JLOrderNr.setBounds(160,160,100,20);
 		
 		JLOrder = new JLabel("Order Nummer:");
@@ -125,7 +124,8 @@ public class Paneel extends JFrame implements ActionListener{
         if(e.getSource() == BTStart){;
         	try {
         		System.out.println("aanroepen grijparm klasse");
-				grijparm.startOrder(ordernr);
+				int ordernr = Integer.parseInt(JLOrderNr.getText());
+        		grijparm.startOrder(ordernr);
 			} catch (ClassNotFoundException | InstantiationException
 					| IllegalAccessException | SQLException e1) {
 				// TODO Auto-generated catch block
@@ -230,7 +230,7 @@ public class Paneel extends JFrame implements ActionListener{
         }
         
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
