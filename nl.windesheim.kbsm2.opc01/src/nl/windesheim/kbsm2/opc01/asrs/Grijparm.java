@@ -67,6 +67,8 @@ public class Grijparm {
 		int locationY = this.locationY;
         int futureLocationX = x;
         int futureLocationY = y;
+        System.out.println(locationX);
+        System.out.println(locationY);
         x = locationX-x;
         y = y-locationY;
         if(x > 0){
@@ -122,7 +124,7 @@ public class Grijparm {
         	while(x != i){
 	        	link.sendPowerPinSwitch(motor2, 1);
 	        	link.sendPowerPinIntensity(speed1, 255);
-	        	if(sensorY > 1004){
+	        	if(sensorY	 > 1004){
 	        		i--;
 	        		delay(500);
 	        	}
@@ -152,7 +154,7 @@ public class Grijparm {
     public void connect(){
     	try {
 
-            link.connect("COM5",115200);
+            link.connect("COM11",115200);
             Thread.sleep(2000);
             System.out.println("verbinding gemaakt");   
 
@@ -199,6 +201,7 @@ public class Grijparm {
     	return x;
     }
     public void dropOfProducts(){
+    	System.out.println("producten afleveren");
     	moveTo(0,0);
     	//arm naar voren
     	link.sendPowerPinSwitch(armW, 0);
@@ -217,6 +220,7 @@ public class Grijparm {
     }
     
     public void pickUpProduct(){
+    	System.out.println("product oppakken");
     	//arm naar voren
     	link.sendPowerPinSwitch(armW, 0);
     	link.sendPowerPinSwitch(armS, 1);
@@ -251,7 +255,7 @@ public class Grijparm {
 	
 	public void startOrder(int orderNr) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
 		Order order = new Order(orderNr);
-		
+		System.out.println("Order gestart");
 		ArrayList<Packet> producten = order.getProducten();
         TSPNearestNeighbourASRS algoritme = new TSPNearestNeighbourASRS();
         ArrayList<Packet> volgorde = algoritme.tsp(producten);
@@ -260,6 +264,7 @@ public class Grijparm {
         int i = 0;
         while(volgorde.size() > i){
         	Packet p = volgorde.get(i);
+        	System.out.println("pakketten geladen");
         	int x = p.x;
         	int y = p.y;
         	moveTo(x,y);
@@ -274,6 +279,8 @@ public class Grijparm {
         	setLocationX(x);
         	setLocationY(y);
         }
+        System.out.println("alles opgehaald");
+        dropOfProducts();
 
 	}
 }
