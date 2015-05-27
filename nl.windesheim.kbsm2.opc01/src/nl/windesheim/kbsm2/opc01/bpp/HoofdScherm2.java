@@ -6,6 +6,7 @@
 package nl.windesheim.kbsm2.opc01.bpp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -19,7 +20,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
      * Creates new form HoofdScherm2
      */
     public HoofdScherm2() {
-        initComponents();
+        initComponents(); // dit is de layout van het scherm
     }
 
     /**
@@ -216,7 +217,6 @@ public class HoofdScherm2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add yoboolean checked = jCheckBox1.isSelected();
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -225,20 +225,9 @@ public class HoofdScherm2 extends javax.swing.JFrame {
         int doosGrootte = (int) jSpinner1.getValue();
         int aantalDozen = (int) jSpinner2.getValue();
         if (doosGrootte > 0 && doosGrootte <= 10 && aantalDozen > 0) {
-            AlgoritmeBase ab = new AlgoritmeBase();
-
-//            ArrayList<Integer> pakketten = new ArrayList<Integer>();
-//            for (int i = 0; i < jlistModel2.getSize(); i++) {
-//                int aantalPakt = (int) jlistModel1.get(i);
-//                int groottePakt = (int) jlistModel2.get(i);
-//
-//                for (int j = 0; j < aantalPakt; j++) {
-//                    pakketten.add(groottePakt);
-//                }
-//            }
-            //ArrayList<ArrayList<Integer>> dozen = new ArrayList<ArrayList<Integer>>(); //fill this arraylist, example please
+            AlgoritmeBase ab = new AlgoritmeBase();// dit is nodig om de algoritmes opteslaan zodat je de resultaten kan bekijken
             ArrayList<Integer> pakketten = new ArrayList<>();
-            for (int i = 0; i < jlistModel2.getSize(); i++) {
+            for (int i = 0; i < jlistModel2.getSize(); i++) {// deze gaat de 2 lijsten af waarin de grootte en heet aantal word aangegeven
                 int aantalPakt = (int) jlistModel2.get(i);
                 int groottePakt = (int) jlistModel1.get(i);
 
@@ -246,42 +235,36 @@ public class HoofdScherm2 extends javax.swing.JFrame {
                     pakketten.add(groottePakt);
                     System.out.println(groottePakt);
                 }
+                Collections.shuffle(pakketten);
             }
 
-            if (jCheckBox1.isSelected()) {
+            if (jCheckBox1.isSelected()) {// de firstfit checkbox
                 FirstFit ff = new FirstFit(doosGrootte, pakketten);
-                ab.AddAlgoritme(ff);
+                ab.addAlgoritme(ff);
                 ff.testPrint();
-                Simulatie1 sim = new Simulatie1(ff);
-                sim.setTitle("Simulatie First Fit");
-                System.out.println("FirstFit");
-//                sim.paneel.repaint();
             }
-            if (jCheckBox2.isSelected()) {
+            if (jCheckBox2.isSelected()) {// de bestfit checkbox
                 BestFit bf = new BestFit(doosGrootte, pakketten);
-                ab.AddAlgoritme(bf);
+                ab.addAlgoritme(bf);
                 bf.testPrint();
-                Simulatie1 sim = new Simulatie1(bf);
-                sim.setTitle("Simulatie Best Fit");
-//                sim.paneel.repaint();
             }
-            if (jCheckBox3.isSelected()) {
+            if (jCheckBox3.isSelected()) {// de nextfit checkbox
                 NextFit nf = new NextFit(doosGrootte, pakketten);
-                ab.AddAlgoritme(nf);
+                ab.addAlgoritme(nf);
                 nf.testPrint();
-                Simulatie1 sim = new Simulatie1(nf);
-                sim.setTitle("Simulatie Next Fit");
-//                sim.paneel.repaint();
             }
-            if (jCheckBox1.isSelected() || jCheckBox2.isSelected() || jCheckBox3.isSelected()) {
+            if (jCheckBox1.isSelected() || jCheckBox2.isSelected() || jCheckBox3.isSelected()) {// hierin word de simulatie uitgevoerd
                 ResultatenScherm result = new ResultatenScherm(ab);
                 result.setTitle("Resultaten");
+                Simulatie1 sim = new Simulatie1(ab);
+                sim.setTitle("Simulatie scherm");
             }
         } else {
             JOptionPane.showMessageDialog(this, "De doosgrootte mag niet kleiner zijn dan 1 of groter dan 10 en er moeten dozen worden toegevoegd aan de lijsten.", "Bericht", JOptionPane.WARNING_MESSAGE);
             System.out.println("De waarde moet boven 0 zijn");
+            // warning zie teks in showMessageDialoog
         }
-
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -289,9 +272,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
         int value1 = (int) jSpinner2.getValue();
         int value2 = (int) jSpinner3.getValue();
 
-        if ((int) jSpinner1.getValue() >= value1) {
-            System.out.println(value1);
-            System.out.println((int) jSpinner1.getValue());
+        if ((int) jSpinner1.getValue() >= value1) {// hier worden de lijsten groter gemaakt en bijgevult 
             if (value1 > 0 && value2 > 0) {
                 jlistModel1.addElement(value1);
                 jList1.setModel(jlistModel1);
@@ -310,7 +291,6 @@ public class HoofdScherm2 extends javax.swing.JFrame {
 
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -336,8 +316,7 @@ public class HoofdScherm2 extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     // End of variables declaration//GEN-END:variables
-    private Algoritme2 algoritme;
-    DefaultListModel jlistModel1 = new DefaultListModel();
+    DefaultListModel jlistModel1 = new DefaultListModel();// dit zijn de lijsten waaraan de doosgrootte en aantal worden toegevoegt
     DefaultListModel jlistModel2 = new DefaultListModel();
 
     public DefaultListModel getList1() {

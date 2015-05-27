@@ -39,6 +39,10 @@ public class TSPSnake {
         return lengthOfPath;
     }
 
+    public ArrayList<Integer> getSequence() {
+        return sequence;
+    }
+
     public void calculatePathLength(double adjMatrix[][]) {
         double length = 0;
         for (int i = 0; i < path.size() - 1; i++) {

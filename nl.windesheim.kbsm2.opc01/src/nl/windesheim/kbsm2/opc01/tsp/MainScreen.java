@@ -5,12 +5,10 @@
  */
 package nl.windesheim.kbsm2.opc01.tsp;
 
-import nl.windesheim.kbsm2.opc01.tsp.BruteForce.DynProgram;
 
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.JCheckBox;
 
 /**
@@ -163,7 +161,7 @@ public class MainScreen extends javax.swing.JFrame {
             for (CheckBox a : boxReference) {
                 jPanel1.add(a);
             }
-
+// checkboxSizes wordt aangemaakt om er voor te zorgen dat het snake algoritme niet out of bounds raakt. Dit komt omdat het snake algoritme niet van de packets uit gaat maar van uit de totale grote van de stelage.
             checkboxSizes = new Point(options.hight, options.width);
             jPanel1.revalidate();
             jPanel1.repaint();
@@ -203,7 +201,7 @@ public class MainScreen extends javax.swing.JFrame {
 
             if (jBruteForce.isSelected()) {
 
-                bruteForce = new DynProgram();
+                bruteForce = new DynProgram(currentList);
                 //tijd wordt heer opgeslagen in nanosecondes
                 long timeStart = System.nanoTime();
                 bruteForce.activate(map.getMap());

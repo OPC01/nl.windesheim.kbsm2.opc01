@@ -5,23 +5,14 @@
  */
 package nl.windesheim.kbsm2.opc01.bpp;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author W7Home
  */
 public class Main {
     
-    public static void main (String args[]){
-        
-        HoofdScherm2 hoofd = new HoofdScherm2();
-        hoofd.setVisible(true);
-//        ArrayList<Integer> pakketten = new ArrayList<>();
-//        pakketten.add(2);
-//        pakketten.add(3);
-//        FirstFit ff = new FirstFit(1, pakketten);
-//        Simulatie1 test = new Simulatie1(ff);
-//        test.setTitle("Simulatie First fit");
+    public static void main (String [] args){
+        HoofdScherm2 main = new HoofdScherm2();
+        main.setTitle("Hoofdscherm");
     }
 }

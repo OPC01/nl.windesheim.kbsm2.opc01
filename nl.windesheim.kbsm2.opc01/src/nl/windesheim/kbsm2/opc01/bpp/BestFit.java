@@ -15,43 +15,36 @@ public class BestFit extends Algoritme2 {
 
     public BestFit(int doosGrootte, ArrayList<Integer> paketten) {
         super(doosGrootte, paketten);
-        //Collections.sort(paketten);
-        //Collections.reverse(paketten);
+
         int sum;
         int bestFit = 0;
         boolean doosvol = true;
 
-        ArrayList<Integer> startdoos = new ArrayList<Integer>();
+        ArrayList<Integer> startdoos = new ArrayList<>();
         startdoos.add(0);
-        dozen.add(startdoos);
+        dozen.add(startdoos); //startdoos aanmaken
 
-        for (Integer pakket : paketten) {
-            bestFit = 0;
+        for (Integer pakket : paketten) { //paketten langsgaan
+            bestFit = 0; //bestfitdoos resetten
             doosvol = true;
-            for (int doos = 1; doos < dozen.size(); doos++) {
+            for (int doos = 1; doos < dozen.size(); doos++) { //dozen langsgaan
                 sum = dozen.get(doos).stream().mapToInt(Integer::intValue).sum();
-                //System.out.println(sum);
                 if (((sum + pakket) <= doosGrootte) && ((sum + pakket) > (pakket + dozen.get(bestFit).stream().mapToInt(Integer::intValue).sum()))) {
-                    bestFit = doos;
+                    bestFit = doos; //checken of som van doos inclusief pakket groter is dan eerst
                     doosvol = false;
                 }
-                //System.out.println("sum = " + sum + ", bestFit = " + bestFit);
             }
-            if (!doosvol) {
-                dozen.get(bestFit).add(pakket);
-                nieuwpakketsim(pakket, bestFit - 1);
+            if (!doosvol) { //beste pakket is gevonden
+                dozen.get(bestFit).add(pakket); //voeg pakket toe aan beste doos
+                nieuwpakketsim(bestFit - 1);
             } else {
-                aantalDozen++;
-                ArrayList<Integer> nieuwedoos = new ArrayList<Integer>();
+                aantalDozen++; //geen passende doos gevonden
+                ArrayList<Integer> nieuwedoos = new ArrayList<>(); //maak nieuwe doos aan en voeg pakket toe aan doos
                 nieuwedoos.add(pakket);
                 dozen.add(nieuwedoos);
-                nieuwpakketsim(pakket, aantalDozen - 1);
+                nieuwpakketsim(aantalDozen - 1);
             }
         }
-        dozen.remove(0);
-        for (int i = 0; i < dozen.size(); i++) {
-            System.out.println("Best Fit");
-            System.out.println(dozen.get(i));
-        }
+        dozen.remove(0); //startdoos verwijderen
     }
 }
