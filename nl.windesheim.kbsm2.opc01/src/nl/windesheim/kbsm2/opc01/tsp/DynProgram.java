@@ -1,4 +1,4 @@
-package nl.windesheim.kbsm2.opc01.tsp.BruteForce;
+package nl.windesheim.kbsm2.opc01.tsp;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,24 +8,23 @@ package nl.windesheim.kbsm2.opc01.tsp.BruteForce;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
-import nl.windesheim.kbsm2.opc01.tsp.BruteForce.Permutator;
-import nl.windesheim.kbsm2.opc01.tsp.BruteForce.Permutator;
 
 /**
  * @author inspiron
  */
 public class DynProgram extends javax.swing.JFrame {
 
-    Vector<String> elements = new Vector<>();
-    Vector<Double> least = new Vector<>();
-    Vector<String> path = new Vector<>();
+    ArrayList<String> elements = new ArrayList<>();
+    ArrayList<Double> least = new ArrayList<>();
+    ArrayList<String> path = new ArrayList<>();
     double least_value = 0;
     double temp_var = 0;
     String least_path = "";
-    ArrayList<Packet> PathP;
+    ArrayList<Packet> PathP = new ArrayList<>();
 
     /**
      * Creates new form BruteForce
@@ -33,9 +32,9 @@ public class DynProgram extends javax.swing.JFrame {
     public DynProgram(ArrayList currentList) {
         //initComponents();
         boolean status = true;
-        elements = new Vector<>();
-        least = new Vector<>();
-        path = new Vector<>();
+        elements = new ArrayList<>();
+        least = new ArrayList<>();
+        path = new ArrayList<>();
         double least_value = 0;
         double temp_var = 0;
         String least_path = "";
@@ -46,7 +45,6 @@ public class DynProgram extends javax.swing.JFrame {
     public void activate(double[][] map) {
         int k = map.length;
         double dist[][] = map;
-        System.out.println(Arrays.deepToString(dist));
         Permutator pg = new Permutator(k, 1);
         double sum = 0;
         String g = "";
@@ -61,7 +59,6 @@ public class DynProgram extends javax.swing.JFrame {
             }
             String words[] = g.split("-");
             path.add(v);
-            System.out.println(g);
             g = "";
             v = "";
             for (int r = 0; r < words.length - 1; r++) {
@@ -69,7 +66,6 @@ public class DynProgram extends javax.swing.JFrame {
                 sum += dist[Integer.parseInt(words[r]) - 1][Integer.parseInt(words[r + 1]) - 1];
             }
 
-            System.out.println(sum);
             least.add(sum);
             //Stores all outcomes
             sum = 0;
@@ -88,11 +84,8 @@ public class DynProgram extends javax.swing.JFrame {
             }
         }
         //outputs the file as a text namely result.txt
-        try {
-            FileOutputStream fout = new FileOutputStream(new File("result.txt"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+      
+        
     }
 
     /**
@@ -165,6 +158,10 @@ public class DynProgram extends javax.swing.JFrame {
 
     public void setLeast_value(double least_value) {
         this.least_value = least_value;
+    }
+
+    public ArrayList<Packet> getPathP() {
+        return PathP;
     }
 
     public void setLeast_path(String least_path) {
