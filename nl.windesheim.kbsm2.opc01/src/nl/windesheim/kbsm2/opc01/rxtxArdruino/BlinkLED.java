@@ -1,5 +1,5 @@
 /**
-Copyright 2013 Luciano Zu project Ardulink http://www.ardulink.org/
+wsCopyright 2013 Luciano Zu project Ardulink http://www.ardulink.org/
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -109,35 +109,35 @@ public class BlinkLED extends JFrame {
                 synchronized (BlinkLED.class) {
                     switch (ke.getID()) {
                     case KeyEvent.KEY_PRESSED:
-                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
         					link.sendPowerPinSwitch(motor1, 0);
         					link.sendPowerPinIntensity(speed1, 255);
-//                        	System.out.println(y);
-                        	if(y > 1008){
-                        		counterY++;
-                        		System.out.println(counterY);
-                        		delay(500);                        	}
+                        	System.out.println(y);
+//                        	if(y > 1008){
+//                        		counterY++;
+//                        		System.out.println(counterY);
+//                        		delay(500);                        	}
                         }
-                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
+                        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
         					link.sendPowerPinSwitch(motor2, 1);
         					link.sendPowerPinIntensity(speed2, 255);
                         	System.out.println(x);
                         }
-                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
+                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
         					link.sendPowerPinSwitch(motor2, 0);
         					link.sendPowerPinIntensity(speed2, 255);
         					link.startListenAnalogPin(lijnsensorH);
                         	System.out.println(x);
                         }
-                        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
         					link.sendPowerPinSwitch(motor1, 1);
         					link.sendPowerPinIntensity(speed1, 200);
-                        	//System.out.println(y);
-                        	if(y > 1008){
-                        		counterY--;
-                        		System.out.println(counterY);
-                        		delay(500);
-                        	}
+                        	System.out.println(y);
+//                        	if(y > 1008){
+//                        		counterY--;
+//                        		System.out.println(counterY);
+//                        		delay(500);
+//                        	}
                         }
                         if (ke.getKeyCode() == KeyEvent.VK_W) {
                         	link.sendPowerPinSwitch(armW, 1);
@@ -152,22 +152,22 @@ public class BlinkLED extends JFrame {
                         break;
 
                     case KeyEvent.KEY_RELEASED:
-                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
         					link.sendPowerPinSwitch(motor1, 0);
         					link.sendPowerPinIntensity(speed1, 0);
         					System.out.println("poort 5 uit");
                         }
-                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
+                        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
         					link.sendPowerPinSwitch(motor2, 1);
         					link.sendPowerPinIntensity(speed2, 0);
                         	System.out.println("poort 7 uit");
                         }
-                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
+                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
         					link.sendPowerPinSwitch(motor2, 0);
         					link.sendPowerPinIntensity(speed2, 0);
                         	System.out.println("poort 8 uit");
                         }
-                        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
         					link.sendPowerPinSwitch(motor1, 1);
         					link.sendPowerPinIntensity(speed1, 0);
                             System.out.println("poort 6 uit");

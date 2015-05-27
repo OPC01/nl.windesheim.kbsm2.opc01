@@ -51,6 +51,17 @@ public class DatabaseCon {
     	return rs;
     }
     
+    public ResultSet getOrderProductsById(int i) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+    	DatabaseCon db = new DatabaseCon();
+        db.connectDatabase();
+        Connection con = db.con();
+        
+    	Statement stmt = con.createStatement();
+    	ResultSet rs = stmt.executeQuery("SELECT * FROM `order` join product p WHERE ordernr ="+i+" AND p.productid = `order`.productid");
+    	
+    	return rs;
+    }
+    
     public ResultSet getKlanten() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
         DatabaseCon db = new DatabaseCon();
         db.connectDatabase();

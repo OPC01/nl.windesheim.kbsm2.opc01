@@ -8,7 +8,7 @@ public class Order {
 	private int ordernummer;
 	private Klant klant;
 	private ArrayList<Integer> artikelNRs;
-	DatabaseCon con;
+	DatabaseCon con = new DatabaseCon();
 	
 	public Order(int ordernummer,Klant klant,ArrayList<Integer> artikelNRs){
 		this.ordernummer = ordernummer;
@@ -36,16 +36,19 @@ public class Order {
 	public void setArtikelNRs(ArrayList<Integer> artikelNRs) {
 		this.artikelNRs = artikelNRs;
 	}
-	@SuppressWarnings("null")
+	
 	public ArrayList<Packet> getProducten() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
-		ArrayList<Packet> producten = null;
+		ArrayList<Packet> producten = new ArrayList<Packet>();
 		int id = this.getOrdernummer();
-		ResultSet rs = con.getOrderById(id);
+		ResultSet rs = con.getOrderProductsById(id);
+		int i = 0;
 		while(rs.next()){
+			i++;
 			int x = rs.getInt("locatieX"); 
 			int y = rs.getInt("locatieY");
 			Packet p = new Packet(x,y);
-			producten.add(p);
+			System.out.println("pakket"+i+":"+x+","+y);
+			producten.add(p);		
 		}
 		
 		return producten;

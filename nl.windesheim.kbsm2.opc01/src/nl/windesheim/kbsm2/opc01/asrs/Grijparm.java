@@ -8,7 +8,7 @@ import org.zu.ardulink.event.AnalogReadChangeEvent;
 import org.zu.ardulink.event.AnalogReadChangeListener;
 
 public class Grijparm {
-	int locationX,locationY,y = 0,x = 0;
+	int locationX,locationY = 2,y = 0,x = 0;
 	public static int sensorX,sensorY;
 	public static Link link = Link.createInstance("TEST");
 	public static int power = 3;
@@ -20,7 +20,7 @@ public class Grijparm {
 	public static int speed2 = 6;
 	
     public Grijparm(){
-    	
+    	connect();
     }
     
     public static void delay(int tijd) {
@@ -33,13 +33,13 @@ public class Grijparm {
     };
         
     public void moveTo(int x, int y){
-		connect();
+		
 		
 	    link.addAnalogReadChangeListener(new AnalogReadChangeListener() {
 	        
 	        @Override
 	        public void stateChanged(AnalogReadChangeEvent e) {
-	           sensorY = e.getValue();
+	           sensorX = e.getValue();
 	           
 	        }
 	        
@@ -53,7 +53,7 @@ public class Grijparm {
 	        
 	        @Override
 	        public void stateChanged(AnalogReadChangeEvent e) {
-	           sensorX = e.getValue();
+	           sensorY = e.getValue();
 	           
 	        }
 	        
@@ -68,87 +68,88 @@ public class Grijparm {
         int futureLocationX = x;
         int futureLocationY = y;
         System.out.println(locationX);
-        System.out.println(locationY);
-        x = locationX-x;
+        System.out.println("fasdfasdf");
+        
+        x = x-locationX;
         y = y-locationY;
+        System.out.println(x);
+        System.out.println(y);
+//        if(y > 0){// verticale as
+//        	//loop int i ++ tot gelijk aan x dan motor uit.
+//        	//omhoog
+//        	int i = 0;
+//        	while(y != i){// horizontaal
+//	        	link.sendPowerPinSwitch(motor2, 0);
+//	        	link.sendPowerPinIntensity(speed2, 255);
+//	        	if(sensorY > 990){
+//	        		i++;
+//	        		delay(1000);
+//	        	}
+//        	}
+//        	if(y == i){
+//        	link.sendPowerPinSwitch(motor2, 0);
+//        	link.sendPowerPinIntensity(speed2, 0);
+//        	}
+//        	delay(300);
+//        }
         if(x > 0){
-        	//loop int i ++ tot gelijk aan x dan motor uit.
-        	//omhoog
-        	int i = 0;
-        	while(x != i){
-	        	link.sendPowerPinSwitch(motor1, 0);
-	        	link.sendPowerPinIntensity(speed1, 255);
-	        	if(sensorX > 1004){
-	        		i++;
-	        		delay(500);
-	        	}
-        	}
-        	link.sendPowerPinSwitch(motor1, 0);
-        	link.sendPowerPinIntensity(speed1, 0);
-        	delay(300);
-        }
-        if(y > 0){
         	//naar rechts
         	int i = 0;
         	while(x != i){
-	        	link.sendPowerPinSwitch(motor2, 0);
-	        	link.sendPowerPinIntensity(speed1, 255);
-	        	if(sensorY > 1004){
-	        		i++;
-	        		delay(500);
-	        	}
-        	}
-        	link.sendPowerPinSwitch(motor2, 0);
-        	link.sendPowerPinIntensity(speed1, 0);
-        	delay(300);
-        }
-        if(x < 0){
-        	//omlaag
-        	int i = 0;
-        	while(x != i){
 	        	link.sendPowerPinSwitch(motor1, 0);
 	        	link.sendPowerPinIntensity(speed1, 255);
-	        	if(sensorX > 1004){
-	        		i--;
-	        		delay(500);
+	        	if(sensorX > 995){
+	        		System.out.println("omhoogLijnsensor");
+	        		i++;
+	        		delay(1000);
 	        	}
         	}
+        	if(x == i){
+        		System.out.println("rem");
         	link.sendPowerPinSwitch(motor1, 0);
         	link.sendPowerPinIntensity(speed1, 0);
-        	delay(300);
-        	
+        	}
+//        	delay(300);
         }
-        if(y < 0){
+//        if(y < 0){
+//        	//omlaag
+//        	int i = 0;
+//        	while(y != i){
+//	        	link.sendPowerPinSwitch(motor2, 1);
+//	        	link.sendPowerPinIntensity(speed2, 255);
+//	        	if(sensorY > 990){
+//	        		i--;
+//	        		delay(1000);
+//	        	}
+//        	}
+//        	if(y == 0){
+//        	link.sendPowerPinSwitch(motor2, 1);
+//        	link.sendPowerPinIntensity(speed2, 0);
+//        	}
+////        	delay(300);
+//        }          
+        	
+        	
+        
+        if(x < 0){
         	//naar links
         	int i = 0;
         	while(x != i){
-	        	link.sendPowerPinSwitch(motor2, 1);
+	        	link.sendPowerPinSwitch(motor1, 1);
 	        	link.sendPowerPinIntensity(speed1, 255);
-	        	if(sensorY	 > 1004){
+	        	if(sensorX > 995){
+	        		System.out.println("omlaagLijnsensor");
 	        		i--;
-	        		delay(500);
+	        		delay(1000);
 	        	}
         	}
-        	link.sendPowerPinSwitch(motor2, 1);
+        	if(x == i){
+        	link.sendPowerPinSwitch(motor1, 1);
         	link.sendPowerPinIntensity(speed1, 0);
-        	delay(300);
+        	}
+//        	delay(300);
         }
-        
-
-
-//		delay(500);
-//		link.sendPowerPinSwitch(motor1, 0);
-//		link.sendPowerPinIntensity(speed1, 0);
-//		//omlaag
-//		link.sendPowerPinSwitch(motor1, 1);
-//		link.sendPowerPinIntensity(speed1, 200);
-//		//naar rechts bewegen.
-//		link.sendPowerPinSwitch(motor2, 0);
-//		link.sendPowerPinIntensity(speed2, 255);
-//		//naar links bewegen.
-//		link.sendPowerPinSwitch(motor2, 1);
-//		link.sendPowerPinIntensity(speed2, 255);
-                       
+//        pickUpProduct();
     }
     
     public void connect(){
@@ -202,7 +203,7 @@ public class Grijparm {
     }
     public void dropOfProducts(){
     	System.out.println("producten afleveren");
-    	moveTo(0,0);
+    	moveTo(0, 2);
     	//arm naar voren
     	link.sendPowerPinSwitch(armW, 0);
     	link.sendPowerPinSwitch(armS, 1);
@@ -225,6 +226,7 @@ public class Grijparm {
     	link.sendPowerPinSwitch(armW, 0);
     	link.sendPowerPinSwitch(armS, 1);
     	link.sendPowerPinIntensity(power, 255);
+    	delay(500);
     	//omhoog
 		link.sendPowerPinSwitch(motor1, 0);
 		link.sendPowerPinIntensity(speed1, 255);
@@ -261,6 +263,12 @@ public class Grijparm {
         ArrayList<Packet> volgorde = algoritme.tsp(producten);
 		int aantalPakketten = 0;
         
+    	link.sendPowerPinSwitch(motor2, 0);
+    	link.sendPowerPinIntensity(speed2, 255);
+    	delay(500);
+    	link.sendPowerPinSwitch(motor2, 0);
+    	link.sendPowerPinIntensity(speed2, 0);
+    	
         int i = 0;
         while(volgorde.size() > i){
         	Packet p = volgorde.get(i);
@@ -269,10 +277,14 @@ public class Grijparm {
         	int y = p.y;
         	moveTo(x,y);
         	pickUpProduct();
+        	System.out.println("pick up");
         	aantalPakketten++;
         	if(aantalPakketten == 3){
-	        	moveTo(0,0);
 	        	dropOfProducts();
+	        	setLocationX(x);
+	        	setLocationY(y);
+	        	System.out.println(x + " heeft 3 pakketten afgelevert");
+	        	System.out.println(y + "heeft 3 pakketten afgelevert");
 	        	aantalPakketten = 0;
         	}	
         	i++;
