@@ -25,14 +25,16 @@ public class Paneel extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 7958972375482775135L;
 	final JButton BTStart,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct;
 	private final JLabel JLStatus,JLOrder;
-	final static JLabel JLOrderNr = new JLabel();
-        final static JButton BTPakbon = new JButton("Pakbon genereren");
+	private final JLabel JLOrderNr;
+	static int ordernr = 0;
+    final static JButton BTPakbon = new JButton("Pakbon genereren");
 	private final JLabel JLLocatie;
 	private final JLabel JLLocatieId;
 	private final JLabel JLPakketten;
 	private final JLabel JLAantalP;
 	private final JLabel JLBezig;
 	private Teken TekenPaneel;
+	Grijparm grijparm = new Grijparm();
         
     private JFileChooser fileChooser = new JFileChooser();
 
@@ -67,14 +69,14 @@ public class Paneel extends JFrame implements ActionListener{
 		JLStatus = new JLabel("Status:");
 		JLStatus.setBounds(10,140,100,20);
 		
-		//JLOrderNr = new JLabel("...");
+		JLOrderNr = new JLabel(Integer.toString(ordernr));
 		JLOrderNr.setBounds(160,160,100,20);
 		
 		JLOrder = new JLabel("Order Nummer:");
 		JLOrder.setBounds(10,160,150,20);
 		
-		JLLocatie = new JLabel("Locatie arm: ");
-		JLLocatie.setBounds(10,180,150,20);
+		JLLocatie = new JLabel("Locatie arm: x:"+grijparm.getLocationX()+",y:"+grijparm.getLocationY());
+		JLLocatie.setBounds(10,180,500,20);
 		
 		JLLocatieId = new JLabel("...");
 		JLLocatieId.setBounds(160,180,100,20);
@@ -121,8 +123,14 @@ public class Paneel extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == BTStart){;
-            KlantDialoog d = new KlantDialoog(this);
-            d.setVisible(true);
+        	try {
+        		System.out.println("aanroepen grijparm klasse");
+				grijparm.startOrder(ordernr);
+			} catch (ClassNotFoundException | InstantiationException
+					| IllegalAccessException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         }
         else if(e.getSource() == BTOrderMaken) {
             int result = fileChooser.showOpenDialog(this);

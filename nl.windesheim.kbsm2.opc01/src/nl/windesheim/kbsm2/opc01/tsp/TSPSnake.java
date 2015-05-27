@@ -1,17 +1,15 @@
 package nl.windesheim.kbsm2.opc01.tsp;
 
-import java.awt.Checkbox;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class TSPSnake {
 
-    private ArrayList<Packet> path = new ArrayList<Packet>();
-    private ArrayList<Integer> sequence = new ArrayList<Integer>();
+    private ArrayList<Packet> path = new ArrayList<>();
+    private final ArrayList<Integer> sequence = new ArrayList<>();
     private double lengthOfPath;
-    private ArrayList<Packet> packets;
-    private Point checkboxSizes;
+    private final ArrayList<Packet> packets;
+    private final Point checkboxSizes;
 
     public TSPSnake(ArrayList<Packet> packets, Point checkboxSizes) {
         this.packets = packets;
@@ -19,7 +17,7 @@ public class TSPSnake {
     }
 
     public void SnakeAlgorithm() {
-        System.out.println("Y =" + checkboxSizes.getY() + "x= " + checkboxSizes.getX());
+        //Gaat van etage naar etage en haalt per etage packet op.
         for (int y = 0; y < checkboxSizes.getY() + 1; y++) {
             for (int x = 0; x < checkboxSizes.getX() + 1; x++) {
                 for (Packet p : packets) {

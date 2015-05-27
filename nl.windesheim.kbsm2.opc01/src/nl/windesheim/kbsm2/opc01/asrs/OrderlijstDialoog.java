@@ -116,7 +116,7 @@ public class OrderlijstDialoog extends javax.swing.JDialog {
     private void jbSelecteerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecteerActionPerformed
         
     	String Selected = (String) this.jlistOrderlijst.getSelectedValue() ;
-    	Paneel.JLOrderNr.setText(Selected);
+    	Paneel.ordernr = Integer.parseInt(Selected);
         Paneel.BTPakbon.setEnabled(true);
     	this.dispose();
     	
