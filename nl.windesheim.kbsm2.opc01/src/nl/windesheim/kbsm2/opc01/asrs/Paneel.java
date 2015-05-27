@@ -76,7 +76,7 @@ public class Paneel extends JFrame implements ActionListener{
 		JLOrder.setBounds(10,160,150,20);
 		
 		JLLocatie = new JLabel("Locatie arm: x:"+grijparm.getLocationX()+",y:"+grijparm.getLocationY());
-		JLLocatie.setBounds(10,180,150,20);
+		JLLocatie.setBounds(10,180,500,20);
 		
 		JLLocatieId = new JLabel("...");
 		JLLocatieId.setBounds(160,180,100,20);
@@ -124,14 +124,13 @@ public class Paneel extends JFrame implements ActionListener{
 
         if(e.getSource() == BTStart){;
         	try {
+        		System.out.println("aanroepen grijparm klasse");
 				grijparm.startOrder(ordernr);
 			} catch (ClassNotFoundException | InstantiationException
 					| IllegalAccessException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-            KlantDialoog d = new KlantDialoog(this);
-            d.setVisible(true);
         }
         else if(e.getSource() == BTOrderMaken) {
             int result = fileChooser.showOpenDialog(this);
