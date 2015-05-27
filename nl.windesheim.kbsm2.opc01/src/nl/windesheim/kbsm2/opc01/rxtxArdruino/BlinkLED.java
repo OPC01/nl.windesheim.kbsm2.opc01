@@ -65,7 +65,7 @@ public class BlinkLED extends JFrame {
 		
 		try {
 
-            link.connect("COM5",115200);
+            link.connect("COM11",115200);
             Thread.sleep(2000);
             System.out.println("verbinding gemaakt");   
 
@@ -116,8 +116,7 @@ public class BlinkLED extends JFrame {
                         	if(y > 1008){
                         		counterY++;
                         		System.out.println(counterY);
-                        		delay(500);
-                        	}
+                        		delay(500);                        	}
                         }
                         if (ke.getKeyCode() == KeyEvent.VK_UP) {
         					link.sendPowerPinSwitch(motor2, 1);

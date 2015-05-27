@@ -13,6 +13,7 @@ public class DistanceMap
     }
     // creëert een adjacency matrix uit ingevoerde ArrayList van Packets.
     // deze wordt gebruikt in sommige algoritme om de afstand tussen verschillende packets te kunnen bepalen
+
     public void createMatrix(ArrayList<Packet> packets)
     {
         map = new double[packets.size()][packets.size()];
@@ -39,6 +40,11 @@ public class DistanceMap
     public double[][] getMap()
     {
         return map;
+    }
+
+    public void setMap(double[][] map)
+    {
+        this.map = map;
     }
 
 }

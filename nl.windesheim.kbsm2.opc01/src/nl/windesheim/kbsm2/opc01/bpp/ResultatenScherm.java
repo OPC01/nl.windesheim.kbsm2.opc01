@@ -5,26 +5,24 @@
  */
 package nl.windesheim.kbsm2.opc01.bpp;
 
-import java.time.Clock;
 import javax.swing.DefaultListModel;
-
 
 /**
  *
  * @author Bastiaan
  */
 public class ResultatenScherm extends javax.swing.JFrame {
+
     private AlgoritmeBase algoritmebase;
+
     /**
      * Creates new form ResultatenScherm
      */
     public ResultatenScherm(AlgoritmeBase a) {
         this.algoritmebase = a;
         initComponents();
-        //System.out.println(algoritmebase.getLengte());
-    
-       
-        for(int i = 0; i < algoritmebase.getLengte(); i++){           
+
+        for (int i = 0; i < algoritmebase.getLengte(); i++) {
             jlistModel1.addElement(algoritmebase.getAlogritme(i).getAlgoritmeNaam());
             jlistModel2.addElement(algoritmebase.getAlogritme(i).getDoosGrootte());
             jlistModel3.addElement(algoritmebase.getAlogritme(i).getMaxOverschot());
@@ -32,17 +30,14 @@ public class ResultatenScherm extends javax.swing.JFrame {
             jlistModel5.addElement(algoritmebase.getAlogritme(i).getAantalDozen());
             jlistModel6.addElement(algoritmebase.getAlogritme(i).getLowerbound());
         }
-        
+
         jList1.setModel(jlistModel1);
         jList2.setModel(jlistModel2);
         jList3.setModel(jlistModel3);
         jList4.setModel(jlistModel4);
         jList5.setModel(jlistModel5);
         jList6.setModel(jlistModel6);
-        
-        //jlistModel1.addElement(algoritmebase.getAlogritme(0));
-        //jlistModel1.addElement(2);
-        //jlistModel2.addElement("hoi");
+
         setVisible(true);
     }
 
@@ -163,40 +158,6 @@ public class ResultatenScherm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ResultatenScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ResultatenScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ResultatenScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ResultatenScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ResultatenScherm().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

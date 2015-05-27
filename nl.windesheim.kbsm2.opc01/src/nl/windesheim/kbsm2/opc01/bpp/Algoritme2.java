@@ -16,26 +16,22 @@ public class Algoritme2{
     private ArrayList<Integer> dozenSimulatie;
     private int doosGrootte;
     private ArrayList<Integer> paketten;
-    //private int overschot;
     public int aantalDozen = 0;
     public ArrayList<ArrayList<Integer>> dozen;
 
-    public Algoritme2(int doosGrootte, ArrayList<Integer> paketten) { //ArrayList<ArrayList<Integer>> dozen
+    public Algoritme2(int doosGrootte, ArrayList<Integer> paketten) { //dit is de basis klasse van elk alogrimte
         this.doosGrootte = doosGrootte;
         this.paketten = paketten;
         dozen  = new ArrayList<>();
         dozenSimulatie = new ArrayList<>();
-        
-        //this.dozen = dozen;
     }
 
-    public void nieuwpakketsim(int pakket, int locatie) {
-        dozenSimulatie.add(pakket);
+    public void nieuwpakketsim(int locatie) {
         dozenSimulatie.add(locatie);
 
     }
     
-    public String getAlgoritmeNaam(){
+    public String getAlgoritmeNaam(){// hiermee halen we de naam van het algoritme op
         if(this instanceof FirstFit){
             return "FirstFit";
         }else if(this instanceof NextFit){
@@ -45,7 +41,7 @@ public class Algoritme2{
         }
     }
     
-    public int getLowerbound(){
+    public int getLowerbound(){//hiermee wordt het minimum aantal pakketten (dus hoeveel pakketten er minimaal nodig zijn om de dozen er in te passen)
         return (int) Math.ceil(paketten.stream().mapToInt(Integer::intValue).sum() / (double) doosGrootte);
     }
     
@@ -81,14 +77,18 @@ public class Algoritme2{
 	return overschot;
     }
     
-    public void testPrint(){
+    public void testPrint(){// deze print de lijst met dozen en de positie van de dozen die later in de pakketten verdwijnen
         System.out.println(dozenSimulatie);
     }
 
     public int getDoosGrootte() {
         return doosGrootte;
     }
-
+    
+    public ArrayList<Integer> getPaketten(){
+        return paketten;
+    }
+    
     public int getAantalDozen() {
         return aantalDozen;
     }
