@@ -11,6 +11,7 @@ import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Vector;
 
 /**
@@ -24,8 +25,8 @@ public class DynProgram extends javax.swing.JFrame {
     double least_value = 0;
     double temp_var = 0;
     String least_path = "";
-    ArrayList<Packet> PathP = new ArrayList<>();
-
+    ArrayList<Packet> pathP = new ArrayList<>();
+ArrayList<Packet> currentList;
     /**
      * Creates new form BruteForce
      */
@@ -39,6 +40,8 @@ public class DynProgram extends javax.swing.JFrame {
         double temp_var = 0;
         String least_path = "";
         String[][] items = new String[8][8];
+        this.currentList = currentList;
+
     }
 
     //Stores the input file values into an array
@@ -70,6 +73,7 @@ public class DynProgram extends javax.swing.JFrame {
             //Stores all outcomes
             sum = 0;
             //empties the sum variable to make room for another value
+
         }
 
 //computes for the least distance
@@ -82,10 +86,19 @@ public class DynProgram extends javax.swing.JFrame {
                 least_value = least.get(w);
                 least_path = path.get(w);
             }
+
         }
-        //outputs the file as a text namely result.txt
-      
-        
+        int tempo = parseInt(least_path);
+        LinkedList<Integer> stack = new LinkedList<Integer>();
+        while (tempo > 0) {
+            stack.push(tempo % 10);
+            tempo = tempo / 10;
+        }
+
+        while (!stack.isEmpty()) {
+            pathP.add(currentList.get(stack.pop()));
+        }
+
     }
 
     /**
@@ -161,7 +174,7 @@ public class DynProgram extends javax.swing.JFrame {
     }
 
     public ArrayList<Packet> getPathP() {
-        return PathP;
+        return pathP;
     }
 
     public void setLeast_path(String least_path) {
