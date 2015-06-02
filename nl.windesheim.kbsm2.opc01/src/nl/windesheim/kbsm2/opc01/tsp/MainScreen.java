@@ -212,7 +212,6 @@ public class MainScreen extends javax.swing.JFrame {
                 s.getBfDistance().setText(length);
                 s.getBfTime().setText(timeS);
                 s.revalidate();
-\
             }
             if (jNearestNeigbour.isSelected()) {
                 long timeStart = System.nanoTime();
