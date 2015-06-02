@@ -269,6 +269,7 @@ public class Grijparm {
 		Order order = new Order(orderNr);
 		System.out.println("Order gestart");
 		ArrayList<Packet> producten = order.getProducten();
+                producten.add(0,new Packet(0,2));
         TSPNearestNeighbourASRS algoritme = new TSPNearestNeighbourASRS();
         ArrayList<Packet> volgorde = algoritme.tsp(producten);
 		int aantalPakketten = 0;
