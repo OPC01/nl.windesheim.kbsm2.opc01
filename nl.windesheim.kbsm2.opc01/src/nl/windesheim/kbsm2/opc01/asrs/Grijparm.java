@@ -3,9 +3,10 @@ package nl.windesheim.kbsm2.opc01.asrs;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.zu.ardulink.event.*;
 import org.zu.ardulink.Link;
-import org.zu.ardulink.event.AnalogReadChangeEvent;
-import org.zu.ardulink.event.AnalogReadChangeListener;
+//import org.zu.ardulink.event.AnalogReadChangeEvent;
+//import org.zu.ardulink.event.AnalogReadChangeListener;
 
 public class Grijparm {
 	int locationX,locationY = 2,y = 0,x = 0;
@@ -36,24 +37,24 @@ public class Grijparm {
     public void moveTo(int x, int y){
 		
 		
-	    link.addAnalogReadChangeListener(new AnalogReadChangeListener() {
+	    link.addDigitalReadChangeListener(new DigitalReadChangeListener() {
 	        
 	        @Override
-	        public void stateChanged(AnalogReadChangeEvent e) {
+	        public void stateChanged(DigitalReadChangeEvent e) {
 	           sensorX = e.getValue();
 	           
 	        }
 	        
 	        @Override
 	        public int getPinListening() {
-	           return 0; // So it executes an analogRead(0)
+	           return 12; // So it executes an analogRead(0)
 	        }
 	     });
 	    
-	    link.addAnalogReadChangeListener(new AnalogReadChangeListener() {
+	    link.addDigitalReadChangeListener(new DigitalReadChangeListener() {
 	        
 	        @Override
-	        public void stateChanged(AnalogReadChangeEvent e) {
+	        public void stateChanged(DigitalReadChangeEvent e) {
 	           sensorY = e.getValue();
 	           
 	        }
@@ -68,7 +69,7 @@ public class Grijparm {
 		int locationY = this.locationY;
         int futureLocationX = x;
         int futureLocationY = y;
-        System.out.println(locationX);
+//        System.out.println(locationX);
         System.out.println("move to function wordt gestart.");
         
         x = x-locationX;
@@ -78,78 +79,105 @@ public class Grijparm {
         if(y > 0){// verticale as
         	//loop int i ++ tot gelijk aan x dan motor uit.
         	//omhoog
+            System.out.println("y as moet"+y+" stappen omhoog");
+        	link.sendPowerPinSwitch(motor1, 0);
+        	link.sendPowerPinIntensity(speed1, 255);
+        	delay(200);
+        	link.sendPowerPinIntensity(speed1, 0);
         	int i = 0;
-        	while(y != i){// horizontaal
-	        	link.sendPowerPinSwitch(motor2, 0);
-	        	link.sendPowerPinIntensity(speed2, 255);
+        	link.sendPowerPinSwitch(motor1, 0);
+        	link.sendPowerPinIntensity(speed1, 255);
+        	yVerticaalUp: while(y != i){// verticaal
 	        	if(sensorY == 0){
 	        		i++;
+	        		System.out.println(y + "omhoog");
+	        		System.out.println("omhoog" + i);
+	        		if(y == i){
+	        			break yVerticaalUp;
+	        		}
 	        		delay(1000);
 	        	}
         	}
-        	if(y == i){
-        	link.sendPowerPinSwitch(motor2, 0);
-        	link.sendPowerPinIntensity(speed2, 0);
-        	}
-        	delay(300);
+        	link.sendPowerPinSwitch(motor1, 0);
+        	link.sendPowerPinIntensity(speed1, 0);
+        	delay(300);//remmen zodat er pakketjes kunnen opgepakt
         }
         if(x > 0){
         	//naar rechts
+        	link.sendPowerPinSwitch(motor2, 0);
+        	link.sendPowerPinIntensity(speed2, 255);
+        	delay(500);
+        	link.sendPowerPinIntensity(speed2, 0);
         	int i = 0;
-        	while(x != i){
-	        	link.sendPowerPinSwitch(motor1, 0);
-	        	link.sendPowerPinIntensity(speed1, 255);
+        	link.sendPowerPinSwitch(motor2, 0);
+        	link.sendPowerPinIntensity(speed2, 255);
+        	xHorizontaalRight: while(x != i){//horizontaal
 	        	if(sensorX == 0){
-	        		System.out.println("omhoogLijnsensor");
 	        		i++;
+	        		System.out.println(x + "naar rechts");
+	        		System.out.println("rechts" + i);
+	        		if(x == i){
+	        			break xHorizontaalRight;
+	        		}
 	        		delay(1000);
 	        	}
+	        	delay(1);
         	}
-        	if(x == i){
-        		System.out.println("rem");
-        	link.sendPowerPinSwitch(motor1, 0);
-        	link.sendPowerPinIntensity(speed1, 0);
-        	}
+        	link.sendPowerPinSwitch(motor2, 0);
+        	link.sendPowerPinIntensity(speed2, 0);
         	delay(300);
         }
         if(y < 0){
         	//omlaag
+            System.out.println("y as moet"+y+" stappen omlaag");
+        	link.sendPowerPinSwitch(motor1, 1);
+        	link.sendPowerPinIntensity(speed1, 255);
+        	delay(200);
+        	link.sendPowerPinIntensity(speed1, 0);
         	int i = 0;
-        	while(y != i){
-	        	link.sendPowerPinSwitch(motor2, 1);
-	        	link.sendPowerPinIntensity(speed2, 255);
+        	link.sendPowerPinSwitch(motor1, 1);
+        	link.sendPowerPinIntensity(speed1, 255);
+        	yVerticaalDown: while(y != i){//verticaal
 	        	if(sensorY == 0){
 	        		i--;
-	        		delay(1000);
+	        		System.out.println(y + " omlaag");
+	        		System.out.println("omlaag" + i);
+	        		if(y == i){
+	        			break yVerticaalDown;
+	        		}
+	        		delay(400);
 	        	}
         	}
-        	if(x == 0){
-        	link.sendPowerPinSwitch(motor2, 1);
-        	link.sendPowerPinIntensity(speed2, 0);
-        	}
-        	delay(300);
+        	link.sendPowerPinSwitch(motor1, 1);
+        	link.sendPowerPinIntensity(speed1, 0);
+        	delay(300);//remmen zodat er pakketjes kunnen opgepakt
         }          
         	
         	
         
-        if(y < 0){
+        if(x < 0){
         	//naar links
+        	link.sendPowerPinSwitch(motor2, 1);
+        	link.sendPowerPinIntensity(speed2, 255);
+        	delay(500);
+        	link.sendPowerPinIntensity(speed2, 0);
         	int i = 0;
-        	while(x != i){
-	        	link.sendPowerPinSwitch(motor1, 1);
-	        	link.sendPowerPinIntensity(speed1, 255);
-	        	if(sensorX == 1){
-	        		System.out.println("omlaagLijnsensor");
+        	link.sendPowerPinSwitch(motor2,1);
+        	link.sendPowerPinIntensity(speed2, 255);
+        	xHorizontaalLeft: while(x != i){//horizontaal
+	        	if(sensorX == 0){
+	        		System.out.println(x + "naar links");
+	        		System.out.println("links" + i);
 	        		i--;
+	        		if(x == i){
+	        			break xHorizontaalLeft;
+	        		}
 	        		delay(1000);
 	        	}
+	        	delay(1);
         	}
-        	if(x == i){
-	        	link.sendPowerPinIntensity(speed1, 0);
-        	}
-        	if(y == i){
-	        	link.sendPowerPinIntensity(speed2, 0);
-        	}
+        	link.sendPowerPinSwitch(motor2, 0);
+        	link.sendPowerPinIntensity(speed2, 0);
         	delay(300);
         }
     }
@@ -205,13 +233,20 @@ public class Grijparm {
     	//omhoog
 		link.sendPowerPinSwitch(motor1, 0);
 		link.sendPowerPinIntensity(speed1, 255);
-		delay(500);
+		delay(1000);
 		link.sendPowerPinSwitch(motor1, 0);
 		link.sendPowerPinIntensity(speed1, 0);
     	//arm naar achteren
     	link.sendPowerPinSwitch(armW, 1);
     	link.sendPowerPinSwitch(armS, 0);
     	link.sendPowerPinIntensity(power, 255);
+    	delay(500);
+    	link.sendPowerPinSwitch(motor1, 1);
+		link.sendPowerPinIntensity(speed1, 255);
+		delay(250);
+		link.sendPowerPinSwitch(motor1, 0);
+		link.sendPowerPinIntensity(speed1, 0);
+		//iets piets naarbeneden
     }
 
 	public int getLocationX() {
@@ -245,21 +280,21 @@ public class Grijparm {
     	link.sendPowerPinIntensity(speed2, 0);
     	
         int i = 0;
+        System.out.println("pakketten geladen");
         while(volgorde.size() > i){
         	Packet p = volgorde.get(i);
-        	System.out.println("pakketten geladen");
         	int x = p.x;
         	int y = p.y;
         	moveTo(x,y);
         	pickUpProduct();
-        	System.out.println("pick up");
+        	//System.out.println("pick up");
         	aantalPakketten++;
         	if(aantalPakketten == 3){
-	        	dropOfProducts();
-	        	bbpRobot.startBbp(aantalPakketten);
+	        	//dropOfProducts();
+	        	//bbpRobot.startBbp(aantalPakketten);
 	        	setLocationX(x);
 	        	setLocationY(y);
-	        	System.out.println(x + " heeft 3 pakketten afgelevert");
+	        	System.out.println(x + "heeft 3 pakketten afgelevert");
 	        	System.out.println(y + "heeft 3 pakketten afgelevert");
 	        	aantalPakketten = 0;
         	}	
@@ -268,8 +303,9 @@ public class Grijparm {
         	setLocationY(y);
         }
         System.out.println("alles opgehaald");
-        dropOfProducts();
-        bbpRobot.startBbp(aantalPakketten);
+        moveTo(0,2);//dit is de begin positie
+        //dropOfProducts();
+        //bbpRobot.startBbp(aantalPakketten);
 
 	}
 }
