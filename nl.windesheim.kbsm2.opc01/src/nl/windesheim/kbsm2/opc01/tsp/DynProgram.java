@@ -85,7 +85,6 @@ public class DynProgram extends javax.swing.JFrame {
             }
 
         }
-        System.out.println(least_path);
         try {
             int tempo = parseInt(least_path);
             LinkedList<Integer> stack = new LinkedList<Integer>();
