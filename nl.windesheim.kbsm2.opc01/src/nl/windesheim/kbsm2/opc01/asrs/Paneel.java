@@ -98,7 +98,7 @@ public class Paneel extends JFrame implements ActionListener{
 		add(JLStatus);
 		add(JLOrderNr);
 		add(JLOrder);
-		add(JLLocatie);
+		//add(JLLocatie);
 		add(JLLocatieId);
 		add(JLPakketten);
 		add(JLAantalP);
@@ -122,10 +122,10 @@ public class Paneel extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == BTStart){;
-        	try {
-        		System.out.println("aanroepen grijparm klasse");
-				int ordernr = Integer.parseInt(JLOrderNr.getText());
-        		grijparm.startOrder(ordernr);
+        	System.out.println("aanroepen grijparm klasse");
+			int ordernr = Integer.parseInt(JLOrderNr.getText());
+			try {
+				grijparm.startOrder(ordernr);
 			} catch (ClassNotFoundException | InstantiationException
 					| IllegalAccessException | SQLException e1) {
 				// TODO Auto-generated catch block
