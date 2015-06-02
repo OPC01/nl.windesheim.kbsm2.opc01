@@ -5,14 +5,9 @@ package nl.windesheim.kbsm2.opc01.tsp;
  * and open the template in the editor.
  */
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Vector;
 
 /**
  * @author inspiron
@@ -25,8 +20,9 @@ public class DynProgram extends javax.swing.JFrame {
     double least_value = 0;
     double temp_var = 0;
     String least_path = "";
-    ArrayList<Packet> pathP = new ArrayList<>();
-ArrayList<Packet> currentList;
+    ArrayList<Packet> pathP;
+    ArrayList<Packet> currentList;
+
     /**
      * Creates new form BruteForce
      */
@@ -41,6 +37,7 @@ ArrayList<Packet> currentList;
         String least_path = "";
         String[][] items = new String[8][8];
         this.currentList = currentList;
+        ArrayList<Packet> pathP = new ArrayList<>();
 
     }
 
@@ -88,15 +85,20 @@ ArrayList<Packet> currentList;
             }
 
         }
-        int tempo = parseInt(least_path);
-        LinkedList<Integer> stack = new LinkedList<Integer>();
-        while (tempo > 0) {
-            stack.push(tempo % 10);
-            tempo = tempo / 10;
-        }
+        System.out.println(least_path);
+        try {
+            int tempo = parseInt(least_path);
+            LinkedList<Integer> stack = new LinkedList<Integer>();
+            while (tempo > 0) {
+                stack.push(tempo % 10);
+                tempo = tempo / 10;
+            }
 
-        while (!stack.isEmpty()) {
-            pathP.add(currentList.get(stack.pop()));
+            while (!stack.isEmpty()) {
+                pathP.add(currentList.get(stack.pop()));
+            }
+        } catch (NumberFormatException ex) { // handle your exception
+
         }
 
     }
