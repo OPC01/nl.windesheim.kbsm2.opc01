@@ -329,8 +329,9 @@ public class Grijparm {
 		System.out.println("Order gestart");
 		//producten ophalen
 		ArrayList<Packet> producten = order.getProducten();
-        //producten sorteren
-		TSPNearestNeighbourASRS algoritme = new TSPNearestNeighbourASRS();
+        producten.add(0,new Packet(0,2));
+        TSPNearestNeighbourASRS algoritme = new TSPNearestNeighbourASRS();
+
         ArrayList<Packet> volgorde = algoritme.tsp(producten);
         //kleine stap naar rechts
     	link.sendPowerPinSwitch(motor2, 0);

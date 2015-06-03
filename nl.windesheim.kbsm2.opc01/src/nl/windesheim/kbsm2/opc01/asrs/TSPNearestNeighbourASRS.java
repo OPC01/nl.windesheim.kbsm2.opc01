@@ -1,12 +1,12 @@
 package nl.windesheim.kbsm2.opc01.asrs;
 
-
 import java.util.*;
 
 public class TSPNearestNeighbourASRS {
 
     private Stack<Integer> stack;
-private double[][] adjacencyMatrix;
+    private double[][] adjacencyMatrix;
+
     public TSPNearestNeighbourASRS() {
         stack = new Stack<Integer>();
     }
@@ -75,7 +75,6 @@ private double[][] adjacencyMatrix;
             }
             return map;
         }
-
 
     }
 }
