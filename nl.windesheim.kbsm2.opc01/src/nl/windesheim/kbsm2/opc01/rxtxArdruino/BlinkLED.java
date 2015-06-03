@@ -215,35 +215,28 @@ public class BlinkLED extends JFrame {
                         	delay(100);
                         }
                         if(ke.getKeyCode() == KeyEvent.VK_P){
-                        	System.out.println("product oppakken");
+                        	System.out.println("producten afleveren");
                         	link.sendPowerPinSwitch(motor1, 1);
                     		link.sendPowerPinIntensity(speed1, 255);
-                    		delay(100);
-                    		link.sendPowerPinSwitch(motor1, 0);
+                    		delay(500);
+                    		link.sendPowerPinSwitch(motor1, 1);
                     		link.sendPowerPinIntensity(speed1, 0);
-                    		//iets naar beneden voor beter oppakken
+                    		delay(100);
                         	//arm naar voren
                         	link.sendPowerPinSwitch(armW, 0);
                         	link.sendPowerPinSwitch(armS, 1);
                         	link.sendPowerPinIntensity(power, 255);
-                        	delay(500);
-                        	//omhoog
-                    		link.sendPowerPinSwitch(motor1, 0);
-                    		link.sendPowerPinIntensity(speed1, 255);
-                    		delay(1000);
-                    		link.sendPowerPinSwitch(motor1, 0);
+                        	delay(200);
+//                        	//omlaag
+                    		link.sendPowerPinSwitch(motor1, 1);
+                    		link.sendPowerPinIntensity(speed1, 80);
+                    		delay(1400);
+                    		link.sendPowerPinSwitch(motor1, 1);
                     		link.sendPowerPinIntensity(speed1, 0);
-                        	//arm naar achteren
-                        	link.sendPowerPinSwitch(armW, 1);
-                        	link.sendPowerPinSwitch(armS, 0);
-                        	link.sendPowerPinIntensity(power, 255);
-                        	delay(500);
-                        	link.sendPowerPinSwitch(motor1, 1);
-                    		link.sendPowerPinIntensity(speed1, 255);
-                    		delay(250);
-                    		link.sendPowerPinSwitch(motor1, 0);
-                    		link.sendPowerPinIntensity(speed1, 0);
-                    		//iets piets naarbeneden
+//                        	//arm naar achteren
+//                        	link.sendPowerPinSwitch(armW, 1);
+//                        	link.sendPowerPinSwitch(armS, 0);
+//                        	link.sendPowerPinIntensity(power, 255);
                         }
                         break;
                 

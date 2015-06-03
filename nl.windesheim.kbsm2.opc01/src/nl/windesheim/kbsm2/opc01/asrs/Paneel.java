@@ -34,6 +34,7 @@ public class Paneel extends JFrame implements ActionListener{
 	private final JLabel JLBezig;
 	private Teken TekenPaneel;
 	Grijparm grijparm = new Grijparm();
+	//Bppimplementatie test = new Bppimplementatie();
         
     private JFileChooser fileChooser = new JFileChooser();
 
@@ -68,7 +69,6 @@ public class Paneel extends JFrame implements ActionListener{
 		JLStatus = new JLabel("Status:");
 		JLStatus.setBounds(10,140,100,20);
 		
-		//JLOrderNr = new JLabel(Integer.toString(ordernr));
 		JLOrderNr.setBounds(160,160,100,20);
 		
 		JLOrder = new JLabel("Order Nummer:");
@@ -126,6 +126,18 @@ public class Paneel extends JFrame implements ActionListener{
 			int ordernr = Integer.parseInt(JLOrderNr.getText());
 			try {
 				grijparm.startOrder(ordernr);
+//				Packet een = new Packet(2, 4);
+//				Packet twee = new Packet(3,5);
+//				Packet drie = new Packet(1,1);
+//				Packet vier = new Packet(2,2);
+//				ArrayList<Packet> test2 = new ArrayList();
+//				test2.add(een);
+//				test2.add(twee);
+//				test2.add(drie);
+//				test2.add(vier);
+//				test.reverse(test2);
+//				System.out.println(test.getActies());
+//				System.out.println(test.getBonnen());
 			} catch (ClassNotFoundException | InstantiationException
 					| IllegalAccessException | SQLException e1) {
 				// TODO Auto-generated catch block

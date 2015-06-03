@@ -10,6 +10,7 @@ import org.zu.ardulink.Link;
 
 public class Grijparm {
 	int locationX,locationY = 2,y = 0,x = 0;
+	int nextYlocation = 0;
 	public static int sensorX,sensorY;
 	public static Link link = Link.createInstance("ASRS");
 	public static int power = 3;
@@ -19,7 +20,9 @@ public class Grijparm {
 	public static int motor2 = 7;
 	public static int speed1 = 5;
 	public static int speed2 = 6;
-	BbpRobot bbpRobot = new BbpRobot();
+	int aantalPakketten = 0;
+	Bppimplementatie bbp = new Bppimplementatie();
+	
 	
     public Grijparm(){
     	connect();
@@ -34,8 +37,7 @@ public class Grijparm {
 		}
     };
         
-    public void moveTo(int x, int y){
-		
+    public void moveTo(int x, int y){ 
 		
 	    link.addDigitalReadChangeListener(new DigitalReadChangeListener() {
 	        
@@ -47,7 +49,7 @@ public class Grijparm {
 	        
 	        @Override
 	        public int getPinListening() {
-	           return 12; // So it executes an analogRead(0)
+	           return 11; // So it executes an analogRead(0)
 	        }
 	     });
 	    
@@ -67,15 +69,21 @@ public class Grijparm {
 		
 		int locationX = this.locationX;
 		int locationY = this.locationY;
-        int futureLocationX = x;
-        int futureLocationY = y;
 //        System.out.println(locationX);
         System.out.println("move to function wordt gestart.");
         
         x = x-locationX;
         y = y-locationY;
-        System.out.println(x);
-        System.out.println(y);
+        
+//        int FiveChecker = y+locationY;
+//        if(FiveChecker == 5){
+//        	link.sendPowerPinSwitch(motor1, 0);
+//        	link.sendPowerPinIntensity(speed1, 255);
+//        	delay(500);
+//        	link.sendPowerPinIntensity(speed1, 0);
+//        }
+        System.out.println("x in moveTo function ="+x);
+        System.out.println("y in moveTo function ="+y);
         if(y > 0){// verticale as
         	//loop int i ++ tot gelijk aan x dan motor uit.
         	//omhoog
@@ -87,16 +95,26 @@ public class Grijparm {
         	int i = 0;
         	link.sendPowerPinSwitch(motor1, 0);
         	link.sendPowerPinIntensity(speed1, 255);
+//        	boolean stop = true;
+        	if(y != 0){
+        		delay(500);
+        	}
         	yVerticaalUp: while(y != i){// verticaal
-	        	if(sensorY == 0){
+//        		if(stop){
+//        			delay(600);
+//        			stop = false;
+//        		}
+        		if(sensorY == 0){
 	        		i++;
 	        		System.out.println(y + "omhoog");
-	        		System.out.println("omhoog" + i);
+//	        		System.out.println("omhoog" + i);
+	        		
 	        		if(y == i){
 	        			break yVerticaalUp;
 	        		}
 	        		delay(1000);
 	        	}
+	        	delay(1);
         	}
         	link.sendPowerPinSwitch(motor1, 0);
         	link.sendPowerPinIntensity(speed1, 0);
@@ -106,7 +124,7 @@ public class Grijparm {
         	//naar rechts
         	link.sendPowerPinSwitch(motor2, 0);
         	link.sendPowerPinIntensity(speed2, 255);
-        	delay(500);
+        	delay(1000);
         	link.sendPowerPinIntensity(speed2, 0);
         	int i = 0;
         	link.sendPowerPinSwitch(motor2, 0);
@@ -114,8 +132,8 @@ public class Grijparm {
         	xHorizontaalRight: while(x != i){//horizontaal
 	        	if(sensorX == 0){
 	        		i++;
-	        		System.out.println(x + "naar rechts");
-	        		System.out.println("rechts" + i);
+//	        		System.out.println(x + "naar rechts");
+//	        		System.out.println("rechts" + i);
 	        		if(x == i){
 	        			break xHorizontaalRight;
 	        		}
@@ -132,7 +150,7 @@ public class Grijparm {
             System.out.println("y as moet"+y+" stappen omlaag");
         	link.sendPowerPinSwitch(motor1, 1);
         	link.sendPowerPinIntensity(speed1, 255);
-        	delay(200);
+        	delay(300);
         	link.sendPowerPinIntensity(speed1, 0);
         	int i = 0;
         	link.sendPowerPinSwitch(motor1, 1);
@@ -140,13 +158,14 @@ public class Grijparm {
         	yVerticaalDown: while(y != i){//verticaal
 	        	if(sensorY == 0){
 	        		i--;
-	        		System.out.println(y + " omlaag");
-	        		System.out.println("omlaag" + i);
+//	        		System.out.println(y + " omlaag");
+//	        		System.out.println("omlaag" + i);
 	        		if(y == i){
 	        			break yVerticaalDown;
 	        		}
 	        		delay(400);
 	        	}
+	        	delay(1);
         	}
         	link.sendPowerPinSwitch(motor1, 1);
         	link.sendPowerPinIntensity(speed1, 0);
@@ -166,8 +185,8 @@ public class Grijparm {
         	link.sendPowerPinIntensity(speed2, 255);
         	xHorizontaalLeft: while(x != i){//horizontaal
 	        	if(sensorX == 0){
-	        		System.out.println(x + "naar links");
-	        		System.out.println("links" + i);
+//	        		System.out.println(x + "naar links");
+//	        		System.out.println("links" + i);
 	        		i--;
 	        		if(x == i){
 	        			break xHorizontaalLeft;
@@ -204,27 +223,65 @@ public class Grijparm {
     public int getSensorX(){
     	return x;
     }
-    public void dropOfProducts(){
+    public void dropOfProducts(ArrayList<Packet> packets) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+    	//bbpRobot.startBbp(aantalPakketten);
     	System.out.println("producten afleveren");
-    	moveTo(0, 2);
+    	//naar links bewegen
+    	link.sendPowerPinSwitch(motor2, 1);
+    	link.sendPowerPinIntensity(speed2, 255);
+    	delay(250);
+    	//motor links uit
+    	link.sendPowerPinIntensity(speed2, 0);
+    	delay(50);
+    	//naar beneden
+    	link.sendPowerPinSwitch(motor1, 1);
+		link.sendPowerPinIntensity(speed1, 255);
+		delay(400);
+		link.sendPowerPinIntensity(speed1, 0);
+		delay(100);
     	//arm naar voren
     	link.sendPowerPinSwitch(armW, 0);
     	link.sendPowerPinSwitch(armS, 1);
     	link.sendPowerPinIntensity(power, 255);
-    	//omlaag
+    	delay(200);
+//    	//omlaag
 		link.sendPowerPinSwitch(motor1, 1);
-		link.sendPowerPinIntensity(speed1, 255);
-		delay(500);
+		link.sendPowerPinIntensity(speed1, 80);
+		delay(1400);
 		link.sendPowerPinSwitch(motor1, 1);
 		link.sendPowerPinIntensity(speed1, 0);
-    	//arm naar achteren
+//    	//arm naar achteren
+//		bbpRobot.startBbp(aantalPakketten);
+		bbp.reverse(packets);
+		delay(1);
     	link.sendPowerPinSwitch(armW, 1);
     	link.sendPowerPinSwitch(armS, 0);
     	link.sendPowerPinIntensity(power, 255);
+    	setLocationX(0);
+    	setLocationY(1);
+    	link.sendPowerPinSwitch(motor1, 0);
+		link.sendPowerPinIntensity(speed1, 255);
+		delay(300);
+		link.sendPowerPinIntensity(speed1, 0);
+    	moveTo(0, 2);
+    	setLocationX(0);
+    	setLocationY(2);
+    	link.sendPowerPinSwitch(motor1, 0);
+		link.sendPowerPinIntensity(speed1, 255);
+		delay(250);
+		link.sendPowerPinIntensity(speed1, 0);
+
+    	aantalPakketten = 0;
+    	
     }
     
     public void pickUpProduct(){
     	System.out.println("product oppakken");
+//    	//heel iets naar beneden gaan.
+//    	link.sendPowerPinSwitch(motor1, 1);
+//		link.sendPowerPinIntensity(speed1, 255);
+//		delay(100);
+//		link.sendPowerPinIntensity(speed1, 0);
     	//arm naar voren
     	link.sendPowerPinSwitch(armW, 0);
     	link.sendPowerPinSwitch(armS, 1);
@@ -243,10 +300,11 @@ public class Grijparm {
     	delay(500);
     	link.sendPowerPinSwitch(motor1, 1);
 		link.sendPowerPinIntensity(speed1, 255);
-		delay(250);
+		delay(270);
 		link.sendPowerPinSwitch(motor1, 0);
 		link.sendPowerPinIntensity(speed1, 0);
 		//iets piets naarbeneden
+		delay(300);
     }
 
 	public int getLocationX() {
@@ -266,46 +324,83 @@ public class Grijparm {
 	}
 	
 	public void startOrder(int orderNr) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+		//order ini
 		Order order = new Order(orderNr);
 		System.out.println("Order gestart");
+		//producten ophalen
 		ArrayList<Packet> producten = order.getProducten();
-        TSPNearestNeighbourASRS algoritme = new TSPNearestNeighbourASRS();
+        //producten sorteren
+		TSPNearestNeighbourASRS algoritme = new TSPNearestNeighbourASRS();
         ArrayList<Packet> volgorde = algoritme.tsp(producten);
-		int aantalPakketten = 0;
-        
+        //kleine stap naar rechts
     	link.sendPowerPinSwitch(motor2, 0);
     	link.sendPowerPinIntensity(speed2, 255);
     	delay(500);
     	link.sendPowerPinSwitch(motor2, 0);
     	link.sendPowerPinIntensity(speed2, 0);
-    	
+    	//i ini
         int i = 0;
         System.out.println("pakketten geladen");
-        while(volgorde.size() > i){
+        //start pakketten ophalen
+        ophaalPakket: while(volgorde.size() > i){
         	Packet p = volgorde.get(i);
         	int x = p.x;
         	int y = p.y;
+        	System.out.println("");
         	moveTo(x,y);
         	pickUpProduct();
         	//System.out.println("pick up");
         	aantalPakketten++;
         	if(aantalPakketten == 3){
-	        	//dropOfProducts();
-	        	//bbpRobot.startBbp(aantalPakketten);
+        		setLocationX(x);
+	        	setLocationY(y);
+	        	System.out.println("x is "+x);
+	        	System.out.println("y is "+y);
+	        	moveTo(0,2);
+	        	dropOfProducts(volgorde);
+	        	x = 0;
+	        	y = 2;
 	        	setLocationX(x);
 	        	setLocationY(y);
-	        	System.out.println(x + "heeft 3 pakketten afgelevert");
-	        	System.out.println(y + "heeft 3 pakketten afgelevert");
-	        	aantalPakketten = 0;
-        	}	
-        	i++;
-        	setLocationX(x);
-        	setLocationY(y);
+	        	System.out.println("y is naar drop of "+y);
+	        	System.out.println("x is naar drop of "+x);
+	        	if(volgorde.size() > i+1){
+	        	}
+	        	else{
+	        		System.out.println("break");
+		        	System.out.println("x is else/break statement "+x);
+		        	System.out.println("y is else/break statement "+y);
+	        		break ophaalPakket;
+	        	}
+	        	i++;
+        	}else{	
+	        	i++;
+	        	setLocationX(x);
+	        	setLocationY(y);
+	        	if(volgorde.size() > i){
+	        		Packet next = volgorde.get(i);
+	        		nextYlocation = next.y;
+	        	}
+	        	
+	        	if(nextYlocation == 5){
+	            	link.sendPowerPinSwitch(motor1, 0);
+	        		link.sendPowerPinIntensity(speed1, 255);
+	        		delay(400);
+	        		link.sendPowerPinIntensity(speed1, 0);
+	        	}
+	        	System.out.println("x is else statement "+x);
+	        	System.out.println("y is else statement "+y);
+        	}
+//        	oldYlocation = y;
         }
         System.out.println("alles opgehaald");
-        moveTo(0,2);//dit is de begin positie
-        //dropOfProducts();
-        //bbpRobot.startBbp(aantalPakketten);
 
+    	if(aantalPakketten >= 1){
+	    	moveTo(0,2);//dit is de begin positie
+	        setLocationX(0);
+	    	setLocationY(2);
+	    	dropOfProducts(volgorde);
+    	}
+    		
 	}
 }

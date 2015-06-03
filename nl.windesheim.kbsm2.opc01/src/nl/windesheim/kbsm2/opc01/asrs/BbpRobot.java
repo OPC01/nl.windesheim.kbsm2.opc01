@@ -100,8 +100,8 @@ public class BbpRobot {
 		boolean test = true;
 		int i = 0;
 	    while(test){
-			if(lijnsensor > 940){
-				System.out.println(lijnsensor);
+	    	//System.out.println(lijnsensor);
+			if(lijnsensor > 1000){
 				link.sendPowerPinSwitch(motor, 0);
 				delay(1000);
 				if(turnServo){
@@ -116,7 +116,7 @@ public class BbpRobot {
 				}
 				
 			}
-			link.sendPowerPinSwitch(motor, 1);
+			link.sendPowerPinSwitch(motor, 0);
 			
 	    }
 		
