@@ -14,5 +14,6 @@ public class Main {
     public static void main (String [] args){
         HoofdScherm2 main = new HoofdScherm2();
         main.setTitle("Hoofdscherm");
+        main.setVisible(true);
     }
 }
