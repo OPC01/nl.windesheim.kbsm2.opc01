@@ -39,6 +39,19 @@ public class DatabaseCon {
     	ResultSet rs = stmt.executeQuery("SELECT * FROM `order`");
     	return rs;
     } 
+    
+    public ResultSet getSingleProduct(int x, int y) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+    	DatabaseCon db = new DatabaseCon();
+        db.connectDatabase();
+        Connection con = db.con();
+        
+        
+    	Statement stmt = con.createStatement();
+    	ResultSet rs = stmt.executeQuery("SELECT * from `product` WHERE locatieX = "+x+" AND locatieY = "+y);
+    	
+    	return rs;
+    }
+    
     public ResultSet getOrderById(int i) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
         DatabaseCon db = new DatabaseCon();
         db.connectDatabase();
@@ -47,6 +60,17 @@ public class DatabaseCon {
         
     	Statement stmt = con.createStatement();
     	ResultSet rs = stmt.executeQuery("SELECT * FROM `order` WHERE ordernr="+i);
+    	
+    	return rs;
+    }
+    
+    public ResultSet getOrderProductsById(int i) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+    	DatabaseCon db = new DatabaseCon();
+        db.connectDatabase();
+        Connection con = db.con();
+        
+    	Statement stmt = con.createStatement();
+    	ResultSet rs = stmt.executeQuery("SELECT * FROM `order` join product p WHERE ordernr ="+i+" AND p.productid = `order`.productid");
     	
     	return rs;
     }

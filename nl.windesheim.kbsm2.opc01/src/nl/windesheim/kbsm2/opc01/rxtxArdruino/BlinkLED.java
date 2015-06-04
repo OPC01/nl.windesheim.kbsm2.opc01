@@ -1,5 +1,5 @@
 /**
-Copyright 2013 Luciano Zu project Ardulink http://www.ardulink.org/
+wsCopyright 2013 Luciano Zu project Ardulink http://www.ardulink.org/
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,8 +19,7 @@ limitations under the License.
 package nl.windesheim.kbsm2.opc01.rxtxArdruino;
 
 import org.zu.ardulink.Link;
-import org.zu.ardulink.event.AnalogReadChangeEvent;
-import org.zu.ardulink.event.AnalogReadChangeListener;
+import org.zu.ardulink.event.*;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
@@ -44,8 +43,9 @@ public class BlinkLED extends JFrame {
 	public static int lijnsensorV = 0;
 	public static int lijnsensorH = 1;
 	public static int x;
-	public static int y;
+	public static int y = 1;
 	public static int counterY = 0;
+	public static int counterX = 0;
 	
     public static void delay(int tijd) {
 		try {
@@ -74,31 +74,31 @@ public class BlinkLED extends JFrame {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-        link.addAnalogReadChangeListener(new AnalogReadChangeListener() {
+        link.addDigitalReadChangeListener(new DigitalReadChangeListener() {
             
             @Override
-            public void stateChanged(AnalogReadChangeEvent e) {
+            public void stateChanged(DigitalReadChangeEvent e) {
                y = e.getValue();
                
             }
             
             @Override
             public int getPinListening() {
-               return 0; // So it executes an analogRead(0)
+               return 13; // So it executes an digital read pullup(13)
             }
          });
         
-        link.addAnalogReadChangeListener(new AnalogReadChangeListener() {
+        link.addDigitalReadChangeListener(new DigitalReadChangeListener() {
             
             @Override
-            public void stateChanged(AnalogReadChangeEvent e) {
+            public void stateChanged(DigitalReadChangeEvent e) {
                x = e.getValue();
                
             }
             
             @Override
             public int getPinListening() {
-               return 1; // So it executes an analogRead(1)
+               return 12; // So it executes an analogRead(12)
             }
          });
 						
@@ -109,31 +109,91 @@ public class BlinkLED extends JFrame {
                 synchronized (BlinkLED.class) {
                     switch (ke.getID()) {
                     case KeyEvent.KEY_PRESSED:
-                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
+//        					boolean test = true;
+//        					boolean test2 = true;
         					link.sendPowerPinSwitch(motor1, 0);
         					link.sendPowerPinIntensity(speed1, 255);
+//                        	while(test){
 //                        	System.out.println(y);
-                        	if(y > 1008){
-                        		counterY++;
-                        		System.out.println(counterY);
-                        		delay(500);                        	}
-                        }
-                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
-        					link.sendPowerPinSwitch(motor2, 1);
-        					link.sendPowerPinIntensity(speed2, 255);
-                        	System.out.println(x);
-                        }
-                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
-        					link.sendPowerPinSwitch(motor2, 0);
-        					link.sendPowerPinIntensity(speed2, 255);
-        					link.startListenAnalogPin(lijnsensorH);
-                        	System.out.println(x);
+//                        	delay(200);
+//                        	if(y == 0){
+//                        		counterY++;
+//                        		System.out.println(y);
+//                        		delay(1000);
+//                        		}	
+////                        		if(counterY == 5){
+////                        			test=false;
+////                        			link.sendPowerPinSwitch(motor1, 1);
+////                					link.sendPowerPinIntensity(speed1, 150);	
+////                        			while(test2){
+////                                    	if(y == 0){
+////                                    		counterY--;
+////                                    		System.out.println(counterY);
+////                                    		delay(1000);
+////                                    		}
+////                    					if(counterY == 0){
+////                        					
+////                        					test2 = false;
+////                        				}
+////                        			}       	
+////        						}
+//                        	}
+//                        	link.sendPowerPinSwitch(motor1, 1);
+//        					link.sendPowerPinIntensity(speed1, 0);
+                        	
+
+                        	//System.out.println(y);
+
                         }
                         if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+        					link.sendPowerPinSwitch(motor2, 1);
+        					link.sendPowerPinIntensity(speed2, 255);
+        					if(counterX != 0){
+        						vol: if(x == 0){
+        							for(int i = 0; i <= 8; i++){
+        								delay(5);
+        								if(x != 0){
+        									break vol;
+        								}
+        							}
+        							counterX--;
+        							System.out.println(counterX);
+        							delay(600);
+        						}
+        					} else{
+        						link.sendPowerPinSwitch(motor2, 0);
+            					link.sendPowerPinIntensity(speed2, 0);
+        					}
+                        	//System.out.println(x);
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+        					link.sendPowerPinSwitch(motor2, 0);
+        					link.sendPowerPinIntensity(speed2, 255);
+        					if(counterX != 6){
+        						vol: if(x == 0){
+        							for(int i = 0; i <= 8; i++){
+        								delay(5);
+        								if(x != 0){
+        									break vol;
+        								}
+        							}
+        							counterX++;
+        							System.out.println(counterX);
+        							delay(600);
+        						}
+        					}else{
+        						link.sendPowerPinSwitch(motor2, 0);
+            					link.sendPowerPinIntensity(speed2, 0);
+        					}
+                        	//System.out.println(x);
+                        	
+                        }
+                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
         					link.sendPowerPinSwitch(motor1, 1);
-        					link.sendPowerPinIntensity(speed1, 200);
-                        	//System.out.println(y);
-                        	if(y > 1008){
+        					link.sendPowerPinIntensity(speed1, 150);
+                        	System.out.println(y);
+                        	if(y == 0){
                         		counterY--;
                         		System.out.println(counterY);
                         		delay(500);
@@ -149,25 +209,55 @@ public class BlinkLED extends JFrame {
                         	link.sendPowerPinSwitch(armS,1);
                         	link.sendPowerPinIntensity(power, 255);
                         }
+                        if(ke.getKeyCode()== KeyEvent.VK_F){
+                        	System.out.println("waarde lijnsensor:"+x);
+                        	System.out.println("waarde pullup:"+y);
+                        	delay(100);
+                        }
+                        if(ke.getKeyCode() == KeyEvent.VK_P){
+                        	System.out.println("producten afleveren");
+                        	link.sendPowerPinSwitch(motor1, 1);
+                    		link.sendPowerPinIntensity(speed1, 255);
+                    		delay(500);
+                    		link.sendPowerPinSwitch(motor1, 1);
+                    		link.sendPowerPinIntensity(speed1, 0);
+                    		delay(100);
+                        	//arm naar voren
+                        	link.sendPowerPinSwitch(armW, 0);
+                        	link.sendPowerPinSwitch(armS, 1);
+                        	link.sendPowerPinIntensity(power, 255);
+                        	delay(200);
+//                        	//omlaag
+                    		link.sendPowerPinSwitch(motor1, 1);
+                    		link.sendPowerPinIntensity(speed1, 80);
+                    		delay(1400);
+                    		link.sendPowerPinSwitch(motor1, 1);
+                    		link.sendPowerPinIntensity(speed1, 0);
+//                        	//arm naar achteren
+//                        	link.sendPowerPinSwitch(armW, 1);
+//                        	link.sendPowerPinSwitch(armS, 0);
+//                        	link.sendPowerPinIntensity(power, 255);
+                        }
                         break;
-
+                
+            
                     case KeyEvent.KEY_RELEASED:
-                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
         					link.sendPowerPinSwitch(motor1, 0);
         					link.sendPowerPinIntensity(speed1, 0);
         					System.out.println("poort 5 uit");
                         }
-                        if (ke.getKeyCode() == KeyEvent.VK_UP) {
+                        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
         					link.sendPowerPinSwitch(motor2, 1);
         					link.sendPowerPinIntensity(speed2, 0);
                         	System.out.println("poort 7 uit");
                         }
-                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
+                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
         					link.sendPowerPinSwitch(motor2, 0);
         					link.sendPowerPinIntensity(speed2, 0);
                         	System.out.println("poort 8 uit");
                         }
-                        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+                        if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
         					link.sendPowerPinSwitch(motor1, 1);
         					link.sendPowerPinIntensity(speed1, 0);
                             System.out.println("poort 6 uit");

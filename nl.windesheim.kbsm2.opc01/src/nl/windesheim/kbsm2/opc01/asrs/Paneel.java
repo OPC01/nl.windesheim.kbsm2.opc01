@@ -25,8 +25,7 @@ public class Paneel extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 7958972375482775135L;
 	final JButton BTStart,BTOrderMaken,BTProducten,BTOrderSelect,BTNieuwProduct;
 	private final JLabel JLStatus,JLOrder;
-	private final JLabel JLOrderNr;
-	static int ordernr = 0;
+	public static final JLabel JLOrderNr = new JLabel("test  22");
     final static JButton BTPakbon = new JButton("Pakbon genereren");
 	private final JLabel JLLocatie;
 	private final JLabel JLLocatieId;
@@ -35,6 +34,7 @@ public class Paneel extends JFrame implements ActionListener{
 	private final JLabel JLBezig;
 	private Teken TekenPaneel;
 	Grijparm grijparm = new Grijparm();
+	//Bppimplementatie test = new Bppimplementatie();
         
     private JFileChooser fileChooser = new JFileChooser();
 
@@ -69,7 +69,6 @@ public class Paneel extends JFrame implements ActionListener{
 		JLStatus = new JLabel("Status:");
 		JLStatus.setBounds(10,140,100,20);
 		
-		JLOrderNr = new JLabel(Integer.toString(ordernr));
 		JLOrderNr.setBounds(160,160,100,20);
 		
 		JLOrder = new JLabel("Order Nummer:");
@@ -99,7 +98,7 @@ public class Paneel extends JFrame implements ActionListener{
 		add(JLStatus);
 		add(JLOrderNr);
 		add(JLOrder);
-		add(JLLocatie);
+		//add(JLLocatie);
 		add(JLLocatieId);
 		add(JLPakketten);
 		add(JLAantalP);
@@ -123,9 +122,22 @@ public class Paneel extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == BTStart){;
-        	try {
-        		System.out.println("aanroepen grijparm klasse");
+        	System.out.println("aanroepen grijparm klasse");
+			int ordernr = Integer.parseInt(JLOrderNr.getText());
+			try {
 				grijparm.startOrder(ordernr);
+//				Packet een = new Packet(2, 4);
+//				Packet twee = new Packet(3,5);
+//				Packet drie = new Packet(1,1);
+//				Packet vier = new Packet(2,2);
+//				ArrayList<Packet> test2 = new ArrayList();
+//				test2.add(een);
+//				test2.add(twee);
+//				test2.add(drie);
+//				test2.add(vier);
+//				test.reverse(test2);
+//				System.out.println(test.getActies());
+//				System.out.println(test.getBonnen());
 			} catch (ClassNotFoundException | InstantiationException
 					| IllegalAccessException | SQLException e1) {
 				// TODO Auto-generated catch block
@@ -230,7 +242,7 @@ public class Paneel extends JFrame implements ActionListener{
         }
         
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
